@@ -16,6 +16,8 @@ Open **Edit a copy** on the website (or open `editor.html`). The visual editor s
 - Replacing animations with JPG, PNG, WebP, GIF, MP4, or WebM files up to 25 MB each.
 - Adding or removing entries and sections, with Undo.
 
+Entry titles open the first HTTPS link in that entry. In **Edit entry → Links**, put the publisher page or preprint first to choose the title’s destination. Additional links remain available beneath the entry.
+
 Choose **Apply changes** in a dialog, then **Download website**. Extract the downloaded ZIP and upload its files to the repository root, committing the update. GitHub Pages republishes from that commit. The downloaded ZIP contains your changed content and media.
 
 **The editor changes a draft in the current tab. It does not save to GitHub automatically.** Download before closing the tab. Anyone can edit their own copy, but only people with write access to your GitHub repository can publish changes. No GitHub token is requested or stored.
