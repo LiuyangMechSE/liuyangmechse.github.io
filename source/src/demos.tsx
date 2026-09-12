@@ -177,7 +177,7 @@ function RunningDemo() {
       <path d={`M${footx - 9} ${footy + 1}h25`} stroke="#506f79" strokeWidth="7" strokeLinecap="round"/>{f.stance && <circle cx={footx} cy={ground} r="3" fill={GREEN}/>}
       <text x="55" y="98" className="scene-label" style={{fill: GREEN}}>Passive spring</text><text x="55" y="115" className="scene-small">Effective J-curve response</text><path d={`M166 111L${hx - 21} ${hy + 56}`} className="mechanics-leader"/>
       <text x="364" y="159" className="scene-label" style={{fill: ORANGE}}>Active actuator</text><text x="364" y="176" className="scene-small">Supplies the difference</text><path d={`M352 171L${hx + 25} ${hy + 78}`} className="mechanics-leader"/>
-      <text x="62" y="241" className="scene-equation">Ftarget = Fspring + Factuator</text><Arrow x1={371} y1={49} x2={420} y2={49} color="#829a9c"/><text x="395" y="36" textAnchor="middle" className="scene-small">Run direction</text>
+      <text x="55" y="229" className="scene-equation">Fₜ = Fₚ + Fₐ</text><Arrow x1={371} y1={49} x2={420} y2={49} color="#829a9c"/><text x="395" y="36" textAnchor="middle" className="scene-small">Run direction</text>
     </svg><RunningPlot cycle={motion.cycle} prestretch={prestretch} pace={pace}/>
   </Frame>;
 }
