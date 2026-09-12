@@ -1,0 +1,117 @@
+{
+  "name": "Liuyang Cheng",
+  "field": "Mechanics · Soft robotics · Material actuators",
+  "affiliation": "University of Illinois Urbana-Champaign",
+  "bio": "I study how the mechanics of soft materials can be used to create motion. My research focuses on twisted and coiled polymer actuators, nonlinear elasticity, and the design and control of artificial muscles.\n\nI combine mechanical modeling with experiments to understand these materials and explore their use in soft robotic systems.",
+  "portrait": "",
+  "links": [
+    {
+      "label": "GitHub",
+      "url": "https://github.com/LiuyangMechSE"
+    },
+    {
+      "label": "Google Scholar",
+      "url": "https://scholar.google.com/citations?user=MMkH8L0AAAAJ&hl=en"
+    }
+  ],
+  "sections": [
+    {
+      "id": "research",
+      "title": "Research & demos",
+      "intro": "Interactive sketches of the ideas behind my research. These are illustrations, not experimental measurements.",
+      "items": [
+        {
+          "authors": "",
+          "meta": "Twisted and coiled polymer actuators",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Related paper",
+              "url": "https://doi.org/10.1016/j.ijmecsci.2024.109440"
+            }
+          ],
+          "layout": "left",
+          "id": "coil",
+          "title": "From fiber geometry to muscle-like motion",
+          "text": "Twisting and coiling turn a polymer fiber into a contractile actuator. I am interested in how geometry, stored energy, and material response work together to produce useful motion.",
+          "demo": "coil"
+        },
+        {
+          "authors": "",
+          "meta": "Nonlinear mechanics",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [],
+          "layout": "left",
+          "id": "curve",
+          "title": "Designing with nonlinear elasticity",
+          "text": "A tensile J-curve combines a compliant response at small deformation with increasing stiffness at larger deformation. My work explores how these properties can be used in antagonistic arrangements.",
+          "demo": "curve"
+        },
+        {
+          "authors": "",
+          "meta": "Art lighting · Work in progress",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [],
+          "layout": "left",
+          "id": "lights",
+          "title": "Artificial muscles in a moving light array",
+          "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array.",
+          "demo": "lights"
+        }
+      ]
+    },
+    {
+      "id": "publications",
+      "title": "Selected publications",
+      "intro": "",
+      "items": [
+        {
+          "authors": "Qiong Wang, Liuyang Cheng, Jeongmin Kim, Samuel Tsai, Devin Roach, Sameh Tawfick",
+          "meta": "Advanced Intelligent Systems · 2026",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1002/aisy.70490"
+            }
+          ],
+          "layout": "left",
+          "id": "p2026",
+          "title": "Characterization and Selection of Contractile Actuators for Soft Robotics Operating in the Quasistatic Regime",
+          "text": "",
+          "demo": "none"
+        },
+        {
+          "authors": "Qiong Wang, Anan Ghrayeb, SeongHyeon Kim, Liuyang Cheng, Sameh Tawfick",
+          "meta": "International Journal of Mechanical Sciences · 280, 109440 · 2024",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1016/j.ijmecsci.2024.109440"
+            },
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2404.00802"
+            }
+          ],
+          "layout": "left",
+          "id": "p2024",
+          "title": "The mechanics and physics of twisted and coiled polymer actuators",
+          "text": "",
+          "demo": "none"
+        }
+      ]
+    }
+  ]
+}
