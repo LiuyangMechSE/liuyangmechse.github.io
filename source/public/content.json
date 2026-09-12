@@ -3,7 +3,7 @@
   "field": "Mechanics · Soft robotics · Material actuators",
   "affiliation": "University of Illinois Urbana-Champaign",
   "bio": "I study how the mechanics of soft materials can be used to create motion. My research focuses on twisted and coiled polymer actuators, nonlinear elasticity, and the design and control of artificial muscles.\n\nI combine mechanical modeling with experiments to understand these materials and explore their use in soft robotic systems.",
-  "portrait": "",
+  "portrait": "media/liuyang-cheng.jpg",
   "links": [
     {
       "label": "GitHub",
@@ -18,7 +18,58 @@
     {
       "id": "research",
       "title": "Research & demos",
-      "intro": "Interactive sketches of the ideas behind my research. These are illustrations, not experimental measurements.",
+      "intro": "How can a material be compliant during motion, yet resist excessive deformation? These animated mechanisms explore the ideas in my work on tensile J-curve materials and artificial ligaments.",
+      "items": [
+        {
+          "authors": "",
+          "mediaType": "image",
+          "media": "",
+          "caption": "Animated illustration based on Figure 6. Material response and motion are schematic; model details are available within the demo.",
+          "links": [
+            {
+              "label": "Read the preprint",
+              "url": "https://arxiv.org/abs/2602.00260"
+            }
+          ],
+          "layout": "wide",
+          "id": "antagonist",
+          "title": "Compliant motion, protective resistance",
+          "text": "Two tensile ligaments pull in opposite directions. As the middle block moves, one stretches while the other relaxes. Their J-shaped response leaves a compliant central region and increasingly resists larger displacements. Adjust pre-stretch to explore the trade-off between stiffness and motion range.",
+          "meta": "Artificial ligaments · Antagonistic translation",
+          "demo": "antagonist"
+        },
+        {
+          "authors": "",
+          "mediaType": "image",
+          "media": "",
+          "caption": "Animated illustration based on Figure 6. Material response and motion are schematic; model details are available within the demo.",
+          "links": [],
+          "layout": "wide",
+          "id": "joint",
+          "title": "From tensile ligaments to a tunable joint",
+          "text": "The same principle extends to rotation. Opposing ligaments create a restoring torque about a pivot; pre-stretch changes the joint’s response. The animation connects joint angle, ligament tension, and resistance throughout the movement.",
+          "meta": "Artificial ligaments · Antagonistic rotation",
+          "demo": "joint"
+        },
+        {
+          "authors": "",
+          "mediaType": "image",
+          "media": "",
+          "caption": "Animated illustration based on Figure 6. Material response and motion are schematic; model details are available within the demo.",
+          "links": [],
+          "layout": "wide",
+          "id": "running",
+          "title": "A tunable spring for a running leg",
+          "text": "In the paper’s conceptual running model, a passive spring and an active linear actuator act in parallel. The actuator supplies the difference between the target leg force and the spring force. Explore how passive tuning changes that balance through compression, rebound, and flight.",
+          "meta": "Running outlook · Passive spring + active actuator",
+          "demo": "running"
+        }
+      ]
+    },
+    {
+      "id": "other-research",
+      "title": "Other research",
+      "intro": "",
       "items": [
         {
           "authors": "",
@@ -36,20 +87,7 @@
           "id": "coil",
           "title": "From fiber geometry to muscle-like motion",
           "text": "Twisting and coiling turn a polymer fiber into a contractile actuator. I am interested in how geometry, stored energy, and material response work together to produce useful motion.",
-          "demo": "coil"
-        },
-        {
-          "authors": "",
-          "meta": "Nonlinear mechanics",
-          "mediaType": "image",
-          "media": "",
-          "caption": "",
-          "links": [],
-          "layout": "left",
-          "id": "curve",
-          "title": "Designing with nonlinear elasticity",
-          "text": "A tensile J-curve combines a compliant response at small deformation with increasing stiffness at larger deformation. My work explores how these properties can be used in antagonistic arrangements.",
-          "demo": "curve"
+          "demo": "none"
         },
         {
           "authors": "",
@@ -62,7 +100,7 @@
           "id": "lights",
           "title": "Artificial muscles in a moving light array",
           "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array.",
-          "demo": "lights"
+          "demo": "none"
         }
       ]
     },
@@ -71,6 +109,24 @@
       "title": "Selected publications",
       "intro": "",
       "items": [
+        {
+          "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "arXiv",
+              "url": "https://arxiv.org/abs/2602.00260"
+            }
+          ],
+          "layout": "left",
+          "id": "p-jcurve",
+          "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
+          "text": "",
+          "meta": "arXiv preprint · 2026",
+          "demo": "none"
+        },
         {
           "authors": "Qiong Wang, Liuyang Cheng, Jeongmin Kim, Samuel Tsai, Devin Roach, Sameh Tawfick",
           "meta": "Advanced Intelligent Systems · 2026",

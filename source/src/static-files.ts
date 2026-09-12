@@ -43,8 +43,9 @@ export async function exportWebsite(content:SiteContent){
  const manifest=await response.json() as {files:string[]};
  if(!Array.isArray(manifest.files)||manifest.files.some(p=>typeof p!=='string'||p.startsWith('/')||p.includes('..')||p.includes(':')))throw Error('The export file list is invalid.');
  const entries:{name:string;data:Uint8Array}[]=[];
- for(const path of manifest.files.filter(p=>p!=='content.json')){const r=await fetch('./'+path);if(!r.ok)throw Error('Could not export '+path);entries.push({name:path,data:new Uint8Array(await r.arrayBuffer())});}
+ for(const path of manifest.files.filter(p=>p!=='content.json'&&p!=='export-manifest.json'&&!p.startsWith('media/'))){const r=await fetch('./'+path);if(!r.ok)throw Error('Could not export '+path);entries.push({name:path,data:new Uint8Array(await r.arrayBuffer())});}
  entries.push({name:'content.json',data:encoder.encode(JSON.stringify(checked,null,2)+'\n')});
  for(const path of mediaPaths(checked)){const staged=uploads.get(path);let blob:Blob;if(staged)blob=staged;else{const r=await fetch('./'+path);if(!r.ok)throw Error('Could not load '+path);blob=await r.blob();}entries.push({name:path,data:new Uint8Array(await blob.arrayBuffer())});}
+ entries.push({name:'export-manifest.json',data:encoder.encode(JSON.stringify({files:[...entries.map(e=>e.name),'export-manifest.json'].sort()},null,2)+'\n')});
  download(zipFiles(entries),'liuyangmechse.github.io-update.zip');
 }

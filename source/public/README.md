@@ -2,12 +2,9 @@
 
 This is a complete static website for **LiuyangMechSE/liuyangmechse.github.io**. The intended address is **https://liuyangmechse.github.io/**. It is ready for GitHub Pages and needs no server, database, build action, or API key.
 
-## Publish the first version
+## Publishing updates
 
-1. Sign in to GitHub as **LiuyangMechSE**. Create a **public** repository named **liuyangmechse.github.io**, with **Add README** enabled.
-2. Upload the contents of this package to the repository root. `index.html`, `editor.html`, `content.json`, `assets/`, and `.nojekyll` should be at the root, not inside an extra folder. Keep all filenames and directories intact. Uploading through GitHub's **Add file → Upload files** works after extracting the ZIP.
-3. Open **Settings → Pages**. Select **Deploy from a branch**, then **main** and **/(root)**. Save.
-4. GitHub will show the published address when deployment finishes. It can take several minutes.
+The website is published at **https://liuyangmechse.github.io/** from the repository's `main` branch and root folder. Committing updated deployment files to that location triggers GitHub Pages. Keep `index.html`, `editor.html`, `content.json`, `assets/`, `media/`, and `.nojekyll` at the root.
 
 ## Edit without coding
 
@@ -16,7 +13,7 @@ Open **Edit a copy** on the website (or open `editor.html`). The visual editor s
 - Dragging sections and entries, including between sections; arrows provide an alternative.
 - Editing your introduction, portrait, text, authors, publication details, and links.
 - Changing media placement: left, right, or full width.
-- Replacing sketches with JPG, PNG, WebP, GIF, MP4, or WebM files up to 25 MB each.
+- Replacing animations with JPG, PNG, WebP, GIF, MP4, or WebM files up to 25 MB each.
 - Adding or removing entries and sections, with Undo.
 
 Choose **Apply changes** in a dialog, then **Download website**. Extract the downloaded ZIP and upload its files to the repository root, committing the update. GitHub Pages republishes from that commit. The downloaded ZIP contains your changed content and media.
@@ -27,7 +24,9 @@ Use media URLs only for assets you are comfortable making public. Direct MP4 and
 
 ## Research content
 
-The included helix, J-curve, and 32-light sketches are explicitly illustrative. They are not experimental measurements or validated actuator predictions. The scientific assumptions are shown under each sketch's **About this sketch** control.
+The three active animations explain antagonistic translation, a rotary joint, and a running leg with a parallel passive spring and actuator, based on Figure 6 of [Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements](https://arxiv.org/abs/2602.00260). The material law is a normalized illustration and the gait is prescribed; these are not experimental measurements or a validated dynamic running simulation. Each animation includes model details and pause/tuning controls. Reduced-motion preferences are respected.
+
+The portrait is the photograph labelled Liuyang Cheng on the [Kinetic Materials Research Group people page](https://tawfick.mechse.illinois.edu/people/), retrieved September 12, 2026.
 
 ## Source code
 

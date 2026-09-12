@@ -1,0 +1,40 @@
+.entry .research-demo.demo,.entry.layout-wide .research-demo.demo{max-width:none;width:100%;margin:0;background:#f8fafb;border:1px solid #dfe7ea;border-radius:7px;container-type:inline-size;overflow:hidden;line-height:1.4}
+.research-demo .mechanics-header{padding:19px 22px 0;display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.research-demo .mechanics-kicker{font-size:13px;letter-spacing:.045em;font-weight:600;color:#345767;display:flex;align-items:center;gap:8px}
+.research-demo .motion-dot{width:6px;height:6px;background:#4c8e79;flex-shrink:0;border-radius:50%;box-shadow:0 0 0 3px #4c8e7912}
+.research-demo .motion-dot.paused{background:#a5b0b5;box-shadow:none}
+.research-demo .mechanics-header p{font-size:12px;color:#6a7c85;margin:6px 0 0;line-height:1.5}
+.research-demo .mechanics-play{flex-shrink:0;display:flex;align-items:center;gap:5px;color:#416777;background:white;border:1px solid #d5e0e5;border-radius:5px;font:inherit;font-size:12px;padding:5px 8px}
+.research-demo .mechanics-play:hover{background:#eff5f7;border-color:#b8ccd5}
+.research-demo .mechanics-play svg{width:13px;height:13px;display:inline}
+.research-demo .mechanics-status{display:flex;justify-content:space-between;gap:15px;padding:15px 22px 0;font-size:11px;color:#68818b;font-variant-numeric:tabular-nums;min-height:32px}
+.research-demo .mechanics-status>span{color:#86969d;white-space:nowrap}
+.research-demo .mechanics-panels{display:grid;grid-template-columns:minmax(0,1.62fr) minmax(0,1fr);align-items:center;padding:9px 15px 4px;gap:1px}
+.research-demo .mechanics-scene{width:100%;height:auto;min-width:0;overflow:visible}
+.research-demo .mechanics-chart{width:100%;height:auto;border-left:1px solid #e4ebee;min-width:0}
+.research-demo svg text{font-family:Arial,Helvetica,sans-serif;font-size:10px;fill:#6b808a}
+.research-demo svg .scene-label{font-size:12px;font-weight:600;letter-spacing:.01em}
+.research-demo svg .scene-small{font-size:10px;fill:#7d919a}
+.research-demo svg .scene-equation{font-family:Georgia,'Times New Roman',serif;font-size:14px;fill:#4a6976}
+.research-demo svg .chart-title{font-size:12px;font-weight:600;fill:#4c6977}
+.research-demo svg .chart-small{font-size:9px;fill:#7a8d96}
+.research-demo svg .chart-value{font-variant-numeric:tabular-nums;font-size:10px}
+.research-demo .mechanics-grid{stroke:#e6ecef;stroke-width:1;fill:none}
+.research-demo .mechanics-axis{stroke:#b8c7ce;stroke-width:1;fill:none}
+.research-demo .mechanics-guide{stroke:#c5d1d6;stroke-width:1;stroke-dasharray:3 5;fill:none}
+.research-demo .mechanics-leader{stroke:#bdcdd3;stroke-width:1;fill:none}
+.research-demo .mechanics-controls{display:grid;grid-template-columns:1fr 1fr;gap:34px;padding:17px 23px 18px;border-top:1px solid #e6ecef;margin:0 15px}
+.research-demo .mechanics-control label{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:11px;color:#536f7e;margin:0 0 8px}
+.research-demo .mechanics-control output{font-variant-numeric:tabular-nums;font-size:11px;color:#24577c;white-space:nowrap}
+.research-demo .mechanics-control input[type=range]{appearance:none;-webkit-appearance:none;display:block;width:100%;height:17px;background:transparent;cursor:pointer;padding:0;margin:0;accent-color:#416f86}
+.research-demo .mechanics-control input[type=range]::-webkit-slider-runnable-track{height:3px;background:#d3dfe5;border-radius:3px}
+.research-demo .mechanics-control input[type=range]::-webkit-slider-thumb{appearance:none;-webkit-appearance:none;width:13px;height:13px;margin-top:-5px;background:#fbfcfc;border:2px solid #416f86;border-radius:50%;box-shadow:0 1px 2px #1d405922}
+.research-demo .mechanics-control input[type=range]::-moz-range-track{height:3px;background:#d3dfe5;border-radius:3px}
+.research-demo .mechanics-control input[type=range]::-moz-range-thumb{width:10px;height:10px;background:#fbfcfc;border:2px solid #416f86;border-radius:50%}
+.research-demo .mechanics-control input:focus-visible{outline:2px solid #477aa3;outline-offset:4px;border-radius:2px}
+.research-demo .mechanics-insight{display:flex;flex-direction:column;justify-content:center;gap:3px;font-size:11px;color:#7a8d96}
+.research-demo .mechanics-insight strong{font-size:11px;font-weight:500;color:#506e7a}
+.research-demo details.mechanics-details{font-size:11px;color:#6e838d;padding:9px 22px;background:#f3f7f8;border-top:1px solid #e2eaed}
+.research-demo .mechanics-details summary{font-size:11px;color:#5c7785}
+.research-demo .mechanics-details p{font-size:11px;margin:9px 0 3px;line-height:1.75;max-width:800px}
+@container(max-width:600px){.research-demo .mechanics-header{padding:16px 16px 0;gap:9px}.research-demo .mechanics-kicker{font-size:12px;letter-spacing:.01em}.research-demo .mechanics-header p{font-size:11px}.research-demo .mechanics-status{padding:12px 16px 0;font-size:10px;min-height:28px}.research-demo .mechanics-status>span{display:none}.research-demo .mechanics-panels{grid-template-columns:1fr;padding:8px 10px 0;gap:2px}.research-demo .mechanics-scene{max-height:280px}.research-demo .mechanics-chart{max-height:240px;border-left:none;border-top:1px solid #e4ebee;padding-top:10px;margin-top:5px}.research-demo .mechanics-controls{margin:0 12px;padding:15px 4px 14px;gap:14px;grid-template-columns:1fr}.research-demo .mechanics-insight{font-size:10px}.research-demo .mechanics-play{padding:5px 6px}.research-demo .mechanics-play span{display:none}.research-demo details.mechanics-details{padding:9px 16px}}
