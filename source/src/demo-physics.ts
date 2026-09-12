@@ -4,7 +4,8 @@ export function antagonistForces(prestretch: number, displacement: number) {
   const left = jForce(prestretch + displacement), right = jForce(prestretch - displacement);
   return {left, right, applied: left - right};
 }
-export const STANCE_FRACTION = .62;
+// Fraction of a full same-leg stride; opposite leg is half a stride out of phase.
+export const STANCE_FRACTION = .40;
 export function runningForces(cycle: number, prestretch: number, pace: number) {
   const p = ((cycle % 1) + 1) % 1, stance = p < STANCE_FRACTION, u = Math.min(p / STANCE_FRACTION, 1);
   const compression = stance ? .23 * Math.sin(Math.PI * u) : 0;
