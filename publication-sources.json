@@ -1,0 +1,249 @@
+{
+  "profile": {
+    "name": "Liuyang Cheng",
+    "id": "MMkH8L0AAAAJ",
+    "url": "https://scholar.google.com/citations?user=MMkH8L0AAAAJ&hl=en",
+    "affiliation": "University of Illinois Urbana-Champaign"
+  },
+  "checkedAt": "2026-09-13",
+  "completeScholarList": false,
+  "access": {
+    "profile": "blocked",
+    "profileHttpStatus": 403,
+    "parentWebOpenHttpStatus": 429,
+    "profileAttemptUrl": "https://scholar.google.com/citations?user=MMkH8L0AAAAJ&hl=en&pagesize=100",
+    "note": "The live Scholar profile could not be retrieved. Search-index snippets identified the profile and several titles, but could not establish the complete publication list or pagination. The papers below were verified in primary publisher, institutional, PubMed, or arXiv sources. They must not be described as an exhaustive import from Google Scholar."
+  },
+  "portrait": {
+    "status": "blocked",
+    "attemptUrl": "https://scholar.google.com/citations?view_op=view_photo&user=MMkH8L0AAAAJ&citpid=2",
+    "httpStatus": 403,
+    "localPath": null,
+    "note": "The conventional official Scholar photo endpoint was requested for this specific profile ID, but access was forbidden. No image or MIME was retrieved and no portrait file was created. This URL was constructed from the known profile ID, not extracted from accessible profile HTML."
+  },
+  "publications": [
+    {
+      "id": "ventricle-2026",
+      "title": "A Predictive Design Framework for a Soft Robotic Ventricle using Contractile Actuators",
+      "authors": [
+        "Jeongmin Kim",
+        "Qiong Wang",
+        "Liuyang Cheng",
+        "Samuel Tsai",
+        "Seong Hyeon Kim",
+        "Harma K. Turbendian",
+        "Sameh Tawfick"
+      ],
+      "year": 2026,
+      "date": "2026-09-09",
+      "venue": "arXiv",
+      "status": "Preprint",
+      "arxiv": "2609.09706",
+      "url": "https://arxiv.org/abs/2609.09706",
+      "links": [
+        {
+          "label": "Preprint",
+          "url": "https://arxiv.org/abs/2609.09706"
+        }
+      ],
+      "sources": [
+        "https://arxiv.org/abs/2609.09706"
+      ],
+      "scholarListingObserved": false,
+      "identityEvidence": "Primary arXiv record names Liuyang Cheng together with known UIUC coauthors Qiong Wang and Sameh Tawfick."
+    },
+    {
+      "id": "actuator-selection-2026",
+      "title": "Characterization and Selection of Contractile Actuators for Soft Robotics Operating in the Quasistatic Regime",
+      "authors": [
+        "Qiong Wang",
+        "Liuyang Cheng",
+        "Jeongmin Kim",
+        "Samuel Tsai",
+        "Devin Roach",
+        "Sameh Tawfick"
+      ],
+      "year": 2026,
+      "date": "2026-07-28",
+      "venue": "Advanced Intelligent Systems",
+      "articleNumber": "e70490",
+      "status": "Journal article",
+      "doi": "10.1002/aisy.70490",
+      "url": "https://doi.org/10.1002/aisy.70490",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1002/aisy.70490"
+        }
+      ],
+      "sources": [
+        "https://advanced.onlinelibrary.wiley.com/doi/10.1002/aisy.70490"
+      ],
+      "scholarListingObserved": false,
+      "identityEvidence": "Wiley's author list associates Liuyang Cheng with the Department of Mechanical Science and Engineering at UIUC, and includes established coauthors."
+    },
+    {
+      "id": "hierarchical-muscle-2026",
+      "title": "Hierarchical Artificial Muscle with Nonlinear Elasticity for Antagonistic and Cyclic Robotics",
+      "authors": [
+        "Samuel Tsai",
+        "Liuyang Cheng",
+        "Ali Albazroun",
+        "Qiong Wang",
+        "Jeongmin Kim",
+        "Arman Tekinalp",
+        "Soonwook Kim",
+        "Charlie Simcox",
+        "Ryne Downing",
+        "Vagish Sivaramakrishnan",
+        "Grace Carsello",
+        "Miles Bimrose",
+        "Wonsik Eom",
+        "William P. King",
+        "Mattia Gazzola",
+        "Sameh Tawfick"
+      ],
+      "year": 2026,
+      "date": "2026-05-28",
+      "earlyOnlineDate": "2026-03-19",
+      "venue": "Advanced Science",
+      "volume": "13",
+      "issue": "30",
+      "articleNumber": "e21604",
+      "status": "Journal article",
+      "doi": "10.1002/advs.202521604",
+      "url": "https://doi.org/10.1002/advs.202521604",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1002/advs.202521604"
+        },
+        {
+          "label": "Open access",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13248829/"
+        }
+      ],
+      "sources": [
+        "https://advanced.onlinelibrary.wiley.com/doi/10.1002/advs.202521604",
+        "https://experts.illinois.edu/en/publications/hierarchical-artificial-muscle-with-nonlinear-elasticity-for-anta/",
+        "https://pubmed.ncbi.nlm.nih.gov/41856930/"
+      ],
+      "scholarListingObserved": true,
+      "identityEvidence": "The exact title appears in the search-index snippet for Scholar profile MMkH8L0AAAAJ; the Wiley and Illinois institutional records verify the authors and bibliographic details."
+    },
+    {
+      "id": "jcurve-2026",
+      "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
+      "authors": [
+        "Liuyang Cheng",
+        "Wonsik Eom",
+        "Qiong Wang",
+        "Hyeongkeun Kim",
+        "Roberto Pineda Guzman",
+        "Jeongmin Kim",
+        "Montse Solis",
+        "Shreyas Malladi",
+        "Samuel Tsai",
+        "Mariana E. Kersh",
+        "Sameh H. Tawfick"
+      ],
+      "year": 2026,
+      "date": "2026-01-30",
+      "venue": "arXiv",
+      "status": "Preprint",
+      "arxiv": "2602.00260",
+      "url": "https://arxiv.org/abs/2602.00260",
+      "links": [
+        {
+          "label": "Preprint",
+          "url": "https://arxiv.org/abs/2602.00260"
+        }
+      ],
+      "sources": [
+        "https://arxiv.org/abs/2602.00260"
+      ],
+      "scholarListingObserved": false,
+      "identityEvidence": "The primary arXiv record matches the user's supplied artificial-ligament manuscript and author group."
+    },
+    {
+      "id": "tcpa-mechanics-2024",
+      "title": "The mechanics and physics of twisted and coiled polymer actuators",
+      "authors": [
+        "Qiong Wang",
+        "Anan Ghrayeb",
+        "Seong Hyeon Kim",
+        "Liuyang Cheng",
+        "Sameh Tawfick"
+      ],
+      "year": 2024,
+      "date": "2024-10-15",
+      "venue": "International Journal of Mechanical Sciences",
+      "volume": "280",
+      "articleNumber": "109440",
+      "status": "Journal article",
+      "doi": "10.1016/j.ijmecsci.2024.109440",
+      "arxiv": "2404.00802",
+      "url": "https://doi.org/10.1016/j.ijmecsci.2024.109440",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1016/j.ijmecsci.2024.109440"
+        },
+        {
+          "label": "Preprint",
+          "url": "https://arxiv.org/abs/2404.00802"
+        }
+      ],
+      "sources": [
+        "https://experts.illinois.edu/en/publications/the-mechanics-and-physics-of-twisted-and-coiled-polymer-actuators/",
+        "https://arxiv.org/abs/2404.00802",
+        "https://tawfick.mechse.illinois.edu/publications/"
+      ],
+      "scholarListingObserved": true,
+      "identityEvidence": "The exact title appears in the search-index snippet for Scholar profile MMkH8L0AAAAJ; UIUC institutional and lab records verify the bibliographic details."
+    },
+    {
+      "id": "jumping-robots-2023",
+      "title": "Insect-scale jumping robots enabled by a dynamic buckling cascade",
+      "authors": [
+        "Yuzhe Wang",
+        "Qiong Wang",
+        "Mingchao Liu",
+        "Yimeng Qin",
+        "Liuyang Cheng",
+        "Ophelia Bolmin",
+        "Marianne Alleyne",
+        "Aimy Wissa",
+        "Ray H. Baughman",
+        "Dominic Vella",
+        "Sameh Tawfick"
+      ],
+      "year": 2023,
+      "date": "2023-01-31",
+      "earlyOnlineDate": "2023-01-23",
+      "venue": "Proceedings of the National Academy of Sciences",
+      "volume": "120",
+      "issue": "5",
+      "articleNumber": "e2210651120",
+      "status": "Journal article",
+      "doi": "10.1073/pnas.2210651120",
+      "url": "https://doi.org/10.1073/pnas.2210651120",
+      "links": [
+        {
+          "label": "Paper",
+          "url": "https://doi.org/10.1073/pnas.2210651120"
+        },
+        {
+          "label": "Open access",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9945960/"
+        }
+      ],
+      "sources": [
+        "https://pubmed.ncbi.nlm.nih.gov/36689664/",
+        "https://pmc.ncbi.nlm.nih.gov/articles/PMC9945960/"
+      ],
+      "scholarListingObserved": true,
+      "identityEvidence": "The exact title appears in the search-index snippet for Scholar profile MMkH8L0AAAAJ; PubMed and the author manuscript in PMC establish the UIUC affiliation and author list."
+    }
+  ]
+}

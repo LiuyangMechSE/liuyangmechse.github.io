@@ -20,7 +20,7 @@ export async function stageMedia(file:File){
  const url='media/'+crypto.randomUUID()+'.'+extension;uploads.set(url,file);previews.set(url,URL.createObjectURL(file));
  return {url,type:file.type.startsWith('video/')?'video' as const:'image' as const};
 }
-export function mediaPaths(content:SiteContent){return Array.from(new Set([content.portrait,...content.sections.flatMap(s=>s.items.map(i=>i.media))].filter(p=>p.startsWith('media/'))));}
+export function mediaPaths(content:SiteContent){return Array.from(new Set([content.portrait,...content.sections.flatMap(s=>s.items.flatMap(i=>[i.media,i.figure?.src??'']))].filter(p=>p.startsWith('media/'))));}
 const encoder=new TextEncoder();
 const table=Uint32Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;return c>>>0;});
 export function crc32(data:Uint8Array){let c=0xffffffff;for(const b of data)c=table[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0;}

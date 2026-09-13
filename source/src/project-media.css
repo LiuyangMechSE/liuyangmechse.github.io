@@ -1,0 +1,129 @@
+.project-media {
+  width: 100%;
+  min-width: 0;
+}
+
+.project-media-paired {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 28px;
+}
+
+.project-media .project-primary-media,
+.project-media .project-paper-figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.project-media .project-primary-media > img,
+.project-media .project-primary-media > video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+}
+
+.project-media .project-primary-media > figcaption {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #65717b;
+}
+
+.project-media .project-paper-figure {
+  padding: 16px;
+  border: 1px solid #dce4e7;
+  border-radius: 5px;
+  background: #fff;
+}
+
+.project-paper-heading {
+  margin-bottom: 14px;
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: #52636e;
+}
+
+.project-media .project-paper-image-link {
+  display: block;
+  color: #24577c;
+  text-decoration: none;
+}
+
+.project-media .project-paper-image-link:focus-visible {
+  outline: 2px solid #24577c;
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+.project-media .project-paper-image-link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: none;
+  object-fit: contain;
+  border-radius: 0;
+  background: #fff;
+}
+
+.project-paper-expand {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 12px;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.project-paper-image-link:hover .project-paper-expand {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.project-media .project-paper-figure > figcaption {
+  margin-top: 12px;
+  border-top: 1px solid #e6ebee;
+  padding-top: 12px;
+  color: #4d5a64;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.project-paper-caption,
+.project-paper-source {
+  margin: 0;
+}
+
+.project-paper-source {
+  margin-top: 7px;
+  color: #72808a;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.project-paper-source:only-child {
+  margin-top: 0;
+}
+
+.project-paper-source a {
+  color: #526b7e;
+  text-decoration: underline;
+  text-decoration-color: #bccbd4;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 949px) {
+  .project-media-paired {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 22px;
+  }
+}
+
+@media (max-width: 540px) {
+  .project-media .project-paper-figure {
+    padding: 14px;
+  }
+}
