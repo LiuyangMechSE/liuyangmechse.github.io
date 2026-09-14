@@ -3,7 +3,7 @@
   "field": "Mechanics · Soft robotics · Material actuators",
   "affiliation": "University of Illinois Urbana-Champaign",
   "bio": "I study how the mechanics of soft materials can be used to create motion. My research focuses on twisted and coiled polymer actuators, nonlinear elasticity, and the design and control of artificial muscles.\n\nI combine mechanical modeling with experiments to understand these materials and explore their use in soft robotic systems.",
-  "portrait": "media/liuyang-cheng.jpg",
+  "portrait": "media/c3127724-ec6e-4da8-92ed-143425180644.jpg",
   "links": [
     {
       "label": "GitHub",
@@ -19,54 +19,54 @@
       "id": "publications",
       "title": "Publications",
       "intro": "",
+      "page": "home",
       "items": [
         {
           "id": "p-ventricle-2026",
           "title": "A Predictive Design Framework for a Soft Robotic Ventricle using Contractile Actuators",
+          "text": "",
           "authors": "Jeongmin Kim, Qiong Wang, Liuyang Cheng, Samuel Tsai, Seong Hyeon Kim, Harma K. Turbendian, Sameh Tawfick",
           "meta": "arXiv preprint · 2026",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Preprint",
               "url": "https://arxiv.org/abs/2609.09706"
             }
-          ]
+          ],
+          "layout": "left"
         },
         {
           "id": "p2026",
           "title": "Characterization and Selection of Contractile Actuators for Soft Robotics Operating in the Quasistatic Regime",
+          "text": "",
           "authors": "Qiong Wang, Liuyang Cheng, Jeongmin Kim, Samuel Tsai, Devin Roach, Sameh Tawfick",
           "meta": "Advanced Intelligent Systems · 2026",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Paper",
               "url": "https://doi.org/10.1002/aisy.70490"
             }
-          ]
+          ],
+          "layout": "left"
         },
         {
           "id": "p-hierarchical-muscle-2026",
           "title": "Hierarchical Artificial Muscle with Nonlinear Elasticity for Antagonistic and Cyclic Robotics",
+          "text": "",
           "authors": "Samuel Tsai, Liuyang Cheng, Ali Albazroun, Qiong Wang, Jeongmin Kim, Arman Tekinalp, Soonwook Kim, Charlie Simcox, Ryne Downing, Vagish Sivaramakrishnan, Grace Carsello, Miles Bimrose, Wonsik Eom, William P. King, Mattia Gazzola, Sameh Tawfick",
           "meta": "Advanced Science · 2026",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Paper",
@@ -76,37 +76,37 @@
               "label": "Open access",
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13248829/"
             }
-          ]
+          ],
+          "layout": "left"
         },
         {
           "id": "p-jcurve",
           "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
+          "text": "",
           "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
           "meta": "arXiv preprint · 2026",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Preprint",
               "url": "https://arxiv.org/abs/2602.00260"
             }
-          ]
+          ],
+          "layout": "left"
         },
         {
           "id": "p2024",
           "title": "The mechanics and physics of twisted and coiled polymer actuators",
+          "text": "",
           "authors": "Qiong Wang, Anan Ghrayeb, Seong Hyeon Kim, Liuyang Cheng, Sameh Tawfick",
           "meta": "International Journal of Mechanical Sciences · 2024",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Paper",
@@ -116,19 +116,19 @@
               "label": "Preprint",
               "url": "https://arxiv.org/abs/2404.00802"
             }
-          ]
+          ],
+          "layout": "left"
         },
         {
           "id": "p-jumping-robots-2023",
           "title": "Insect-scale jumping robots enabled by a dynamic buckling cascade",
+          "text": "",
           "authors": "Yuzhe Wang, Qiong Wang, Mingchao Liu, Yimeng Qin, Liuyang Cheng, Ophelia Bolmin, Marianne Alleyne, Aimy Wissa, Ray H. Baughman, Dominic Vella, Sameh Tawfick",
           "meta": "Proceedings of the National Academy of Sciences · 2023",
-          "text": "",
-          "media": "",
-          "mediaType": "image",
-          "caption": "",
           "demo": "none",
-          "layout": "left",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
           "links": [
             {
               "label": "Paper",
@@ -138,18 +138,24 @@
               "label": "Open access",
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9945960/"
             }
-          ]
+          ],
+          "layout": "left"
         }
-      ],
-      "page": "home"
+      ]
     },
     {
       "id": "artificial-ligaments",
       "title": "Artificial ligaments",
       "intro": "How can a material be compliant during motion, yet resist excessive deformation? These animated mechanisms explore the ideas in my work on tensile J-curve materials and artificial ligaments.",
+      "page": "research",
       "items": [
         {
+          "id": "antagonist",
+          "title": "Compliant motion, protective resistance",
+          "text": "Two tensile ligaments pull in opposite directions. As the middle block moves, one stretches while the other relaxes. Their J-shaped response leaves a compliant central region and increasingly resists larger displacements. Adjust pre-stretch to explore the trade-off between stiffness and motion range.",
           "authors": "",
+          "meta": "Artificial ligaments · Antagonistic translation",
+          "demo": "antagonist",
           "mediaType": "image",
           "media": "",
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
@@ -160,11 +166,6 @@
             }
           ],
           "layout": "wide",
-          "id": "antagonist",
-          "title": "Compliant motion, protective resistance",
-          "text": "Two tensile ligaments pull in opposite directions. As the middle block moves, one stretches while the other relaxes. Their J-shaped response leaves a compliant central region and increasingly resists larger displacements. Adjust pre-stretch to explore the trade-off between stiffness and motion range.",
-          "meta": "Artificial ligaments · Antagonistic translation",
-          "demo": "antagonist",
           "figure": {
             "src": "media/paper-jcurve-antagonistic.webp",
             "alt": "Original paper plot comparing the nonlinear force–displacement response of opposing J-curve ligaments without pre-stretch against a stiffer response with pre-stretch.",
@@ -174,7 +175,12 @@
           }
         },
         {
+          "id": "joint",
+          "title": "From tensile ligaments to a tunable joint",
+          "text": "The same principle extends to rotation. Opposing ligaments create a restoring torque about a pivot; pre-stretch changes the joint’s response. The animation connects joint angle, ligament tension, and resistance throughout the movement.",
           "authors": "",
+          "meta": "Artificial ligaments · Antagonistic rotation",
+          "demo": "joint",
           "mediaType": "image",
           "media": "",
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
@@ -185,11 +191,6 @@
             }
           ],
           "layout": "wide",
-          "id": "joint",
-          "title": "From tensile ligaments to a tunable joint",
-          "text": "The same principle extends to rotation. Opposing ligaments create a restoring torque about a pivot; pre-stretch changes the joint’s response. The animation connects joint angle, ligament tension, and resistance throughout the movement.",
-          "meta": "Artificial ligaments · Antagonistic rotation",
-          "demo": "joint",
           "figure": {
             "src": "media/paper-jcurve-joint.webp",
             "alt": "Original paper drawing of a pivoting robot arm with artificial ligaments on opposite sides of the joint, beside force versus angle curves at different pre-stretch levels.",
@@ -199,7 +200,12 @@
           }
         },
         {
+          "id": "running",
+          "title": "A tunable spring for a running leg",
+          "text": "In the paper’s conceptual running model, a passive spring and an active linear actuator act in parallel. The actuator supplies the difference between the target leg force and the spring force. Explore how passive tuning changes that balance through compression, rebound, and flight.",
           "authors": "",
+          "meta": "Running outlook · Passive spring + active actuator",
+          "demo": "running",
           "mediaType": "image",
           "media": "",
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
@@ -210,11 +216,6 @@
             }
           ],
           "layout": "wide",
-          "id": "running",
-          "title": "A tunable spring for a running leg",
-          "text": "In the paper’s conceptual running model, a passive spring and an active linear actuator act in parallel. The actuator supplies the difference between the target leg force and the spring force. Explore how passive tuning changes that balance through compression, rebound, and flight.",
-          "meta": "Running outlook · Passive spring + active actuator",
-          "demo": "running",
           "figure": {
             "src": "media/paper-jcurve-running.webp",
             "alt": "Original revised-manuscript schematic of running with a spring-loaded leg, showing the center-of-mass path and a parallel spring and linear actuator during stance.",
@@ -223,8 +224,7 @@
             "sourceUrl": ""
           }
         }
-      ],
-      "page": "research"
+      ]
     },
     {
       "id": "polymer-actuators",
@@ -233,8 +233,12 @@
       "page": "research",
       "items": [
         {
+          "id": "coil",
+          "title": "From fiber geometry to muscle-like motion",
+          "text": "Twisting and coiling turn a polymer fiber into a contractile actuator. I am interested in how geometry, stored energy, and material response work together to produce useful motion.",
           "authors": "",
           "meta": "Twisted and coiled polymer actuators",
+          "demo": "none",
           "mediaType": "image",
           "media": "",
           "caption": "",
@@ -245,10 +249,6 @@
             }
           ],
           "layout": "left",
-          "id": "coil",
-          "title": "From fiber geometry to muscle-like motion",
-          "text": "Twisting and coiling turn a polymer fiber into a contractile actuator. I am interested in how geometry, stored energy, and material response work together to produce useful motion.",
-          "demo": "none",
           "figure": {
             "src": "media/paper-tcpa-thermomechanics.webp",
             "alt": "Original TCPA mechanics paper figure showing nylon coil photographs, thermomechanical test steps, and force–displacement curves at low and actuation temperatures.",
@@ -266,17 +266,17 @@
       "page": "research",
       "items": [
         {
+          "id": "lights",
+          "title": "Artificial muscles in a moving light array",
+          "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array.",
           "authors": "",
           "meta": "Art lighting · Work in progress",
+          "demo": "none",
           "mediaType": "image",
           "media": "",
           "caption": "",
           "links": [],
-          "layout": "left",
-          "id": "lights",
-          "title": "Artificial muscles in a moving light array",
-          "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array.",
-          "demo": "none"
+          "layout": "left"
         }
       ]
     }
