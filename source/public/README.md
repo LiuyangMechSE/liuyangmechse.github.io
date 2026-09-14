@@ -1,6 +1,6 @@
 # Liuyang Cheng — personal website
 
-This is a complete static website for **LiuyangMechSE/liuyangmechse.github.io**. The intended address is **https://liuyangmechse.github.io/**. It is ready for GitHub Pages and needs no server, database, build action, or API key.
+This is a complete static website for **LiuyangMechSE/liuyangmechse.github.io**. The intended address is **https://liuyangmechse.github.io/**. It is ready for GitHub Pages and needs no application server. Public viewing needs no account; direct publishing from the editor requires GitHub repository authorization.
 
 ## Publishing updates
 
@@ -8,9 +8,9 @@ The website is published at **https://liuyangmechse.github.io/** from the reposi
 
 ## Edit without coding
 
-Open **Edit a copy** on the website (or open `editor.html`). The visual editor supports:
+Open **Edit website** on the website (or open `editor.html`). The visual editor supports:
 
-- Switching between Home and Research while keeping drafts in the same tab.
+- Switching between Home and Research, with drafts and uploaded images restored after refreshing or reopening the editor in the same browser.
 - Dragging projects, sections, and entries, including between sections on the same page; arrows provide an alternative.
 - Moving a section between Home and Research in its edit dialog.
 - Editing the paper figure, caption, and source beside a demo.
@@ -21,9 +21,15 @@ Open **Edit a copy** on the website (or open `editor.html`). The visual editor s
 
 Entry titles open the first HTTPS link in that entry. In **Edit entry → Links**, put the publisher page or preprint first to choose the title’s destination. Additional links remain available beneath the entry.
 
-Choose **Apply changes** in a dialog, then **Download website**. Extract the downloaded ZIP and upload its files to the repository root, committing the update. GitHub Pages republishes from that commit. The downloaded ZIP contains your changed content and media.
+Choose **Save changes** in a dialog to keep the edit in your draft. Text, layout, and uploaded portraits/media are automatically saved on this device using IndexedDB. The editor waits for the storage transaction before reporting that the draft is saved, and shows an error if browser storage is unavailable or full. Browser data clearing or private browsing can remove these local drafts; **Download backup** keeps an independent ZIP copy.
 
-**The editor changes a draft in the current tab. It does not save to GitHub automatically.** Download before closing the tab. Anyone can edit their own copy, but only people with write access to your GitHub repository can publish changes. No GitHub token is requested or stored.
+Choose **Save to GitHub** to make your edits permanent on the public website. In the publishing dialog, create a GitHub fine-grained personal access token for **only `liuyangmechse.github.io`**, with repository **Contents: Read and write**. Paste it into the editor's password field. The token is used only for authenticated requests to GitHub, remains in memory for the current tab, and is never written to browser storage, content files, downloads, URLs, or repository commits. Refreshing/closing the page clears authorization. Never place a token in `content.json` or send it in chat.
+
+Publishing verifies repository write access, checks the latest content for conflicting changes, uploads new media, updates root and source `content.json` copies plus the export manifest, and saves them in one commit on `main`. GitHub Pages then deploys that commit. The editor reports the actual GitHub result and links to the saved commit and deployment page. Publishing failure preserves your local draft. Downloading a backup does not mark changes as published.
+
+Anyone can edit a local draft. Only an account with repository write access can publish changes. Public Home and Research pages always load published content and never display another browser's local draft.
+
+As an alternative, extract **Download backup** and commit its files to the repository root. Keep root `content.json` and `source/public/content.json` synchronized if publishing an exported ZIP manually. **Discard draft** resets only your device's draft to the published version last loaded by the editor.
 
 Use media URLs only for assets you are comfortable making public. Direct MP4 and WebM URLs work as videos; YouTube watch-page URLs are not direct media URLs.
 

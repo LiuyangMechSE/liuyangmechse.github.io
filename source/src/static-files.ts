@@ -1,9 +1,43 @@
-import {initialContent,siteSchema,type SiteContent} from './lib/content';
+import {siteSchema,type SiteContent} from './lib/content';
+import {readDraftSnapshot,writeDraftSnapshot,deleteDraftSnapshot} from './draft-storage';
 
-// Unsaved uploads are temporary, tab-local drafts until exported and committed.
-const uploads=new Map<string,File>();
+// Uploads are staged in memory, then stored with content by saveDraft.
+const uploads=new Map<string,Blob>();
 const previews=new Map<string,string>();
 export const mediaSource=(path:string)=>previews.get(path)??path;
+export const getStagedMedia=(path:string)=>uploads.get(path);
+export async function saveDraft(content:SiteContent,base:SiteContent):Promise<void>{
+ const snapshot={content:siteSchema.parse(content),base:siteSchema.parse(base),updatedAt:new Date().toISOString(),uploads:Array.from(uploads,([path,blob])=>({path,blob}))};
+ await writeDraftSnapshot(snapshot);
+}
+export async function loadDraft():Promise<{content:SiteContent;base:SiteContent;updatedAt:string}|null>{
+ const raw=await readDraftSnapshot();
+ if(raw===undefined)return null;
+ if(!raw||typeof raw!=='object')throw Error('The saved draft is invalid.');
+ const record=raw as Record<string,unknown>;
+ const content=siteSchema.parse(record.content),base=siteSchema.parse(record.base);
+ if(typeof record.updatedAt!=='string'||!Number.isFinite(Date.parse(record.updatedAt))||!Array.isArray(record.uploads))throw Error('The saved draft is invalid.');
+ const restored=new Map<string,Blob>();
+ for(const entry of record.uploads){
+  if(!entry||typeof entry!=='object'||typeof entry.path!=='string'||!/^media\/[a-zA-Z0-9.-]+$/.test(entry.path)||!(entry.blob instanceof Blob)||!['image/jpeg','image/png','image/webp','image/gif','video/mp4','video/webm'].includes(entry.blob.type)||!entry.blob.size||entry.blob.size>25*1024*1024||restored.has(entry.path))throw Error('The saved draft contains invalid media.');
+  restored.set(entry.path,entry.blob);
+ }
+ // Prepare all object URLs before replacing the active maps, so a bad restore
+ // cannot partially replace the current editing session.
+ const restoredPreviews=new Map<string,string>();
+ try{for(const [path,blob] of restored)restoredPreviews.set(path,URL.createObjectURL(blob));}
+ catch(error){for(const url of restoredPreviews.values())URL.revokeObjectURL(url);throw error;}
+ for(const url of previews.values())URL.revokeObjectURL(url);
+ uploads.clear();previews.clear();
+ for(const [path,blob] of restored)uploads.set(path,blob);
+ for(const [path,url] of restoredPreviews)previews.set(path,url);
+ return {content,base,updatedAt:record.updatedAt};
+}
+export async function clearDraft():Promise<void>{
+ await deleteDraftSnapshot();
+ // Keep staged media alive for the current session and undo history. The caller
+ // decides which content to display after discarding or publishing a draft.
+}
 export async function loadPage(){
  const response=await fetch('./content.json',{cache:'no-store'});
  if(!response.ok)throw Error('Your content could not be loaded. Refresh before editing.');
