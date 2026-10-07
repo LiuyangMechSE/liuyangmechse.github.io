@@ -271,13 +271,13 @@
       "items": [
         {
           "id": "lights",
-          "title": "Artificial muscles in a moving light array",
-          "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array.",
+          "title": "Art lighting driven by long artificial muscles",
+          "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array. Those muscles are produced by an automated scalable manufacuring machine",
           "authors": "",
           "meta": "Art lighting · Work in progress",
           "demo": "none",
-          "mediaType": "image",
-          "media": "",
+          "mediaType": "video",
+          "media": "media/ea7c0c13-2bbd-42aa-a102-69fc19e841a7.mp4",
           "caption": "",
           "links": [],
           "layout": "left"
