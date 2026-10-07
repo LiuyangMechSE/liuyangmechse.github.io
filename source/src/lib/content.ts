@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import seed from '../../public/content.json';
-export const safeUrl = (s: string) => !s || /^https:\/\/[^\s]+$/i.test(s) || /^media\/[a-zA-Z0-9.-]+$/.test(s) || /^mailto:[^\s@]+@[^\s@]+$/.test(s);
+export const isLocalPdfPath = (s: string) => /^files\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.pdf$/i.test(s) && !s.includes('..');
+export const safeUrl = (s: string) => !s || /^https:\/\/[^\s]+$/i.test(s) || /^media\/[a-zA-Z0-9.-]+$/.test(s) || isLocalPdfPath(s) || /^mailto:[^\s@]+@[^\s@]+$/.test(s);
 const url = z.string().max(2000).refine(safeUrl);
 export const linkSchema = z.object({label:z.string().max(80),url});
 export const figureSchema = z.object({src:url,alt:z.string().max(1000),caption:z.string().max(1000),sourceLabel:z.string().max(400),sourceUrl:url});

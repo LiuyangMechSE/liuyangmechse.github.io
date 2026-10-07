@@ -100,13 +100,13 @@ export async function publishWebsite({token, content, base, onProgress}: {
  const media: {path: string; sha: string; bytes?: Uint8Array}[] = [];
  // Check every file before creating any remote objects. Missing uploads never become broken links.
  for (const path of paths) {
-  const staged = getStagedMedia(path), existing = files.get(path);
+  const staged = getStagedMedia(path), existing = files.get(path), sourceExisting = files.get('source/public/' + path);
   if (staged) {
    const bytes = new Uint8Array(await staged.arrayBuffer()), sha = await gitBlobSha(bytes);
-   if (existing && existing !== sha) throw Error('An uploaded image has the same filename as a different image on GitHub. Upload that image again to give it a new filename.');
-   media.push({path, sha, ...(existing ? {} : {bytes})});
+   if ((existing && existing !== sha) || (sourceExisting && sourceExisting !== sha)) throw Error('An uploaded file has the same filename as a different file on GitHub. Upload that file again to give it a new filename.');
+   media.push({path, sha, ...(existing || sourceExisting ? {} : {bytes})});
   } else {
-   const sha = existing ?? files.get('source/public/' + path);
+   const sha = existing ?? sourceExisting;
    if (!sha) throw Error(`The upload ${path} is missing from this device and GitHub. Choose the file again before publishing.`);
    media.push({path, sha});
   }
@@ -133,7 +133,7 @@ export async function publishWebsite({token, content, base, onProgress}: {
   return sha;
  }
  for (const [index, file] of media.entries()) {
-  if (file.bytes) {progress(`Uploading media ${index + 1} of ${media.length}…`); await uploadBlob(base64(file.bytes), 'base64', file.sha);}
+  if (file.bytes) {progress(`Uploading file ${index + 1} of ${media.length}…`); await uploadBlob(base64(file.bytes), 'base64', file.sha);}
   addFile(file.path, file.sha); addFile('source/public/' + file.path, file.sha);
  }
  progress('Saving website content…');

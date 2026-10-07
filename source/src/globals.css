@@ -130,3 +130,4 @@ footer{border-top:1px solid #e4e8ec;margin-top:55px;padding-top:20px;color:#7882
 @media(max-width:760px){.research-page{padding-top:32px}.research-intro nav{gap:8px 18px}.research-page .layout-wide .entry-copy{padding-bottom:2px}.topbar nav{gap:14px}}
 
 .editor-actions{flex-wrap:wrap}.editor-bar .draft-error,.publish-error{color:#a33426}.publish-dialog p{font-size:14px;line-height:1.65;margin:0}.publish-dialog .authorization-note{font-size:13px;color:#607181}.publish-error{border:1px solid #e5b9b0;background:#fff7f5;border-radius:4px;padding:12px}.editor-bar a{text-decoration:underline}.editor-actions>button:not([data-slot]){white-space:nowrap}
+.cv-upload a{font-size:13px;color:#164f80;text-decoration:underline;text-underline-offset:3px;margin-top:4px}

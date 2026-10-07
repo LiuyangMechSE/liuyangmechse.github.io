@@ -1,9 +1,11 @@
-import {siteSchema,type SiteContent} from './lib/content';
+import {isLocalPdfPath,siteSchema,type SiteContent} from './lib/content';
 import {readDraftSnapshot,writeDraftSnapshot,deleteDraftSnapshot} from './draft-storage';
 
 // Uploads are staged in memory, then stored with content by saveDraft.
 const uploads=new Map<string,Blob>();
 const previews=new Map<string,string>();
+const maxUploadSize=25*1024*1024;
+async function hasPdfHeader(blob:Blob){return new TextDecoder().decode(await blob.slice(0,5).arrayBuffer())==='%PDF-';}
 export const mediaSource=(path:string)=>previews.get(path)??path;
 export const getStagedMedia=(path:string)=>uploads.get(path);
 export async function saveDraft(content:SiteContent,base:SiteContent):Promise<void>{
@@ -19,7 +21,10 @@ export async function loadDraft():Promise<{content:SiteContent;base:SiteContent;
  if(typeof record.updatedAt!=='string'||!Number.isFinite(Date.parse(record.updatedAt))||!Array.isArray(record.uploads))throw Error('The saved draft is invalid.');
  const restored=new Map<string,Blob>();
  for(const entry of record.uploads){
-  if(!entry||typeof entry!=='object'||typeof entry.path!=='string'||!/^media\/[a-zA-Z0-9.-]+$/.test(entry.path)||!(entry.blob instanceof Blob)||!['image/jpeg','image/png','image/webp','image/gif','video/mp4','video/webm'].includes(entry.blob.type)||!entry.blob.size||entry.blob.size>25*1024*1024||restored.has(entry.path))throw Error('The saved draft contains invalid media.');
+  if(!entry||typeof entry!=='object'||typeof entry.path!=='string'||!(entry.blob instanceof Blob)||!entry.blob.size||entry.blob.size>maxUploadSize||restored.has(entry.path))throw Error('The saved draft contains an invalid file.');
+  const validMedia=/^media\/[a-zA-Z0-9.-]+$/.test(entry.path)&&['image/jpeg','image/png','image/webp','image/gif','video/mp4','video/webm'].includes(entry.blob.type);
+  const validPdf=isLocalPdfPath(entry.path)&&entry.blob.type==='application/pdf'&&await hasPdfHeader(entry.blob);
+  if(!validMedia&&!validPdf)throw Error('The saved draft contains an invalid file.');
   restored.set(entry.path,entry.blob);
  }
  // Prepare all object URLs before replacing the active maps, so a bad restore
@@ -54,7 +59,20 @@ export async function stageMedia(file:File){
  const url='media/'+crypto.randomUUID()+'.'+extension;uploads.set(url,file);previews.set(url,URL.createObjectURL(file));
  return {url,type:file.type.startsWith('video/')?'video' as const:'image' as const};
 }
-export function mediaPaths(content:SiteContent){return Array.from(new Set([content.portrait,...content.sections.flatMap(s=>s.items.flatMap(i=>[i.media,i.figure?.src??'']))].filter(p=>p.startsWith('media/'))));}
+export async function stageCv(file:File):Promise<string>{
+ if(!/\.pdf$/i.test(file.name)||!['','application/pdf','application/octet-stream'].includes(file.type))throw Error('Choose a PDF file for your CV.');
+ if(!file.size||file.size>maxUploadSize)throw Error('Choose a nonempty PDF no larger than 25 MB.');
+ if(!await hasPdfHeader(file))throw Error('This file is not a PDF. Choose your CV as a PDF file.');
+ const path='files/cv-'+crypto.randomUUID()+'.pdf',blob=new Blob([file],{type:'application/pdf'});
+ const preview=URL.createObjectURL(blob);uploads.set(path,blob);previews.set(path,preview);
+ return path;
+}
+export function mediaPaths(content:SiteContent){
+ const items=content.sections.flatMap(section=>section.items);
+ const images=[content.portrait,...items.flatMap(item=>[item.media,item.figure?.src??''])].filter(path=>path.startsWith('media/'));
+ const documents=[...content.links,...items.flatMap(item=>item.links)].map(link=>link.url).filter(isLocalPdfPath);
+ return Array.from(new Set([...images,...documents]));
+}
 const encoder=new TextEncoder();
 const table=Uint32Array.from({length:256},(_,n)=>{let c=n;for(let k=0;k<8;k++)c=(c&1)?0xedb88320^(c>>>1):c>>>1;return c>>>0;});
 export function crc32(data:Uint8Array){let c=0xffffffff;for(const b of data)c=table[(c^b)&255]^(c>>>8);return (c^0xffffffff)>>>0;}
@@ -77,9 +95,9 @@ export async function exportWebsite(content:SiteContent){
  const manifest=await response.json() as {files:string[]};
  if(!Array.isArray(manifest.files)||manifest.files.some(p=>typeof p!=='string'||p.startsWith('/')||p.includes('..')||p.includes(':')))throw Error('The export file list is invalid.');
  const entries:{name:string;data:Uint8Array}[]=[];
- for(const path of manifest.files.filter(p=>p!=='content.json'&&p!=='export-manifest.json'&&!p.startsWith('media/'))){const r=await fetch('./'+path);if(!r.ok)throw Error('Could not export '+path);entries.push({name:path,data:new Uint8Array(await r.arrayBuffer())});}
+ const paths=new Set([...manifest.files,...mediaPaths(checked)]);paths.delete('content.json');paths.delete('export-manifest.json');
+ for(const path of paths){const staged=uploads.get(path);let blob:Blob;if(staged)blob=staged;else{const r=await fetch('./'+path);if(!r.ok)throw Error('Could not export '+path);blob=await r.blob();}entries.push({name:path,data:new Uint8Array(await blob.arrayBuffer())});}
  entries.push({name:'content.json',data:encoder.encode(JSON.stringify(checked,null,2)+'\n')});
- for(const path of mediaPaths(checked)){const staged=uploads.get(path);let blob:Blob;if(staged)blob=staged;else{const r=await fetch('./'+path);if(!r.ok)throw Error('Could not load '+path);blob=await r.blob();}entries.push({name:path,data:new Uint8Array(await blob.arrayBuffer())});}
  entries.push({name:'export-manifest.json',data:encoder.encode(JSON.stringify({files:[...entries.map(e=>e.name),'export-manifest.json'].sort()},null,2)+'\n')});
  download(zipFiles(entries),'liuyangmechse.github.io-update.zip');
 }

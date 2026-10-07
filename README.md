@@ -15,13 +15,16 @@ Open **Edit website** on the website (or open `editor.html`). The visual editor 
 - Moving a section between Home and Research in its edit dialog.
 - Editing the paper figure, caption, and source beside a demo.
 - Editing your introduction, portrait, text, authors, publication details, and links.
+- Replacing your CV with a PDF up to 25 MB, with a preview, saved draft, and permanent GitHub publishing.
 - Changing media placement: left, right, or full width.
 - Replacing animations with JPG, PNG, WebP, GIF, MP4, or WebM files up to 25 MB each.
 - Adding or removing entries and sections, with Undo.
 
+To update your CV, open **Home → Edit introduction, CV & links → Choose CV PDF** (or drop the PDF into the CV box). Use **Open selected CV (PDF)** to review it, choose **Save changes**, then **Save to GitHub**. The existing CV link is updated in place. Uploaded PDFs are saved with your local draft and included in **Download backup**; publishing saves each PDF in both `files/` and `source/public/files/`. Previous PDFs remain in the repository so older links keep working.
+
 Entry titles open the first HTTPS link in that entry. In **Edit entry → Links**, put the publisher page or preprint first to choose the title’s destination. Additional links remain available beneath the entry.
 
-Choose **Save changes** in a dialog to keep the edit in your draft. Text, layout, and uploaded portraits/media are automatically saved on this device using IndexedDB. The editor waits for the storage transaction before reporting that the draft is saved, and shows an error if browser storage is unavailable or full. Browser data clearing or private browsing can remove these local drafts; **Download backup** keeps an independent ZIP copy.
+Choose **Save changes** in a dialog to keep the edit in your draft. Text, layout, and uploaded portraits/media/CVs are automatically saved on this device using IndexedDB. The editor waits for the storage transaction before reporting that the draft is saved, and shows an error if browser storage is unavailable or full. Browser data clearing or private browsing can remove these local drafts; **Download backup** keeps an independent ZIP copy.
 
 Choose **Save to GitHub** to make your edits permanent on the public website. In the publishing dialog, create a GitHub fine-grained personal access token for **only `liuyangmechse.github.io`**, with repository **Contents: Read and write**. Paste it into the editor's password field. The token is used only for authenticated requests to GitHub, remains in memory for the current tab, and is never written to browser storage, content files, downloads, URLs, or repository commits. Refreshing/closing the page clears authorization. Never place a token in `content.json` or send it in chat.
 
@@ -53,7 +56,7 @@ The authoritative data is root `content.json`. Keep `source/public/content.json`
 
 The first package includes a `source/` folder with the React/TypeScript source, styles, and build configuration. The compiled files at the repository root can be published immediately; source compilation is optional.
 
-To rebuild, install Node.js 22.13 or later, open `source/`, run `npm install`, then `npm run build`. Copy `source/dist/` contents to the repository root. Before rebuilding a previously edited website, copy your current root `content.json` and `media/` (if present) into `source/public/` so they are preserved.
+To rebuild, install Node.js 22.13 or later, open `source/`, run `npm install`, then `npm run build`. Copy `source/dist/` contents to the repository root. Before rebuilding a previously edited website, copy your current root `content.json`, `media/`, and `files/` (if present) into `source/public/` so they are preserved.
 
 For a local preview of the compiled website, run `python -m http.server 8000` in the repository root, then open `http://localhost:8000`. The editor fetches local files, so opening the HTML directly through `file://` is not supported.
 
