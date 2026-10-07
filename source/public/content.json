@@ -283,6 +283,27 @@
           "layout": "left"
         }
       ]
+    },
+    {
+      "id": "octopus-arm",
+      "title": "Octopus arm",
+      "intro": "",
+      "page": "research",
+      "items": [
+        {
+          "id": "octopus-arm-soft-robotics",
+          "title": "Octopus-inspired soft robotic arms",
+          "text": "An ongoing research direction exploring soft robotic arms inspired by the flexible motion of octopus arms.",
+          "authors": "",
+          "meta": "Bio-inspired soft robotics · Work in progress",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [],
+          "layout": "left"
+        }
+      ]
     }
   ]
 }
