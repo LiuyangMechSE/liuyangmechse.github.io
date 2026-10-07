@@ -40,6 +40,24 @@
           "layout": "left"
         },
         {
+          "id": "p-jcurve",
+          "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
+          "text": "",
+          "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
+          "meta": "arXiv preprint · 2026",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Preprint",
+              "url": "https://arxiv.org/abs/2602.00260"
+            }
+          ],
+          "layout": "left"
+        },
+        {
           "id": "p2026",
           "title": "Characterization and Selection of Contractile Actuators for Soft Robotics Operating in the Quasistatic Regime",
           "text": "",
@@ -75,24 +93,6 @@
             {
               "label": "Open access",
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13248829/"
-            }
-          ],
-          "layout": "left"
-        },
-        {
-          "id": "p-jcurve",
-          "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
-          "text": "",
-          "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
-          "meta": "arXiv preprint · 2026",
-          "demo": "none",
-          "mediaType": "image",
-          "media": "",
-          "caption": "",
-          "links": [
-            {
-              "label": "Preprint",
-              "url": "https://arxiv.org/abs/2602.00260"
             }
           ],
           "layout": "left"
