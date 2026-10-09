@@ -8,7 +8,9 @@ The website is published at **https://liuyangmechse.github.io/** from the reposi
 
 ## Edit without coding
 
-Open **Edit website** on the website (or open `editor.html`). The visual editor supports:
+The public pages do not show an editing link. Bookmark **https://liuyangmechse.github.io/editor.html** to open the editor. Enter a GitHub token from the **LiuyangMechSE** account to unlock the controls; authorization stays in memory for the current tab and is also used for publishing. Refreshing or closing the tab locks the controls again. Saved drafts remain on this device.
+
+The visual editor supports:
 
 - Switching between Home and Research, with drafts and uploaded images restored after refreshing or reopening the editor in the same browser.
 - Dragging projects, sections, and entries, including between sections on the same page; arrows provide an alternative.
@@ -30,7 +32,7 @@ Choose **Save to GitHub** to make your edits permanent on the public website. In
 
 Publishing verifies repository write access, checks the latest content for conflicting changes, uploads new media, updates root and source `content.json` copies plus the export manifest, and saves them in one commit on `main`. GitHub Pages then deploys that commit. The editor reports the actual GitHub result and links to the saved commit and deployment page. Publishing failure preserves your local draft. Downloading a backup does not mark changes as published.
 
-Anyone can edit a local draft. Only an account with repository write access can publish changes. Public Home and Research pages always load published content and never display another browser's local draft.
+The editor UI checks the GitHub account identity and repository access before loading drafts or showing editing controls. This is a client-side convenience gate: GitHub Pages still serves the static editor files publicly, and the URL is not a confidential resource. GitHub enforces write authorization for all published changes. Public Home and Research pages always load published content and never display another browser's local draft.
 
 As an alternative, extract **Download backup** and commit its files to the repository root. Keep root `content.json` and `source/public/content.json` synchronized if publishing an exported ZIP manually. **Discard draft** resets only your device's draft to the published version last loaded by the editor.
 
