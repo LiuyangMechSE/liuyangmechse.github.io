@@ -1,0 +1,28 @@
+{
+  "checkedAt": "2026-10-21",
+  "presentations": [
+    {
+      "id": "ses-2026-soft-spiral-octopus",
+      "title": "Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles",
+      "presenter": "Liuyang Cheng",
+      "type": "Oral presentation",
+      "conference": "2026 Society of Engineering Science Annual Technical Meeting",
+      "conferenceDates": "2026-10-11/2026-10-14",
+      "date": "2026-10-12",
+      "time": "15:50–16:10 EDT",
+      "location": "Purdue University, West Lafayette, Indiana, USA",
+      "room": "STEW 278",
+      "session": "3.7.3 Soft Robotics: Matter, Structure, and Intelligence",
+      "sources": [
+        {
+          "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf",
+          "pages": [
+            51,
+            52
+          ]
+        }
+      ],
+      "note": "The official program identifies the speaker, not the complete author list. This is a conference presentation, not a single-author publication. No invited status or award is claimed."
+    }
+  ]
+}

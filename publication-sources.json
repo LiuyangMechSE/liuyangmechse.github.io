@@ -149,8 +149,8 @@
       ],
       "year": 2026,
       "date": "2026-01-30",
-      "venue": "arXiv",
-      "status": "Preprint",
+      "venue": "Proceedings of the National Academy of Sciences",
+      "status": "Accepted",
       "arxiv": "2602.00260",
       "url": "https://arxiv.org/abs/2602.00260",
       "links": [
@@ -163,7 +163,14 @@
         "https://arxiv.org/abs/2602.00260"
       ],
       "scholarListingObserved": false,
-      "identityEvidence": "The primary arXiv record matches the user's supplied artificial-ligament manuscript and author group."
+      "identityEvidence": "The primary arXiv record matches the user's supplied artificial-ligament manuscript and author group.",
+      "acceptedDate": "2026-10-05",
+      "statusCheckedAt": "2026-10-21",
+      "statusSource": {
+        "type": "Author-revised CV",
+        "url": "https://liuyangmechse.github.io/files/Liuyang-Cheng-CV-zh-20261021.pdf",
+        "note": "Acceptance date provided in the author-revised CV. Publication DOI, volume and issue have not been assigned here; the existing arXiv link remains the preprint."
+      }
     },
     {
       "id": "tcpa-mechanics-2024",

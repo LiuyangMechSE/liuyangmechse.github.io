@@ -10,7 +10,7 @@ The website is published at **https://liuyangmechse.github.io/** from the reposi
 
 Use **EN / 中文** in the navigation to change language. The choice is saved on this browser; `?lang=en` or `?lang=zh` in a shared link overrides it. Home, Research, paper captions and interactive demo controls follow the selected language. Publication titles, author names and journal names retain their original bibliographic spelling. If a new entry has no Chinese text yet, it safely falls back to English.
 
-The English CV is preserved at its existing URL. Chinese mode opens `files/Liuyang-Cheng-CV-zh.pdf`. Both versions are included in backups. The Chinese PDF uses embedded CJK fonts; its editable source and reproducible renderer are `source/scripts/cv-zh.html` and `source/scripts/build-cv-zh.py`.
+The current English and Chinese CVs are `files/Liuyang-Cheng-CV-en-20261021.pdf` and `files/Liuyang-Cheng-CV-zh-20261021.pdf`. Earlier PDFs remain available at their original URLs. Both current versions are included in backups. The Chinese PDF uses embedded CJK fonts and preserves the owner’s revised document; its HTML source and alternative renderer are `source/scripts/cv-zh.html` and `source/scripts/build-cv-zh.py`. The published October 21 revision was exported from the owner-reviewed Word document, not regenerated from the HTML renderer.
 
 In the owner editor, both text versions appear side by side. A content edit in either language becomes the **latest source** and appears on both pages after publishing. Its previous translation remains stored in the editor, not shown as outdated content. This is **translation review, not automatic translation**: no translation service, API key or extra account is used.
 
@@ -67,9 +67,13 @@ The animations use a normalized material law and prescribed gait. They are expla
 
 The portrait is the photograph labelled Liuyang Cheng on the [Kinetic Materials Research Group people page](https://tawfick.mechse.illinois.edu/people/), retrieved September 12, 2026.
 
+## Conference presentations
+
+The SES 2026 entry records Liuyang Cheng’s oral presentation, “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles,” on October 12, 2026 at Purdue University. The official program is linked from the entry and recorded in `conference-sources.json`. It identifies the presenter, not a sole-author publication, invited talk, or award.
+
 ## Publication updates
 
-The home page contains six verified papers/preprints as of September 13, 2026. `publication-sources.json` records their primary-source evidence. Direct access to Google Scholar profile `MMkH8L0AAAAJ` and its portrait was blocked (403/429), so the initial import is **not verified as a complete Scholar list** and the existing lab portrait remains.
+The home page contains six verified papers/preprints initially checked on September 13, 2026. The October 21 author-revised CV confirms the J-curve manuscript’s PNAS acceptance on October 5, 2026; it is marked accepted while the existing arXiv link remains a preprint link. `publication-sources.json` records their primary-source evidence. Direct access to Google Scholar profile `MMkH8L0AAAAJ` and its portrait was blocked (403/429), so the initial import is **not verified as a complete Scholar list** and the existing lab portrait remains.
 
 A weekly ChatGPT automation checks this Scholar profile and updates the site through the connected GitHub account. If Scholar is blocked, it leaves the existing records intact and reports the block. It must not remove entries based on an incomplete result or attribute another author's work by name alone. This is a scheduled ChatGPT task; it is not a browser timer or GitHub Actions scraper.
 

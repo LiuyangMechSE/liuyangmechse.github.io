@@ -15,9 +15,9 @@
     },
     {
       "label": "CV (PDF)",
-      "url": "files/cv-eddb5176-660d-4eac-81bd-928cf9d47059.pdf",
+      "url": "files/Liuyang-Cheng-CV-en-20261021.pdf",
       "zhLabel": "简历 (PDF)",
-      "zhUrl": "files/Liuyang-Cheng-CV-zh.pdf",
+      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261021.pdf",
       "kind": "cv"
     },
     {
@@ -56,7 +56,7 @@
           "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
           "text": "",
           "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
-          "meta": "arXiv preprint · 2026",
+          "meta": "Proceedings of the National Academy of Sciences · Accepted 2026-10-05",
           "demo": "none",
           "mediaType": "image",
           "media": "",
@@ -373,18 +373,24 @@
         {
           "id": "octopus-arm-soft-robotics",
           "title": "Octopus-inspired soft robotic arms",
-          "text": "An ongoing research direction exploring soft robotic arms inspired by the flexible motion of octopus arms.",
+          "text": "An ongoing research direction exploring soft robotic arms inspired by the flexible motion of octopus arms.\n\nSES 2026 oral presentation: “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”, October 12, 2026, Purdue University.",
           "authors": "",
           "meta": "Bio-inspired soft robotics · Work in progress",
           "demo": "none",
           "mediaType": "image",
           "media": "",
           "caption": "",
-          "links": [],
+          "links": [
+            {
+              "label": "SES 2026 program",
+              "zhLabel": "SES 2026 会议日程",
+              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf"
+            }
+          ],
           "layout": "left",
           "zh": {
             "title": "章鱼腕足启发的软体机械臂",
-            "text": "这项进行中的研究以章鱼腕足的柔性运动为启发，探索软体机械臂。",
+            "text": "这项进行中的研究以章鱼腕足的柔性运动为启发，探索软体机械臂。\n\nSES 2026 口头报告：“Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”，2026 年 10 月 12 日，Purdue University。",
             "meta": "仿生软体机器人 · 进行中"
           },
           "kind": "research"
@@ -392,6 +398,40 @@
       ],
       "zh": {
         "title": "章鱼腕足仿生机械臂"
+      }
+    },
+    {
+      "id": "conference-presentations",
+      "title": "Conference presentations",
+      "intro": "",
+      "page": "home",
+      "items": [
+        {
+          "id": "ses-2026-soft-spiral-octopus",
+          "title": "Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles",
+          "text": "Presenter: Liuyang Cheng. Oral presentation at the 2026 Society of Engineering Science Annual Technical Meeting, Purdue University, West Lafayette, Indiana, USA.",
+          "authors": "",
+          "meta": "SES 2026 · 2026-10-12",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Conference program",
+              "zhLabel": "会议日程",
+              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf"
+            }
+          ],
+          "layout": "left",
+          "kind": "publication",
+          "zh": {
+            "text": "报告人：成刘阳。2026 Society of Engineering Science Annual Technical Meeting 口头报告，地点为美国印第安纳州西拉法叶的 Purdue University。"
+          }
+        }
+      ],
+      "zh": {
+        "title": "会议报告"
       }
     }
   ],

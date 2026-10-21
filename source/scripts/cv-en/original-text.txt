@@ -1,0 +1,146 @@
+                                  Curriculum Vitae/Resume
+                                                Liuyang Cheng
+                                              liuyang5@illinois.edu
+
+
+Research Profile
+Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected
+Dec. 2026). Four peer-reviewed journal articles (including PNAS) and a first-author manuscript under review at
+PNAS, spanning theory, manufacturing, and characterization of soft actuators.
+
+Research Interests
+Soft robotics; Bioinspired mechanism; Material actuator; Nonlinear mechanics of J-curve materials; Scalable
+actuator manufacturing and characterization.
+
+Education
+University of Illinois Urbana-Champaign                                                              Illinois, USA
+    o   Ph.D. of Mechanical Science and Engineering                         Aug. 2021 - Dec. 2026 (expected)
+    o   Thesis: Bioinspired Functional Materials and Versatile Soft Robotic Arm; Advisor: Sameh H. Tawfick
+    o   GPA (Overall): 3.8/4.0
+    o   B.S. in Mechanical Science and Engineering                                    Aug. 2017 - June 2021
+    o   GPA (Overall): 3.72/4.0
+    o   Dual-degree program with Zhejiang University
+
+Zhejiang University                                                                               Zhejiang, China
+    o   B.Eng. in Mechanical Engineering                                                   Sep. 2017 - June 2021
+    o   GPA (Overall): 3.75/4.0
+
+Publications
+    Peer-Reviewed Journal Articles
+    o   Wang, Q., Cheng, L., Kim, J., Tsai, S., Roach, D., & Tawfick, S. (2026). Characterization and selection of
+        contractile actuators for soft robotics operating in the quasistatic regime. Advanced Intelligent Systems,
+        Article e70490. https://doi.org/10.1002/aisy.70490
+    o   Tsai, S., Cheng, L., Albazroun, A., Wang, Q., Kim, J., Tekinalp, A., ... & Tawfick, S. (2026). Hierarchical
+        Artificial Muscle with Nonlinear Elasticity for Antagonistic and Cyclic Robotics. Advanced Science, 13(30),
+        e21604.
+    o   Wang, Q., Ghrayeb, A., Kim, S., Cheng, L., & Tawfick, S. (2024). The mechanics and physics of twisted and
+        coiled polymer actuators. International Journal of Mechanical Sciences, 280, 109440.
+    o   Wang, Y., Wang, Q., Liu, M., Qin, Y., Cheng, L., Bolmin, O., ... & Tawfick, S. (2023). Insect-scale jumping
+        robots enabled by a dynamic buckling cascade. Proceedings of the National Academy of Sciences, 120(5),
+        e2210651120.
+    Accepted
+    o   Cheng, L., Eom, W., Wang, Q., Kim, H., Kim, J., Pineda Guzman, R., Solis, M., Malladi, S., Tsai, S., Kersh,
+        M. E., & Tawfick, S. (2026). Principles of use of tensile J-curve materials in antagonistic arrangements
+        [Accepted by Proceedings of the National Academy of Sciences Oct. 5, 2026].
+
+    In Preparation
+    o   Kim, J., Wang, Q., Cheng, L., Tsai, S., Kim, S.H., & Tawfick, S., “A Predictive Design Framework for a Soft
+        Robotic Ventricle using Contractile Actuators.”, [Preprint at arXiv:2609.09706].
+
+
+Conference Presentations
+
+    o   Cheng, L., Kim, J., & Tawfick, S., "Soft Robotic Octopus Tentacles Actuated by Scalable Coiled
+        Artificial Muscles." Smart Materials, Adaptive Structures, and Intelligent Systems, St. Louis, Missouri,
+        Sept. 2025. (Oral)
+    o   Cheng, L., Eom, W., Wang, Q., Kersh, M. E., & Tawfick, S. "Hierarchical twisted and coiled fibers
+        mimicking the stretchability and energy absorption of biological ligaments." Society of Engineering
+        Science, Minneapolis, MN, Oct. 2023. (Oral)
+
+
+Academic Service
+
+    o   Manuscript Reviewer, Advanced Robotics Research | 2026
+
+
+Research Projects
+Scalable Supercoiled Artificial Muscle Manufacturing
+University of Illinois Urbana-Champaign                                                       June 2023 - On-going
+    o   Originated a continuous fabrication method and built an Arduino-based machine for scalable production
+    o   Developed theory linking stepper-motor speeds to twist density, geometry, and actuation performance
+
+
+Octopus-Inspired Soft Robotic Arm
+Mini-MURI Project, UIUC (ONR-funded)                                                          Jan. 2023 - On-going
+Advisors: Sameh H. Tawfick, Mattia Gazzola, James Pikul
+    o   Designed the tapered spiral geometry and built 2D prototypes with longitudinal and oblique muscles,
+        demonstrating curling and twisting
+    o   Established theory relating arm geometry to the required muscle stroke
+    o   Added a mesh structure for greater flexibility; building a 3D spiral version
+
+
+Actuator Characterization and Selection for Soft Robotic Design
+University of Illinois Urbana-Champaign                                                       July 2024 - Oct. 2025
+    o   Developed a two-tensile-test method for actuator selection, validated on McKibben actuators
+
+
+Smart Granular Robot with Vibration Sensing
+University of Illinois Urbana-Champaign                                                      June 2023 – Mar. 2025
+Advisors: Sameh H. Tawfick, Ahmed Elbanna
+    o   Developed a granular robot with vibration sensing, an on-board micro-motor, and inter-robot communication
+    o   Built a Python interface for group control; evaluated environmental interaction as a smart soil
+Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements
+University of Illinois Urbana-Champaign                                                    May 2022 - April 2025
+    o   Led the design of artificial ligaments reproducing the J-shaped tensile response of biological ligaments;
+        identified the mechanisms of their nonlinearity and hysteresis
+    o   Originated principles of use of J-curve materials in linear and rotary antagonistic mechanisms (first-author
+        manuscript under review at PNAS)
+    o   Developed self-sensing ligaments using CNT surface coatings
+
+
+Supercoiled & Hypercoiled Artificial Muscles
+University of Illinois Urbana-Champaign                                                     Feb. 2022 - May 2024
+    o   Led the design of supercoiled and hypercoiled artificial muscles with embedded nichrome wires for uniform
+        Joule heating; built an Arduino-based fabrication machine
+    o   Helped standardize isobaric and isometric testing methods
+
+
+Insect-Scale Jumping Robot with Coiled Artificial Muscle
+University of Illinois Urbana-Champaign                                                     June 2020 - May 2022
+    o   Fabricated coiled muscles and tested the insect-scale jumping robot (PNAS, 2023)
+
+
+High Power Density, Large-Stroke Coiled Artificial Muscle System
+Undergraduate Research Assistant, UIUC                                                      Jan. 2020 - Aug. 2020
+    o   Optimized twisting and mandrel-coiling procedures across five approaches; quantified effects of material,
+        diameter, and pre-stretch
+    o   Standardized fabrication and produced custom muscles for a collaborating group at Harvard
+
+
+Technical Skills
+
+    o   Fabrication: twisted and coiled polymer actuators (mono-, super- and hyper-coiled), McKibben
+        actuators, embedded nichrome Joule-heating, SIS fiber spinning, mandrel coiling, scalable muscle
+        manufacturing
+    o   Characterization: isobaric and isometric actuator testing, tensile and cyclic testing, two-tensile-test
+        actuator selection, J-curve nonlinearity and hysteresis analysis
+    o   Design and computation: CAD modeling, Arduino-based machine design and stepper-motor control,
+        soft arm and mesh assembly, MATLAB, Python, machine learning
+
+Teaching Experience
+TAM 210/211: Engineering Mechanics – Statics                             University of Illinois Urbana-Champaign
+Teaching Assistant                                                                          Aug. 2025 - Dec. 2025
+
+ME 170: Computer-Aided Design                                            University of Illinois Urbana-Champaign
+Teaching Assistant                                                                          Jan. 2025 - June 2025
+ME 370: Mechanical Design I                                          University of Illinois Urbana-Champaign
+Teaching Assistant                                                                          Jan. 2024 - June 2024
+
+TAM 211: Engineering Mechanics – Statics                                                        Zhejiang University
+Teaching Assistant                                                                          Sep. 2019 - Jan. 2020
+
+Awards & Honors
+Undergraduate Technology Innovation Award                        Government of Zhejiang Province, China
+Leader of the Project Multi-functional Portable Egg Boiler & Peeler                           Aug. 2020
+    o   Top 7% student independent research projects of all universities in Zhejiang Province
+

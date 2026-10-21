@@ -98,7 +98,7 @@ li { margin:0 0 2pt; padding-left:1pt; }
 def main():
     parser = Parser(); parser.feed(SOURCE.read_text())
     sections = [x for x in descendants(parser.root) if x.tag == 'section' and x.cls('page')]
-    out = ROOT / 'files/Liuyang-Cheng-CV-zh.pdf'
+    out = ROOT / 'files/Liuyang-Cheng-CV-zh-20261021.pdf'
     out.parent.mkdir(exist_ok=True, parents=True)
     with tempfile.TemporaryDirectory(prefix='cv-zh-fonts-') as temp:
         for weight in ('Regular', 'Bold'):
@@ -126,7 +126,7 @@ def main():
             page.insert_text((548, 771), f'{index+1} / {len(sections)}', fontname='helv', fontsize=8, color=(.4,.4,.4))
         doc.set_metadata({'title': 'Liuyang Cheng 学术简历', 'author': 'Liuyang Cheng', 'subject': 'Chinese translation of the original academic CV'})
         doc.save(out, garbage=4, deflate=True)
-    public = ROOT / 'source/public/files/Liuyang-Cheng-CV-zh.pdf'
+    public = ROOT / 'source/public/files/Liuyang-Cheng-CV-zh-20261021.pdf'
     public.parent.mkdir(exist_ok=True, parents=True)
     shutil.copyfile(out, public)
     print(out)

@@ -7,7 +7,7 @@ export function localizedLinks(links:Item['links'],language:Language):Item['link
 export function localizedItem(item:Item,language:Language,bibliography=false):Item {
  const fields=bibliography?['text','caption']:['title','text','meta','caption'];
  const view=textFields(item,fields,language);
- if(bibliography)view.meta=language==='zh'?item.meta.replace(/\bpreprint\b/gi,'预印本'):item.meta;
+ if(bibliography)view.meta=language==='zh'?item.meta.replace(/\bpreprint\b/gi,'预印本').replace(/\bAccepted\b/g,'已接收'):item.meta;
  else if(language==='zh'&&!item.zh?.meta&&!item.pendingTranslation?.meta)view.meta=view.meta.replace(/\bpreprint\b/gi,'预印本');
  return {...view,authors:item.authors,links:localizedLinks(item.links,language),figure:item.figure?textFields(item.figure,['alt','caption','sourceLabel'],language):undefined};
 }

@@ -32,7 +32,9 @@ function safeLink(link) {
   return { label: link.label.trim(), url: url.href };
 }
 
-const metadataFor = record => [record.venue.trim(), /preprint/i.test(record.status) ? 'Preprint' : '', record.year].filter(Boolean).join(' · ');
+const metadataFor = record => /^accepted$/i.test(record.status.trim())
+  ? [record.venue.trim(), `Accepted${record.acceptedDate ? ' ' + record.acceptedDate : ''}`, record.acceptedDate ? '' : record.year].filter(Boolean).join(' · ')
+  : [record.venue.trim(), /preprint/i.test(record.status) ? 'Preprint' : '', record.year].filter(Boolean).join(' · ');
 const canonicalJson = value => JSON.stringify(value, (_, item) => item && !Array.isArray(item) && typeof item === 'object' ? Object.fromEntries(Object.entries(item).sort(([a], [b]) => a.localeCompare(b))) : item);
 
 // Mirrors the dependency-free portions of src/lib/content.ts. Existing manual
@@ -137,13 +139,14 @@ export function validateInput(input) {
     if (!Array.isArray(raw.links) || raw.links.length === 0) fail('Every publication needs at least one verified link.');
     if (raw.doi !== undefined && !doiKey(raw.doi)) fail('Invalid DOI.');
     if (raw.arxiv !== undefined && !arxivKey(raw.arxiv)) fail('Invalid arXiv ID.');
-    const record = { ...raw, title: raw.title.trim(), authors: raw.authors.map(a => a.trim()), links: raw.links.map(safeLink) };
+    if (raw.acceptedDate !== undefined && (typeof raw.acceptedDate !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(raw.acceptedDate) || !Number.isFinite(Date.parse(raw.acceptedDate)) || new Date(raw.acceptedDate).toISOString().slice(0,10) !== raw.acceptedDate)) fail('Invalid acceptance date. Use an exact verified YYYY-MM-DD date.');
+    const record = { ...raw, title: raw.title.trim(), venue: raw.venue.trim(), status: raw.status.trim(), authors: raw.authors.map(a => a.trim()), links: raw.links.map(safeLink) };
     if (record.id.length > 100 || record.title.length > 400 || record.authors.join(', ').length > 2000 || metadataFor(record).length > 300 || record.links.length > 10) fail('Publication ID, title, authors, metadata, or links exceed website limits.');
     const collisions = records.filter(other => overlaps(keysFor(record), keysFor(other)));
     if (collisions.length > 1) fail('Ambiguous duplicate records in input.');
     if (collisions.length === 1) {
       const first = collisions[0];
-      if (titleKey(first.title) !== titleKey(record.title) || first.year !== record.year || first.authors.join('|') !== record.authors.join('|') || first.venue !== record.venue || first.status !== record.status || (first.doi && record.doi && doiKey(first.doi) !== doiKey(record.doi)) || (first.arxiv && record.arxiv && arxivKey(first.arxiv) !== arxivKey(record.arxiv))) fail('Conflicting duplicate publications; resolve the input before merging.');
+      if (titleKey(first.title) !== titleKey(record.title) || first.year !== record.year || first.authors.join('|') !== record.authors.join('|') || first.venue !== record.venue || first.status !== record.status || first.acceptedDate !== record.acceptedDate || (first.doi && record.doi && doiKey(first.doi) !== doiKey(record.doi)) || (first.arxiv && record.arxiv && arxivKey(first.arxiv) !== arxivKey(record.arxiv))) fail('Conflicting duplicate publications; resolve the input before merging.');
       first.links = mergeLinks(first.links[0], first.links, record.links);
       first.doi ||= record.doi; first.arxiv ||= record.arxiv;
     } else {
@@ -178,7 +181,11 @@ export function mergePublications(content, records) {
     const priorPrimary = item.links.find(link => link.url === primaryUrl);
     const primary = priorPrimary || record.links.find(link => link.url === primaryUrl) || { label: record.doi ? 'Paper' : 'Preprint', url: primaryUrl };
     // Bibliographic spelling, author identity, venue/status and year are shared facts.
-    const updated = editSharedText(editSharedText(editSharedText(item, 'title', record.title), 'authors', record.authors.join(', ')), 'meta', metadataFor(record));
+    // An arXiv-only refresh is not evidence that an author-confirmed acceptance was withdrawn.
+    const previousAcceptance = item.meta.match(/^(.*?) · Accepted(?: (\d{4}-\d{2}-\d{2}))?(?: · \d{4})?$/);
+    const preserveAcceptance = previousAcceptance && (/preprint/i.test(record.status) || (/^accepted$/i.test(record.status.trim()) && !record.acceptedDate && previousAcceptance[1].toLowerCase() === record.venue.trim().toLowerCase()));
+    const metadata = preserveAcceptance ? item.meta : metadataFor(record);
+    const updated = editSharedText(editSharedText(editSharedText(item, 'title', record.title), 'authors', record.authors.join(', ')), 'meta', metadata);
     delete item.pendingTranslation;
     Object.assign(item, updated, {kind:'publication'});
     item.links = mergeLinks(primary, item.links, record.links);

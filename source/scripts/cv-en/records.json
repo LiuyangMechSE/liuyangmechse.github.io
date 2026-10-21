@@ -1,0 +1,370 @@
+[
+  {
+    "type": "title",
+    "text": "Curriculum Vitae/Resume"
+  },
+  {
+    "type": "name",
+    "text": "Liuyang Cheng"
+  },
+  {
+    "type": "email",
+    "text": "liuyang5@illinois.edu",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Research Profile"
+  },
+  {
+    "type": "body",
+    "text": "Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected Dec. 2026). Four peer-reviewed journal articles (including PNAS) and a first-author manuscript accepted by PNAS, spanning theory, manufacturing, and characterization of soft actuators.",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Research Interests"
+  },
+  {
+    "type": "body",
+    "text": "Soft robotics; Bioinspired mechanism; Material actuator; Nonlinear mechanics of J-curve materials; Scalable actuator manufacturing and characterization.",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Education"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tIllinois, USA"
+  },
+  {
+    "type": "bullet",
+    "text": "Ph.D. of Mechanical Science and Engineering                         Aug. 2021 - Dec. 2026 (expected)"
+  },
+  {
+    "type": "bullet",
+    "text": "Thesis: Bioinspired Functional Materials and Versatile Soft Robotic Arm; Advisor: Sameh H. Tawfick"
+  },
+  {
+    "type": "bullet",
+    "text": "GPA (Overall): 3.8/4.0"
+  },
+  {
+    "type": "bullet",
+    "text": "B.S. in Mechanical Science and Engineering                                    Aug. 2017 - June 2021"
+  },
+  {
+    "type": "bullet",
+    "text": "GPA (Overall): 3.72/4.0"
+  },
+  {
+    "type": "bullet",
+    "text": "Dual-degree program with Zhejiang University",
+    "blank_after": true
+  },
+  {
+    "type": "pair",
+    "text": "Zhejiang University\tZhejiang, China"
+  },
+  {
+    "type": "bullet",
+    "text": "B.Eng. in Mechanical Engineering                                                   Sep. 2017 - June 2021"
+  },
+  {
+    "type": "bullet",
+    "text": "GPA (Overall): 3.75/4.0",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Publications"
+  },
+  {
+    "type": "subheading",
+    "text": "Peer-Reviewed Journal Articles"
+  },
+  {
+    "type": "bullet",
+    "text": "Wang, Q., Cheng, L., Kim, J., Tsai, S., Roach, D., & Tawfick, S. (2026). Characterization and selection of contractile actuators for soft robotics operating in the quasistatic regime. Advanced Intelligent Systems, Article e70490. https://doi.org/10.1002/aisy.70490"
+  },
+  {
+    "type": "bullet",
+    "text": "Tsai, S., Cheng, L., Albazroun, A., Wang, Q., Kim, J., Tekinalp, A., ... & Tawfick, S. (2026). Hierarchical Artificial Muscle with Nonlinear Elasticity for Antagonistic and Cyclic Robotics. Advanced Science, 13(30), e21604."
+  },
+  {
+    "type": "bullet",
+    "text": "Wang, Q., Ghrayeb, A., Kim, S., Cheng, L., & Tawfick, S. (2024). The mechanics and physics of twisted and coiled polymer actuators. International Journal of Mechanical Sciences, 280, 109440."
+  },
+  {
+    "type": "bullet",
+    "text": "Wang, Y., Wang, Q., Liu, M., Qin, Y., Cheng, L., Bolmin, O., ... & Tawfick, S. (2023). Insect-scale jumping robots enabled by a dynamic buckling cascade. Proceedings of the National Academy of Sciences, 120(5), e2210651120."
+  },
+  {
+    "type": "subheading",
+    "text": "Accepted"
+  },
+  {
+    "type": "bullet",
+    "text": "Cheng, L., Eom, W., Wang, Q., Kim, H., Kim, J., Pineda Guzman, R., Solis, M., Malladi, S., Tsai, S., Kersh, M. E., & Tawfick, S. (2026). Principles of use of tensile J-curve materials in antagonistic arrangements [Accepted by Proceedings of the National Academy of Sciences Oct. 5, 2026].",
+    "blank_after": true
+  },
+  {
+    "type": "subheading",
+    "text": "In Preparation"
+  },
+  {
+    "type": "bullet",
+    "text": "Kim, J., Wang, Q., Cheng, L., Tsai, S., Kim, S.H., & Tawfick, S., “A Predictive Design Framework for a Soft Robotic Ventricle using Contractile Actuators.”, [Preprint at arXiv:2609.09706].",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Conference Presentations",
+    "blank_after": true
+  },
+  {
+    "type": "bullet",
+    "text": "Liuyang Cheng (presenter). \"Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles.\" 2026 Society of Engineering Science Annual Technical Meeting (SES 2026), Purdue University, West Lafayette, Indiana, USA, Oct. 12, 2026. (Oral)",
+    "ses": true
+  },
+  {
+    "type": "bullet",
+    "text": "Cheng, L., Kim, J., & Tawfick, S., \"Soft Robotic Octopus Tentacles Actuated by Scalable Coiled Artificial Muscles.\" Smart Materials, Adaptive Structures, and Intelligent Systems, St. Louis, Missouri, Sept. 2025. (Oral)"
+  },
+  {
+    "type": "bullet",
+    "text": "Cheng, L., Eom, W., Wang, Q., Kersh, M. E., & Tawfick, S. \"Hierarchical twisted and coiled fibers mimicking the stretchability and energy absorption of biological ligaments.\" Society of Engineering Science, Minneapolis, MN, Oct. 2023. (Oral)",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Academic Service",
+    "blank_after": true
+  },
+  {
+    "type": "bullet",
+    "text": "Manuscript Reviewer, Advanced Robotics Research | 2026",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Research Projects"
+  },
+  {
+    "type": "project",
+    "text": "Scalable Supercoiled Artificial Muscle Manufacturing"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tJune 2023 - On-going"
+  },
+  {
+    "type": "bullet",
+    "text": "Originated a continuous fabrication method and built an Arduino-based machine for scalable production"
+  },
+  {
+    "type": "bullet",
+    "text": "Developed theory linking stepper-motor speeds to twist density, geometry, and actuation performance",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "Octopus-Inspired Soft Robotic Arm"
+  },
+  {
+    "type": "pair",
+    "text": "Mini-MURI Project, UIUC (ONR-funded)\tJan. 2023 - On-going"
+  },
+  {
+    "type": "plain",
+    "text": "Advisors: Sameh H. Tawfick, Mattia Gazzola, James Pikul"
+  },
+  {
+    "type": "bullet",
+    "text": "Designed the tapered spiral geometry and built 2D prototypes with longitudinal and oblique muscles, demonstrating curling and twisting"
+  },
+  {
+    "type": "bullet",
+    "text": "Established theory relating arm geometry to the required muscle stroke"
+  },
+  {
+    "type": "bullet",
+    "text": "Added a mesh structure for greater flexibility; building a 3D spiral version",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "Actuator Characterization and Selection for Soft Robotic Design"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tJuly 2024 - Oct. 2025"
+  },
+  {
+    "type": "bullet",
+    "text": "Developed a two-tensile-test method for actuator selection, validated on McKibben actuators",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "Smart Granular Robot with Vibration Sensing"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tJune 2023 – Mar. 2025"
+  },
+  {
+    "type": "plain",
+    "text": "Advisors: Sameh H. Tawfick, Ahmed Elbanna"
+  },
+  {
+    "type": "bullet",
+    "text": "Developed a granular robot with vibration sensing, an on-board micro-motor, and inter-robot communication"
+  },
+  {
+    "type": "bullet",
+    "text": "Built a Python interface for group control; evaluated environmental interaction as a smart soil"
+  },
+  {
+    "type": "project",
+    "text": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tMay 2022 - April 2025"
+  },
+  {
+    "type": "bullet",
+    "text": "Led the design of artificial ligaments reproducing the J-shaped tensile response of biological ligaments; identified the mechanisms of their nonlinearity and hysteresis"
+  },
+  {
+    "type": "bullet",
+    "text": "Originated principles of use of J-curve materials in linear and rotary antagonistic mechanisms (first-author manuscript accepted by PNAS)"
+  },
+  {
+    "type": "bullet",
+    "text": "Developed self-sensing ligaments using CNT surface coatings",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "Supercoiled & Hypercoiled Artificial Muscles"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tFeb. 2022 - May 2024"
+  },
+  {
+    "type": "bullet",
+    "text": "Led the design of supercoiled and hypercoiled artificial muscles with embedded nichrome wires for uniform Joule heating; built an Arduino-based fabrication machine"
+  },
+  {
+    "type": "bullet",
+    "text": "Helped standardize isobaric and isometric testing methods",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "Insect-Scale Jumping Robot with Coiled Artificial Muscle"
+  },
+  {
+    "type": "pair",
+    "text": "University of Illinois Urbana-Champaign\tJune 2020 - May 2022"
+  },
+  {
+    "type": "bullet",
+    "text": "Fabricated coiled muscles and tested the insect-scale jumping robot (PNAS, 2023)",
+    "blank_after": true
+  },
+  {
+    "type": "project",
+    "text": "High Power Density, Large-Stroke Coiled Artificial Muscle System"
+  },
+  {
+    "type": "pair",
+    "text": "Undergraduate Research Assistant, UIUC\tJan. 2020 - Aug. 2020"
+  },
+  {
+    "type": "bullet",
+    "text": "Optimized twisting and mandrel-coiling procedures across five approaches; quantified effects of material, diameter, and pre-stretch"
+  },
+  {
+    "type": "bullet",
+    "text": "Standardized fabrication and produced custom muscles for a collaborating group at Harvard",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Technical Skills",
+    "blank_after": true
+  },
+  {
+    "type": "bullet",
+    "text": "Fabrication: twisted and coiled polymer actuators (mono-, super- and hyper-coiled), McKibben actuators, embedded nichrome Joule-heating, SIS fiber spinning, mandrel coiling, scalable muscle manufacturing"
+  },
+  {
+    "type": "bullet",
+    "text": "Characterization: isobaric and isometric actuator testing, tensile and cyclic testing, two-tensile-test actuator selection, J-curve nonlinearity and hysteresis analysis"
+  },
+  {
+    "type": "bullet",
+    "text": "Design and computation: CAD modeling, Arduino-based machine design and stepper-motor control, soft arm and mesh assembly, MATLAB, Python, machine learning",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Teaching Experience"
+  },
+  {
+    "type": "pair",
+    "text": "TAM 210/211: Engineering Mechanics – Statics\tUniversity of Illinois Urbana-Champaign"
+  },
+  {
+    "type": "pair",
+    "text": "Teaching Assistant\tAug. 2025 - Dec. 2025",
+    "blank_after": true
+  },
+  {
+    "type": "pair",
+    "text": "ME 170: Computer-Aided Design\tUniversity of Illinois Urbana-Champaign"
+  },
+  {
+    "type": "pair",
+    "text": "Teaching Assistant\tJan. 2025 - June 2025"
+  },
+  {
+    "type": "pair",
+    "text": "ME 370: Mechanical Design I\tUniversity of Illinois Urbana-Champaign"
+  },
+  {
+    "type": "pair",
+    "text": "Teaching Assistant\tJan. 2024 - June 2024",
+    "blank_after": true
+  },
+  {
+    "type": "pair",
+    "text": "TAM 211: Engineering Mechanics – Statics\tZhejiang University"
+  },
+  {
+    "type": "pair",
+    "text": "Teaching Assistant\tSep. 2019 - Jan. 2020",
+    "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Awards & Honors"
+  },
+  {
+    "type": "pair",
+    "text": "Undergraduate Technology Innovation Award\tGovernment of Zhejiang Province, China"
+  },
+  {
+    "type": "pair",
+    "text": "Leader of the Project Multi-functional Portable Egg Boiler & Peeler\tAug. 2020"
+  },
+  {
+    "type": "bullet",
+    "text": "Top 7% student independent research projects of all universities in Zhejiang Province"
+  }
+]
