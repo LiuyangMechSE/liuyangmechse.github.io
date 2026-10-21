@@ -209,6 +209,24 @@ try {
   assert.deepEqual(JSON.parse(files.get('content.json')), local); const manifest = JSON.parse(files.get('export-manifest.json'));
   assert.deepEqual(manifest.files, [...files.keys()].sort()); assert.ok(fetched.includes('./files/Liuyang-Cheng-CV.pdf'));
  });
+ await check('pending bilingual state and old translation publish atomically and survive draft/export paths', async () => {
+  for (const language of ['en','zh']) {
+   const local=clone(base);local.pendingTranslation={bio:language};if(language==='en')local.bio='Updated English source';else local.zh.bio='最新中文源文';
+   const state=mock(base);const result=await publishWebsite({token:'test-token',content:local,base});
+   const writes=state.calls.find(call=>call.path==='/git/trees'&&call.method==='POST').body.tree;
+   const root=JSON.parse(state.blobs.get(writes.find(file=>file.path==='content.json').sha));
+   const source=JSON.parse(state.blobs.get(writes.find(file=>file.path==='source/public/content.json').sha));
+   assert.deepEqual(root,local);assert.deepEqual(source,local);assert.deepEqual(result.content,local);
+   await saveDraft(result.content,base);assert.deepEqual((await loadDraft()).content,local);
+  }
+ });
+ await check('concurrent translation confirmation cannot merge with a newer source before writes', async () => {
+  const baseline=clone(base);baseline.bio='A';baseline.pendingTranslation={bio:'en'};
+  const local=clone(baseline);local.bio='B';
+  const remote=clone(baseline);remote.zh.bio='译文 A';delete remote.pendingTranslation;
+  const state=mock(remote);await assert.rejects(publishWebsite({token:'test-token',content:local,base:baseline}),/changed on GitHub/);
+  assert.ok(state.calls.every(call=>call.method==='GET'));
+ });
  process.stdout.write(`${count} offline publishing checks passed.\n`);
 } finally {
  delete globalThis.__publishTestMedia;

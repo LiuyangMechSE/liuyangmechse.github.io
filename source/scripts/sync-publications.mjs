@@ -4,6 +4,7 @@ import { readFile, writeFile, rename, unlink, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { randomUUID } from 'node:crypto';
+import { editSharedText } from '../src/translation-sync.mjs';
 
 const PROFILE_ID = 'MMkH8L0AAAAJ';
 const titleKey = value => value.normalize('NFKD').replace(/\p{M}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]/gu, '');
@@ -45,30 +46,51 @@ export function validateSiteContent(site) {
     string(value, 2000, location);
     if (value && !/^https:\/\/[^\s]+$/i.test(value) && !/^media\/[a-zA-Z0-9.-]+$/.test(value) && !/^mailto:[^\s@]+@[^\s@]+$/.test(value) && !/^files\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.pdf$/i.test(value)) fail(`Invalid website URL at ${location}.`);
   };
+  const translations = (record, fields, location) => {
+    if (record.zh !== undefined) {
+      if (!record.zh || typeof record.zh !== 'object' || Array.isArray(record.zh)) fail(`Invalid translations at ${location}.`);
+      for (const [key, value] of Object.entries(record.zh)) {
+        if (!(Object.hasOwn(fields,key))) fail(`Unknown translated field ${location}.${key}.`);
+        string(value,fields[key],`${location}.zh.${key}`,key==='name'?1:0);
+      }
+    }
+    if (record.pendingTranslation !== undefined) {
+      if (!record.pendingTranslation || typeof record.pendingTranslation !== 'object' || Array.isArray(record.pendingTranslation)) fail(`Invalid translation state at ${location}.`);
+      for (const [key, source] of Object.entries(record.pendingTranslation)) {
+        if (!(Object.hasOwn(fields,key)) || !['en','zh'].includes(source)) fail(`Invalid pending translation at ${location}.${key}.`);
+        if (source==='zh' && typeof (key==='label'?record.zhLabel:record.zh?.[key])!=='string') fail(`Missing Chinese source at ${location}.${key}.`);
+      }
+    }
+  };
   const links = (value, location) => {
     array(value, 10, location);
-    value.forEach((link, index) => { if (!link || typeof link !== 'object') fail(`Invalid link at ${location}.`); string(link.label, 80, `${location}[${index}].label`); url(link.url, `${location}[${index}].url`); if(link.zhLabel!==undefined)string(link.zhLabel,80,`${location}[${index}].zhLabel`); if(link.zhUrl!==undefined)url(link.zhUrl,`${location}[${index}].zhUrl`); });
+    value.forEach((link, index) => { if (!link || typeof link !== 'object') fail(`Invalid link at ${location}.`); string(link.label, 80, `${location}[${index}].label`); url(link.url, `${location}[${index}].url`); if(link.zhLabel!==undefined)string(link.zhLabel,80,`${location}[${index}].zhLabel`); if(link.zhUrl!==undefined)url(link.zhUrl,`${location}[${index}].zhUrl`); if(link.kind!==undefined&&link.kind!=='cv')fail('Invalid link kind.'); translations(link,{label:80},`${location}[${index}]`); });
   };
   if (!site || typeof site !== 'object') fail('Invalid website content.');
   for (const [key, max, min] of [['name',120,1],['field',200],['affiliation',400],['bio',6000]]) string(site[key],max,key,min);
+  translations(site,{name:120,field:200,affiliation:400,bio:6000},'site');
   url(site.portrait,'portrait'); links(site.links,'links'); array(site.sections,20,'sections');
   const ids = new Set();
   const id = (value, location) => { string(value,100,location,1); if (ids.has(value)) fail(`Duplicate global website ID: ${value}.`); ids.add(value); };
   site.sections.forEach((section, sectionIndex) => {
     const where = `sections[${sectionIndex}]`;
     if (!section || typeof section !== 'object') fail(`Invalid ${where}.`);
+    translations(section,{title:200,intro:3000},where);
     id(section.id,`${where}.id`); string(section.title,200,`${where}.title`); string(section.intro,3000,`${where}.intro`);
     if (section.page !== undefined && !['home','research'].includes(section.page)) fail(`Invalid page at ${where}.`);
     array(section.items,500,`${where}.items`);
     section.items.forEach((item, itemIndex) => {
       const at = `${where}.items[${itemIndex}]`;
       if (!item || typeof item !== 'object') fail(`Invalid ${at}.`);
+      translations(item,{title:400,text:6000,authors:2000,meta:300,caption:600},at);
+      if(item.kind!==undefined&&!['publication','research'].includes(item.kind))fail('Invalid item kind.');
       id(item.id,`${at}.id`);
       for (const [key,max] of [['title',400],['text',6000],['authors',2000],['meta',300],['caption',600]]) string(item[key],max,`${at}.${key}`);
       if (!['antagonist','joint','running','coil','curve','lights','none'].includes(item.demo) || !['image','video'].includes(item.mediaType) || !['left','right','wide'].includes(item.layout)) fail(`Invalid demo, media type, or layout at ${at}.`);
       url(item.media,`${at}.media`); links(item.links,`${at}.links`);
       if (item.figure !== undefined) {
         if (!item.figure || typeof item.figure !== 'object') fail(`Invalid figure at ${at}.`);
+        translations(item.figure,{alt:1000,caption:1000,sourceLabel:400},`${at}.figure`);
         url(item.figure.src,`${at}.figure.src`); url(item.figure.sourceUrl,`${at}.figure.sourceUrl`);
         for (const [key,max] of [['alt',1000],['caption',1000],['sourceLabel',400]]) string(item.figure[key],max,`${at}.figure.${key}`);
       }
@@ -149,15 +171,16 @@ export function mergePublications(content, records) {
     let item = candidates[0];
     if (!item) {
       if (seenIds.has(record.id)) fail('A new publication ID collides with another existing paper.');
-      item = { id: record.id, title: record.title, authors: '', text: '', meta: '', demo: 'none', mediaType: 'image', media: '', caption: '', links: [], layout: 'left' };
+      item = { id: record.id, kind: 'publication', title: record.title, authors: '', text: '', meta: '', demo: 'none', mediaType: 'image', media: '', caption: '', links: [], layout: 'left' };
       section.items.push(item); seenIds.add(item.id);
     }
     const primaryUrl = record.doi ? `https://doi.org/${doiKey(record.doi)}` : record.arxiv ? `https://arxiv.org/abs/${arxivKey(record.arxiv)}` : record.links[0].url;
     const priorPrimary = item.links.find(link => link.url === primaryUrl);
     const primary = priorPrimary || record.links.find(link => link.url === primaryUrl) || { label: record.doi ? 'Paper' : 'Preprint', url: primaryUrl };
-    item.title = record.title;
-    item.authors = record.authors.join(', ');
-    item.meta = metadataFor(record);
+    // Bibliographic spelling, author identity, venue/status and year are shared facts.
+    const updated = editSharedText(editSharedText(editSharedText(item, 'title', record.title), 'authors', record.authors.join(', ')), 'meta', metadataFor(record));
+    delete item.pendingTranslation;
+    Object.assign(item, updated, {kind:'publication'});
     item.links = mergeLinks(primary, item.links, record.links);
     years.set(item.id, record.year);
   }

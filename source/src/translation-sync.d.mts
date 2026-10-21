@@ -1,0 +1,12 @@
+import type {Language} from './language';
+export function rawText(record:object,key:string,language:Language):string;
+export function textFor(record:object,key:string,language:Language):string;
+export function editText<T extends object>(record:T,key:string,language:Language,value:string):T;
+export function reviewText<T extends object>(record:T,key:string,useSameText?:boolean):T;
+export function editSharedText<T extends object>(record:T,key:string,value:string):T;
+export function isCvLink(link:{label:string;url:string;kind?:string}):boolean;
+export function editLinkUrl<T extends object>(link:T,language:Language,value:string):T;
+export function pendingTranslations(value:unknown,targetLanguage?:Language):number;
+export function editTranslation<T extends object>(record:T,key:string,language:Language,value:string):T;
+export function chooseSource<T extends object>(record:T,key:string,language:Language):T;
+export function preserveItemKind<T extends object>(item:T,sourceSectionId:string):T;
