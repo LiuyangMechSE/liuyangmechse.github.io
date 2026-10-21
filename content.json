@@ -16,9 +16,9 @@
     {
       "label": "CV (PDF)",
       "url": "files/Liuyang-Cheng-CV-en-20261021.pdf",
+      "kind": "cv",
       "zhLabel": "简历 (PDF)",
-      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261021.pdf",
-      "kind": "cv"
+      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261021.pdf"
     },
     {
       "label": "LinkedIn",
@@ -34,6 +34,7 @@
       "items": [
         {
           "id": "p-ventricle-2026",
+          "kind": "publication",
           "title": "A Predictive Design Framework for a Soft Robotic Ventricle using Contractile Actuators",
           "text": "",
           "authors": "Jeongmin Kim, Qiong Wang, Liuyang Cheng, Samuel Tsai, Seong Hyeon Kim, Harma K. Turbendian, Sameh Tawfick",
@@ -48,11 +49,11 @@
               "url": "https://arxiv.org/abs/2609.09706"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         },
         {
           "id": "p-jcurve",
+          "kind": "publication",
           "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
           "text": "",
           "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
@@ -67,11 +68,11 @@
               "url": "https://arxiv.org/abs/2602.00260"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         },
         {
           "id": "p2026",
+          "kind": "publication",
           "title": "Characterization and Selection of Contractile Actuators for Soft Robotics Operating in the Quasistatic Regime",
           "text": "",
           "authors": "Qiong Wang, Liuyang Cheng, Jeongmin Kim, Samuel Tsai, Devin Roach, Sameh Tawfick",
@@ -86,11 +87,11 @@
               "url": "https://doi.org/10.1002/aisy.70490"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         },
         {
           "id": "p-hierarchical-muscle-2026",
+          "kind": "publication",
           "title": "Hierarchical Artificial Muscle with Nonlinear Elasticity for Antagonistic and Cyclic Robotics",
           "text": "",
           "authors": "Samuel Tsai, Liuyang Cheng, Ali Albazroun, Qiong Wang, Jeongmin Kim, Arman Tekinalp, Soonwook Kim, Charlie Simcox, Ryne Downing, Vagish Sivaramakrishnan, Grace Carsello, Miles Bimrose, Wonsik Eom, William P. King, Mattia Gazzola, Sameh Tawfick",
@@ -109,11 +110,11 @@
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC13248829/"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         },
         {
           "id": "p2024",
+          "kind": "publication",
           "title": "The mechanics and physics of twisted and coiled polymer actuators",
           "text": "",
           "authors": "Qiong Wang, Anan Ghrayeb, Seong Hyeon Kim, Liuyang Cheng, Sameh Tawfick",
@@ -132,11 +133,11 @@
               "url": "https://arxiv.org/abs/2404.00802"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         },
         {
           "id": "p-jumping-robots-2023",
+          "kind": "publication",
           "title": "Insect-scale jumping robots enabled by a dynamic buckling cascade",
           "text": "",
           "authors": "Yuzhe Wang, Qiong Wang, Mingchao Liu, Yimeng Qin, Liuyang Cheng, Ophelia Bolmin, Marianne Alleyne, Aimy Wissa, Ray H. Baughman, Dominic Vella, Sameh Tawfick",
@@ -155,8 +156,7 @@
               "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9945960/"
             }
           ],
-          "layout": "left",
-          "kind": "publication"
+          "layout": "left"
         }
       ],
       "zh": {
@@ -171,6 +171,7 @@
       "items": [
         {
           "id": "antagonist",
+          "kind": "research",
           "title": "Compliant motion, protective resistance",
           "text": "Two tensile ligaments pull in opposite directions. As the middle block moves, one stretches while the other relaxes. Their J-shaped response leaves a compliant central region and increasingly resists larger displacements. Adjust pre-stretch to explore the trade-off between stiffness and motion range.",
           "authors": "",
@@ -203,11 +204,11 @@
             "text": "两条受拉韧带沿相反方向牵引。中间滑块移动时，一条伸长，另一条松弛。它们的 J 型响应在中心区域保持柔顺，并随位移增大提供更强的阻力。调节预拉伸程度，可探索刚度与运动范围之间的权衡。",
             "meta": "人工韧带 · 拮抗平移",
             "caption": "原理示意动画。模型假设请见“模型与论文”。"
-          },
-          "kind": "research"
+          }
         },
         {
           "id": "joint",
+          "kind": "research",
           "title": "From tensile ligaments to a tunable joint",
           "text": "The same principle extends to rotation. Opposing ligaments create a restoring torque about a pivot; pre-stretch changes the joint’s response. The animation connects joint angle, ligament tension, and resistance throughout the movement.",
           "authors": "",
@@ -240,11 +241,11 @@
             "text": "同一原理也可用于转动。相互拮抗的韧带围绕转轴产生恢复力矩，预拉伸会改变关节的响应。动画展示了运动过程中关节角度、韧带张力与阻力之间的联系。",
             "meta": "人工韧带 · 拮抗转动",
             "caption": "原理示意动画。模型假设请见“模型与论文”。"
-          },
-          "kind": "research"
+          }
         },
         {
           "id": "running",
+          "kind": "research",
           "title": "A tunable spring for a running leg",
           "text": "In the paper’s conceptual running model, a passive spring and an active linear actuator act in parallel. The actuator supplies the difference between the target leg force and the spring force. Explore how passive tuning changes that balance through compression, rebound, and flight.",
           "authors": "",
@@ -277,8 +278,7 @@
             "text": "在论文的概念性跑步模型中，被动弹簧与主动直线驱动器并联。驱动器补足目标腿部力与弹簧力之间的差值。可以探索在压缩、回弹与腾空阶段，被动参数的调节如何改变两者的分工。",
             "meta": "跑步应用展望 · 被动弹簧 + 主动驱动器",
             "caption": "原理示意动画。模型假设请见“模型与论文”。"
-          },
-          "kind": "research"
+          }
         }
       ],
       "zh": {
@@ -294,6 +294,7 @@
       "items": [
         {
           "id": "coil",
+          "kind": "research",
           "title": "From fiber geometry to muscle-like motion",
           "text": "Twisting and coiling turn a polymer fiber into a contractile actuator. I am interested in how geometry, stored energy, and material response work together to produce useful motion.",
           "authors": "",
@@ -325,8 +326,7 @@
             "title": "从纤维几何到类肌肉运动",
             "text": "加捻与卷曲可以将聚合物纤维转变为收缩式驱动器。我关注几何形状、储存的能量与材料响应如何共同作用，产生有用的运动。",
             "meta": "加捻卷曲聚合物驱动器"
-          },
-          "kind": "research"
+          }
         }
       ],
       "zh": {
@@ -341,6 +341,7 @@
       "items": [
         {
           "id": "lights",
+          "kind": "research",
           "title": "Art lighting driven by long artificial muscles",
           "text": "An ongoing exploration of coordinated TCPA motion for an art lighting system, including cycle stability, motion tracking, and control across a 32-actuator array. Those muscles are produced by an automated scalable manufacuring machine",
           "authors": "",
@@ -356,8 +357,7 @@
             "text": "这项进行中的研究探索将 TCPA 的协调运动用于艺术灯光系统，内容包括循环稳定性、运动跟踪，以及 32 个驱动器阵列的控制。这些人工肌肉由可规模化生产的自动制造设备制备。",
             "meta": "艺术灯光 · 进行中",
             "caption": "艺术灯光实际展示视频，六倍速播放"
-          },
-          "kind": "research"
+          }
         }
       ],
       "zh": {
@@ -372,6 +372,7 @@
       "items": [
         {
           "id": "octopus-arm-soft-robotics",
+          "kind": "research",
           "title": "Octopus-inspired soft robotic arms",
           "text": "An ongoing research direction exploring soft robotic arms inspired by the flexible motion of octopus arms.\n\nSES 2026 oral presentation: “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”, October 12, 2026, Purdue University.",
           "authors": "",
@@ -383,8 +384,8 @@
           "links": [
             {
               "label": "SES 2026 program",
-              "zhLabel": "SES 2026 会议日程",
-              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf"
+              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf",
+              "zhLabel": "SES 2026 会议日程"
             }
           ],
           "layout": "left",
@@ -392,46 +393,11 @@
             "title": "章鱼腕足启发的软体机械臂",
             "text": "这项进行中的研究以章鱼腕足的柔性运动为启发，探索软体机械臂。\n\nSES 2026 口头报告：“Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”，2026 年 10 月 12 日，Purdue University。",
             "meta": "仿生软体机器人 · 进行中"
-          },
-          "kind": "research"
-        }
-      ],
-      "zh": {
-        "title": "章鱼腕足仿生机械臂"
-      }
-    },
-    {
-      "id": "conference-presentations",
-      "title": "Conference presentations",
-      "intro": "",
-      "page": "home",
-      "items": [
-        {
-          "id": "ses-2026-soft-spiral-octopus",
-          "title": "Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles",
-          "text": "Presenter: Liuyang Cheng. Oral presentation at the 2026 Society of Engineering Science Annual Technical Meeting, Purdue University, West Lafayette, Indiana, USA.",
-          "authors": "",
-          "meta": "SES 2026 · 2026-10-12",
-          "demo": "none",
-          "mediaType": "image",
-          "media": "",
-          "caption": "",
-          "links": [
-            {
-              "label": "Conference program",
-              "zhLabel": "会议日程",
-              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf"
-            }
-          ],
-          "layout": "left",
-          "kind": "publication",
-          "zh": {
-            "text": "报告人：成刘阳。2026 Society of Engineering Science Annual Technical Meeting 口头报告，地点为美国印第安纳州西拉法叶的 Purdue University。"
           }
         }
       ],
       "zh": {
-        "title": "会议报告"
+        "title": "章鱼腕足仿生机械臂"
       }
     }
   ],
