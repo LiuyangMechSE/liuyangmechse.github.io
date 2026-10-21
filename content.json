@@ -15,7 +15,9 @@
     },
     {
       "label": "CV (PDF)",
-      "url": "files/cv-eddb5176-660d-4eac-81bd-928cf9d47059.pdf"
+      "url": "files/cv-eddb5176-660d-4eac-81bd-928cf9d47059.pdf",
+      "zhLabel": "简历 (PDF)",
+      "zhUrl": "files/Liuyang-Cheng-CV-zh.pdf"
     },
     {
       "label": "LinkedIn",
@@ -149,7 +151,10 @@
           ],
           "layout": "left"
         }
-      ]
+      ],
+      "zh": {
+        "title": "论文发表"
+      }
     },
     {
       "id": "artificial-ligaments",
@@ -179,7 +184,18 @@
             "alt": "Original paper plot comparing the nonlinear force–displacement response of opposing J-curve ligaments without pre-stretch against a stiffer response with pre-stretch.",
             "caption": "Paper Fig. 5b: predicted force–displacement responses for an antagonistic pair, with and without pre-stretch.",
             "sourceLabel": "arXiv preprint v1, January 30, 2026",
-            "sourceUrl": "https://arxiv.org/abs/2602.00260"
+            "sourceUrl": "https://arxiv.org/abs/2602.00260",
+            "zh": {
+              "alt": "论文原图：比较无预拉伸的拮抗 J 型曲线韧带的非线性力-位移响应与预拉伸后更高刚度的响应。",
+              "caption": "论文图 5b：一对拮抗韧带在有、无预拉伸条件下的预测力-位移响应。",
+              "sourceLabel": "arXiv 预印本 v1，2026 年 1 月 30 日"
+            }
+          },
+          "zh": {
+            "title": "柔顺运动与保护性阻力",
+            "text": "两条受拉韧带沿相反方向牵引。中间滑块移动时，一条伸长，另一条松弛。它们的 J 型响应在中心区域保持柔顺，并随位移增大提供更强的阻力。调节预拉伸程度，可探索刚度与运动范围之间的权衡。",
+            "meta": "人工韧带 · 拮抗平移",
+            "caption": "原理示意动画。模型假设请见“模型与论文”。"
           }
         },
         {
@@ -204,7 +220,18 @@
             "alt": "Original paper drawing of a pivoting robot arm with artificial ligaments on opposite sides of the joint, beside force versus angle curves at different pre-stretch levels.",
             "caption": "Paper Fig. 5e: a pivot joint with opposing artificial ligaments and its predicted response at different pre-stretches.",
             "sourceLabel": "arXiv preprint v1, January 30, 2026",
-            "sourceUrl": "https://arxiv.org/abs/2602.00260"
+            "sourceUrl": "https://arxiv.org/abs/2602.00260",
+            "zh": {
+              "alt": "论文原图：关节两侧配置人工韧带的转动机械臂，以及不同预拉伸程度下的力-角度曲线。",
+              "caption": "论文图 5e：带有拮抗人工韧带的转动关节，以及不同预拉伸程度下的预测响应。",
+              "sourceLabel": "arXiv 预印本 v1，2026 年 1 月 30 日"
+            }
+          },
+          "zh": {
+            "title": "从受拉韧带到可调关节",
+            "text": "同一原理也可用于转动。相互拮抗的韧带围绕转轴产生恢复力矩，预拉伸会改变关节的响应。动画展示了运动过程中关节角度、韧带张力与阻力之间的联系。",
+            "meta": "人工韧带 · 拮抗转动",
+            "caption": "原理示意动画。模型假设请见“模型与论文”。"
           }
         },
         {
@@ -229,10 +256,25 @@
             "alt": "Original revised-manuscript schematic of running with a spring-loaded leg, showing the center-of-mass path and a parallel spring and linear actuator during stance.",
             "caption": "Revised manuscript, Fig. 6g: the running-leg concept uses a passive spring and an active linear actuator in parallel.",
             "sourceLabel": "Author-supplied revised manuscript, August 30, 2026; running panels are not in arXiv v1",
-            "sourceUrl": ""
+            "sourceUrl": "",
+            "zh": {
+              "alt": "修订稿原图：带弹簧腿的跑步示意，展示质心轨迹，以及支撑阶段并联的弹簧和直线驱动器。",
+              "caption": "修订稿图 6g：跑步腿的概念设计采用被动弹簧与主动直线驱动器并联。",
+              "sourceLabel": "作者提供的修订稿，2026 年 8 月 30 日；跑步相关图未收录于 arXiv v1"
+            }
+          },
+          "zh": {
+            "title": "用于跑步腿的可调弹簧",
+            "text": "在论文的概念性跑步模型中，被动弹簧与主动直线驱动器并联。驱动器补足目标腿部力与弹簧力之间的差值。可以探索在压缩、回弹与腾空阶段，被动参数的调节如何改变两者的分工。",
+            "meta": "跑步应用展望 · 被动弹簧 + 主动驱动器",
+            "caption": "原理示意动画。模型假设请见“模型与论文”。"
           }
         }
-      ]
+      ],
+      "zh": {
+        "title": "人工韧带",
+        "intro": "材料如何在运动时保持柔顺，同时抵抗过度变形？这些交互动画展示了我在拉伸 J 型曲线材料与人工韧带研究中的一些思路。"
+      }
     },
     {
       "id": "polymer-actuators",
@@ -262,10 +304,23 @@
             "alt": "Original TCPA mechanics paper figure showing nylon coil photographs, thermomechanical test steps, and force–displacement curves at low and actuation temperatures.",
             "caption": "Paper Fig. 1: nylon coiled actuators, the thermal test procedure, and force–displacement responses showing contraction and stiffness change on heating.",
             "sourceLabel": "arXiv preprint v2, October 2, 2024",
-            "sourceUrl": "https://doi.org/10.1016/j.ijmecsci.2024.109440"
+            "sourceUrl": "https://doi.org/10.1016/j.ijmecsci.2024.109440",
+            "zh": {
+              "alt": "TCPA 力学论文原图：尼龙卷曲驱动器照片、热力学测试步骤，以及低温和驱动温度下的力-位移曲线。",
+              "caption": "论文图 1：尼龙卷曲驱动器、热测试流程，以及体现加热时收缩与刚度变化的力-位移响应。",
+              "sourceLabel": "arXiv 预印本 v2，2024 年 10 月 2 日"
+            }
+          },
+          "zh": {
+            "title": "从纤维几何到类肌肉运动",
+            "text": "加捻与卷曲可以将聚合物纤维转变为收缩式驱动器。我关注几何形状、储存的能量与材料响应如何共同作用，产生有用的运动。",
+            "meta": "加捻卷曲聚合物驱动器"
           }
         }
-      ]
+      ],
+      "zh": {
+        "title": "加捻卷曲聚合物驱动器"
+      }
     },
     {
       "id": "art-lighting",
@@ -284,9 +339,17 @@
           "media": "media/ea7c0c13-2bbd-42aa-a102-69fc19e841a7.mp4",
           "caption": "",
           "links": [],
-          "layout": "left"
+          "layout": "left",
+          "zh": {
+            "title": "长人工肌肉驱动的艺术灯光",
+            "text": "这项进行中的研究探索将 TCPA 的协调运动用于艺术灯光系统，内容包括循环稳定性、运动跟踪，以及 32 个驱动器阵列的控制。这些人工肌肉由可规模化生产的自动制造设备制备。",
+            "meta": "艺术灯光 · 进行中"
+          }
         }
-      ]
+      ],
+      "zh": {
+        "title": "用于艺术灯光的人工肌肉"
+      }
     },
     {
       "id": "octopus-arm",
@@ -305,9 +368,22 @@
           "media": "",
           "caption": "",
           "links": [],
-          "layout": "left"
+          "layout": "left",
+          "zh": {
+            "title": "章鱼腕足启发的软体机械臂",
+            "text": "这项进行中的研究以章鱼腕足的柔性运动为启发，探索软体机械臂。",
+            "meta": "仿生软体机器人 · 进行中"
+          }
         }
-      ]
+      ],
+      "zh": {
+        "title": "章鱼腕足仿生机械臂"
+      }
     }
-  ]
+  ],
+  "zh": {
+    "field": "力学 · 软体机器人 · 材料驱动器",
+    "affiliation": "伊利诺伊大学厄巴纳香槟校区",
+    "bio": "我是伊利诺伊大学厄巴纳香槟校区机械科学与工程专业的博士候选人。\n\n我的研究聚焦于软体机器人、加捻卷曲聚合物驱动器、非线性弹性，以及人工肌肉的自动化制造。\n\n我研究软材料的力学特性如何产生运动，以及如何将其应用于软体机器人。我结合力学建模与实验，理解这些材料的行为，并探索它们在软体机器人系统中的应用。"
+  }
 }

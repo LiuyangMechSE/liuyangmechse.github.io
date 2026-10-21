@@ -3,9 +3,11 @@ import Demo from './demos';
 import type {Item} from './lib/content';
 import {mediaSource} from './static-files';
 import './project-media.css';
+import {useLanguage} from './language';
 
 /** Keep an interactive explanation and its paper source in the same reading view. */
 export default function ProjectMedia({item}: {item: Item}) {
+  const {t}=useLanguage();
   const figureCaptionId = useId();
   const hasPrimary = Boolean(item.media) || item.demo !== 'none';
   const paperFigure = item.figure?.src ? item.figure : undefined;
@@ -22,16 +24,16 @@ export default function ProjectMedia({item}: {item: Item}) {
     </figure>}
 
     {paperFigure && <figure className="project-paper-figure" aria-labelledby={figureCaptionId}>
-      <div className="project-paper-heading">From the paper</div>
-      <a className="project-paper-image-link" href={mediaSource(paperFigure.src)} target="_blank" rel="noopener noreferrer" aria-label={`Open the paper figure for ${item.title} in a new tab`}>
-        <img src={mediaSource(paperFigure.src)} alt={paperFigure.alt || `Paper figure illustrating ${item.title}`} loading="lazy" decoding="async"/>
-        <span className="project-paper-expand" aria-hidden="true">Open full figure <span>↗</span></span>
+      <div className="project-paper-heading">{t("From the paper","论文插图")}</div>
+      <a className="project-paper-image-link" href={mediaSource(paperFigure.src)} target="_blank" rel="noopener noreferrer" aria-label={t(`Open the paper figure for ${item.title} in a new tab`,`在新标签页中打开“${item.title}”的论文插图`)}>
+        <img src={mediaSource(paperFigure.src)} alt={paperFigure.alt || t(`Paper figure illustrating ${item.title}`,`“${item.title}”的论文插图`)} loading="lazy" decoding="async"/>
+        <span className="project-paper-expand" aria-hidden="true">{t("Open full figure","查看完整插图")} <span>↗</span></span>
       </a>
       <figcaption id={figureCaptionId}>
         {paperFigure.caption && <p className="project-paper-caption">{paperFigure.caption}</p>}
         {(paperFigure.sourceLabel || paperFigure.sourceUrl) && <p className="project-paper-source">
           {paperFigure.sourceUrl
-            ? <a href={paperFigure.sourceUrl} target="_blank" rel="noopener noreferrer">{paperFigure.sourceLabel || 'Source paper'}</a>
+            ? <a href={paperFigure.sourceUrl} target="_blank" rel="noopener noreferrer">{paperFigure.sourceLabel || t('Source paper','来源论文')}</a>
             : paperFigure.sourceLabel}
         </p>}
       </figcaption>

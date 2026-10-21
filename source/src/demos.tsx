@@ -5,6 +5,7 @@ import {Play, Pause} from 'lucide-react';
 import {antagonistForces, runningForces, STANCE_FRACTION} from './demo-physics';
 import './demos.css';
 import {runningPose} from './running-gait';
+import {useLanguage} from './language';
 
 export type DemoKind = 'antagonist' | 'joint' | 'running' | 'coil' | 'curve' | 'lights';
 const BLUE = '#24577c', GREEN = '#358879', ORANGE = '#c77940', INK = '#344954', TAU = 2 * Math.PI;
@@ -63,93 +64,99 @@ function Control({label, value, min = 0, max = .75, step = .01, onChange, output
 }
 
 function Frame({title, subtitle, status, motion, children, controls, details}: {title: string; subtitle: string; status: string; motion: ReturnType<typeof useMotion>; children: ReactNode; controls: ReactNode; details: ReactNode}) {
+  const {t} = useLanguage();
   return <div ref={motion.root} className="demo research-demo" data-animation={title} data-cycle={round(motion.cycle)}>
-    <div className="mechanics-header"><div><div className="mechanics-kicker"><span className={motion.playing ? 'motion-dot' : 'motion-dot paused'}/>{title}</div><p>{subtitle}</p></div><button type="button" className="mechanics-play" onClick={motion.toggle} aria-label={`${motion.playing ? 'Pause' : 'Play'} ${title} animation`}>{motion.playing ? <Pause size={13}/> : <Play size={13}/>}<span>{motion.playing ? 'Pause' : 'Play'}</span></button></div>
-    <div className="mechanics-status">{status}<span>Illustrative mechanics</span></div>
+    <div className="mechanics-header"><div><div className="mechanics-kicker"><span className={motion.playing ? 'motion-dot' : 'motion-dot paused'}/>{title}</div><p>{subtitle}</p></div><button type="button" className="mechanics-play" onClick={motion.toggle} aria-label={t(`${motion.playing ? 'Pause' : 'Play'} ${title} animation`, `${motion.playing ? '暂停' : '播放'}${title}动画`)}>{motion.playing ? <Pause size={13}/> : <Play size={13}/>}<span>{motion.playing ? t('Pause', '暂停') : t('Play', '播放')}</span></button></div>
+    <div className="mechanics-status">{status}<span>{t('Illustrative mechanics', '力学原理示意')}</span></div>
     <div className="mechanics-panels">{children}</div><div className="mechanics-controls">{controls}</div>
-    <details className="mechanics-details"><summary>Model & paper</summary>{details}<p>Based on <a href="https://arxiv.org/abs/2602.00260" target="_blank" rel="noreferrer">Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements</a> and its revised manuscript. The animation is an explanatory schematic; its normalized curves are not experimental data.</p></details>
+    <details className="mechanics-details"><summary>{t('Model & paper', '模型与论文')}</summary>{details}<p>{t('Based on ', '依据论文 ')}<a href="https://arxiv.org/abs/2602.00260" target="_blank" rel="noreferrer">Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements</a>{t(' and its revised manuscript. The animation is an explanatory schematic; its normalized curves are not experimental data.', ' 及其修订稿制作。本动画仅用于解释原理，其中的归一化曲线并非实验数据。')}</p></details>
   </div>;
 }
 
 function ForcePlot({prestretch, displacement, rotary = false}: {prestretch: number; displacement: number; rotary?: boolean}) {
+  const {t} = useLanguage();
   const plot = {x: 42, y: 35, w: 232, h: 132}, px = (x: number) => plot.x + (x + 1) / 2 * plot.w, py = (y: number) => plot.y + (1 - y) / 2 * plot.h;
   const paths = useMemo(() => [0, prestretch].map(s => Array.from({length: 161}, (_, i) => {
     const x = (2 * i / 160 - 1) * (1 - s);
     return `${i ? 'L' : 'M'}${round(px(x))},${round(py(antagonistForces(s, x).applied))}`;
   }).join(' ')), [prestretch]);
   const f = antagonistForces(prestretch, displacement);
-  return <svg className="mechanics-chart" viewBox="0 0 310 290" role="img" aria-label={rotary ? 'Live normalized applied torque versus rotation, with individual ligament tensions' : 'Live net applied force versus displacement, with individual ligament tensions'}>
-    <text x="22" y="19" className="chart-title">{rotary ? 'Torque–rotation response' : 'Force–displacement response'}</text>
+  return <svg className="mechanics-chart" viewBox="0 0 310 290" role="img" aria-label={rotary ? t('Live normalized applied torque versus rotation, with individual ligament tensions', '实时显示归一化外加力矩与转角的关系，以及各条韧带的张力') : t('Live net applied force versus displacement, with individual ligament tensions', '实时显示净外力与位移的关系，以及各条韧带的张力')}>
+    <text x="22" y="19" className="chart-title">{rotary ? t('Torque–rotation response', '力矩–转角响应') : t('Force–displacement response', '力–位移响应')}</text>
     <rect x={px(-(1 - prestretch))} y={plot.y} width={(1 - prestretch) * plot.w} height={plot.h} rx="2" fill="#edf3f4"/>
     {[.5, -.5].map(y => <path key={y} d={`M${plot.x} ${py(y)}h${plot.w}`} className="mechanics-grid"/>)}
     <path d={`M${plot.x} ${py(0)}h${plot.w}M${px(0)} ${plot.y}v${plot.h}`} className="mechanics-axis"/>
     <path d={paths[0]} stroke="#b6c4ca" strokeWidth="1.7" strokeDasharray="4 4" fill="none"/><path d={paths[1]} stroke={BLUE} strokeWidth="2.6" fill="none"/>
     <path d={`M${px(displacement)} ${py(0)}V${py(f.applied)}`} stroke={BLUE} strokeDasharray="2 3" opacity=".45"/><circle cx={px(displacement)} cy={py(f.applied)} r="5.5" fill={BLUE} stroke="white" strokeWidth="2"/>
-    <text x="27" y={plot.y + 4} textAnchor="end">+1</text><text x="27" y={plot.y + plot.h + 4} textAnchor="end">−1</text><text x={plot.x} y="184" textAnchor="middle">−1</text><text x={px(0)} y="184" textAnchor="middle">0</text><text x={plot.x + plot.w} y="184" textAnchor="middle">+1</text><text x="159" y="201" textAnchor="middle">{rotary ? 'rθ / dmax' : 'Displacement / dmax'}</text>
-    <text x="22" y="225" className="chart-small">Ligament tensions / Fmax</text>
-    {([{name: 'Left', value: f.left, color: BLUE}, {name: 'Right', value: f.right, color: GREEN}]).map((bar, i) => <g key={bar.name}><text x="22" y={244 + i * 22}>{bar.name}</text><rect x="66" y={235 + i * 22} width="166" height="7" rx="3.5" fill="#e7edef"/><rect x="66" y={235 + i * 22} width={166 * bar.value} height="7" rx="3.5" fill={bar.color}/><text x="267" y={244 + i * 22} textAnchor="end" className="chart-value">{bar.value.toFixed(2)}</text></g>)}
+    <text x="27" y={plot.y + 4} textAnchor="end">+1</text><text x="27" y={plot.y + plot.h + 4} textAnchor="end">−1</text><text x={plot.x} y="184" textAnchor="middle">−1</text><text x={px(0)} y="184" textAnchor="middle">0</text><text x={plot.x + plot.w} y="184" textAnchor="middle">+1</text><text x="159" y="201" textAnchor="middle">{rotary ? 'rθ / dmax' : t('Displacement / dmax', '位移 / dmax')}</text>
+    <text x="22" y="225" className="chart-small">{t('Ligament tensions / Fmax', '韧带张力 / Fmax')}</text>
+    {([{name: t('Left', '左侧'), value: f.left, color: BLUE}, {name: t('Right', '右侧'), value: f.right, color: GREEN}]).map((bar, i) => <g key={i}><text x="22" y={244 + i * 22}>{bar.name}</text><rect x="66" y={235 + i * 22} width="166" height="7" rx="3.5" fill="#e7edef"/><rect x="66" y={235 + i * 22} width={166 * bar.value} height="7" rx="3.5" fill={bar.color}/><text x="267" y={244 + i * 22} textAnchor="end" className="chart-value">{bar.value.toFixed(2)}</text></g>)}
   </svg>;
 }
 
 function AntagonistDemo() {
+  const {t} = useLanguage();
   const [prestretch, setPrestretch] = useState(.2), motion = useMotion(5.8);
   const displacement = .94 * (1 - prestretch) * Math.sin(motion.cycle * TAU), force = antagonistForces(prestretch, displacement);
   const cx = 250 + 75 * displacement, left = 110 - 75 * prestretch, right = 390 + 75 * prestretch;
   const gradient = useId();
-  const status = Math.abs(displacement) < .025 ? 'Balanced at the center' : `${displacement > 0 ? 'Left' : 'Right'} ligament stretches · ${displacement > 0 ? 'right' : 'left'} ligament relaxes`;
-  return <Frame title="Antagonistic translation" subtitle="Two tensile ligaments. One self-centering motion." status={status} motion={motion}
-    controls={<><Control label="Pre-stretch · Δs / dmax" value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><div className="mechanics-insight"><strong>{Math.round((1 - prestretch) * 100)}% travel available</strong><span>More pre-stretch stiffens the center and narrows the motion range.</span></div></>}
-    details={<p>The external force required to hold the block is Fₘ = F(Δs + dₘ) − F(Δs − dₘ); the ligaments exert the opposite restoring force (Eqs. 3–4). An unloaded ligament goes slack. Here F(e) = 0.04e + 0.96e⁶ for e ≥ 0 and zero otherwise, where e is extension / dmax. Motion stays inside |dₘ| ≤ dmax − Δs. Gray dashed curve: zero pre-stretch. Colored curve: current pre-stretch. Plot force is normalized by the single-ligament Fmax.</p>}>
-    <svg className="mechanics-scene" viewBox="0 0 500 290" role="img" aria-label="A block oscillates between two coiled ligaments. The lengthening ligament pulls it back toward the center.">
+  const status = Math.abs(displacement) < .025 ? t('Balanced at the center', '中心位置处于平衡') : t(`${displacement > 0 ? 'Left' : 'Right'} ligament stretches · ${displacement > 0 ? 'right' : 'left'} ligament relaxes`, `${displacement > 0 ? '左侧' : '右侧'}韧带拉伸 · ${displacement > 0 ? '右侧' : '左侧'}韧带松弛`);
+  return <Frame title={t("Antagonistic translation", "拮抗式平移")} subtitle={t("Two tensile ligaments. One self-centering motion.", "两条受拉韧带，实现自动回中的运动。")} status={status} motion={motion}
+    controls={<><Control label={t("Pre-stretch · Δs / dmax", "预拉伸 · Δs / dmax")} value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><div className="mechanics-insight"><strong>{t(`${Math.round((1 - prestretch) * 100)}% travel available`, `可用行程 ${Math.round((1 - prestretch) * 100)}%`)}</strong><span>{t("More pre-stretch stiffens the center and narrows the motion range.", "增大预拉伸可提高中心位置的刚度，同时缩小运动范围。")}</span></div></>}
+    details={<p>{t("The external force required to hold the block is Fₘ = F(Δs + dₘ) − F(Δs − dₘ); the ligaments exert the opposite restoring force (Eqs. 3–4). An unloaded ligament goes slack. Here F(e) = 0.04e + 0.96e⁶ for e ≥ 0 and zero otherwise, where e is extension / dmax. Motion stays inside |dₘ| ≤ dmax − Δs. Gray dashed curve: zero pre-stretch. Colored curve: current pre-stretch. Plot force is normalized by the single-ligament Fmax.", "维持滑块位置所需的外力为 Fₘ = F(Δs + dₘ) − F(Δs − dₘ)；韧带施加方向相反的回复力（式 3–4）。韧带卸载后会松弛。此处，当 e ≥ 0 时，F(e) = 0.04e + 0.96e⁶，否则为零，其中 e 为伸长量 / dmax。运动始终满足 |dₘ| ≤ dmax − Δs。灰色虚线表示零预拉伸，彩色曲线表示当前预拉伸。图中的力以单条韧带的 Fmax 归一化。")}</p>}>
+    <svg className="mechanics-scene" viewBox="0 0 500 290" role="img" aria-label={t("A block oscillates between two coiled ligaments. The lengthening ligament pulls it back toward the center.", "滑块在两条螺旋状韧带之间往复运动。被拉长的韧带将滑块拉回中心。")}>
       <defs><linearGradient id={gradient} x1="0" y1="0" x2="0" y2="1"><stop stopColor="#eef2f2"/><stop offset="1" stopColor="#bac9cd"/></linearGradient></defs>
       <path d="M49 151H451" stroke="#dce4e7" strokeWidth="13" strokeLinecap="round"/><path d="M49 150H451" stroke="white" strokeWidth="3"/><path d="M250 66V209" className="mechanics-guide"/>
-      <rect x={250 - 75 * (1 - prestretch)} y="210" width={150 * (1 - prestretch)} height="4" rx="2" fill="#d8e5e8"/><circle cx={cx} cy="212" r="4" fill={BLUE}/><text x="250" y="237" textAnchor="middle" className="scene-small">Available displacement</text>
-      {[left, right].map((x, i) => <g key={i}><rect x={x - 5} y="93" width="10" height="68" rx="2" fill="#c7d1d5"/><path d={`M${x + (i ? 5 : -5)} 99l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7`} stroke="#93a6ae" strokeWidth="1.3"/><text x={x} y="180" textAnchor="middle" className="scene-small">Fixed</text></g>)}
+      <rect x={250 - 75 * (1 - prestretch)} y="210" width={150 * (1 - prestretch)} height="4" rx="2" fill="#d8e5e8"/><circle cx={cx} cy="212" r="4" fill={BLUE}/><text x="250" y="237" textAnchor="middle" className="scene-small">{t("Available displacement", "可用位移范围")}</text>
+      {[left, right].map((x, i) => <g key={i}><rect x={x - 5} y="93" width="10" height="68" rx="2" fill="#c7d1d5"/><path d={`M${x + (i ? 5 : -5)} 99l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7m${i ? -7 : 7} 23l${i ? 7 : -7} -7`} stroke="#93a6ae" strokeWidth="1.3"/><text x={x} y="180" textAnchor="middle" className="scene-small">{t("Fixed", "固定端")}</text></g>)}
       <Coil x1={left + 5} y1={122} x2={cx - 25} y2={122} force={force.left} color={BLUE} slack={prestretch + displacement < 0}/><Coil x1={cx + 25} y1={122} x2={right - 5} y2={122} force={force.right} color={GREEN} slack={prestretch - displacement < 0}/>
       <rect x={cx - 25} y="105" width="50" height="42" rx="5" fill={`url(#${gradient})`} stroke="#8c9fa8" strokeWidth="1.3"/><circle cx={cx} cy="125" r="4" fill="#f8fbfc" stroke="#80959f"/><circle cx={cx - 14} cy="149" r="5" fill="#7f939d"/><circle cx={cx + 14} cy="149" r="5" fill="#7f939d"/>
       <Arrow x1={cx - 5} y1={93} x2={cx - 5 - 60 * force.left} y2={93} color={BLUE}/><Arrow x1={cx + 5} y1={93} x2={cx + 5 + 60 * force.right} y2={93} color={GREEN}/>
-      <text x={(left + cx - 25) / 2} y="73" textAnchor="middle" className="scene-label" style={{fill: BLUE}}>Left ligament</text><text x={(cx + 25 + right) / 2} y="73" textAnchor="middle" className="scene-label" style={{fill: GREEN}}>Right ligament</text><text x="250" y="271" textAnchor="middle" className="scene-equation">Fₘ = F(Δs + dₘ) − F(Δs − dₘ)</text>
+      <text x={(left + cx - 25) / 2} y="73" textAnchor="middle" className="scene-label" style={{fill: BLUE}}>{t("Left ligament", "左侧韧带")}</text><text x={(cx + 25 + right) / 2} y="73" textAnchor="middle" className="scene-label" style={{fill: GREEN}}>{t("Right ligament", "右侧韧带")}</text><text x="250" y="271" textAnchor="middle" className="scene-equation">Fₘ = F(Δs + dₘ) − F(Δs − dₘ)</text>
     </svg><ForcePlot prestretch={prestretch} displacement={displacement}/>
   </Frame>;
 }
 
 function JointDemo() {
+  const {t} = useLanguage();
   const [prestretch, setPrestretch] = useState(.3), motion = useMotion(6.5);
   const displacement = .92 * (1 - prestretch) * Math.sin(motion.cycle * TAU), theta = 60 * displacement / 48, force = antagonistForces(prestretch, displacement);
   const cx = 250, cy = 166, r = 48, ly = 102 + 60 * (prestretch + displacement), ry = 102 + 60 * (prestretch - displacement), angle = theta * 180 / Math.PI;
-  return <Frame title="Antagonistic joint" subtitle="The same J-curve response, translated into rotation." status={`Joint angle ${angle > 0 ? '+' : ''}${Math.round(angle)}° · ${Math.abs(angle) < 2 ? 'centered' : 'passive torque acts toward center'}`} motion={motion}
-    controls={<><Control label="Pre-stretch · Δs / dmax" value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><div className="mechanics-insight"><strong>Soft near center, firm near the limit</strong><span>Turn up pre-stretch to see the available rotation narrow.</span></div></>}
-    details={<p>An ideal tendon route around a joint of radius r converts rotation to extension: dₘ = rθ. The holding torque is τ = r[F(Δs + rθ) − F(Δs − rθ)]; the passive joint torque acts in the opposite direction. This pulley schematic illustrates Fig. 5e in the public preprint (Fig. 6e in the revised manuscript) using the same normalized, tensile-only material law as the translation demo. The vertical axis is τ / (rFmax), and the horizontal axis is rθ / dmax. The coil ends move by the corresponding arc length.</p>}>
-    <svg className="mechanics-scene" viewBox="0 0 500 290" role="img" aria-label="A joint rotates against two oppositely routed tensile ligaments. One stretches as the other relaxes.">
-      <path d="M250 30V166" stroke="#d0dadd" strokeWidth="19" strokeLinecap="round"/><path d="M190 30H310" stroke="#879da7" strokeWidth="9" strokeLinecap="round"/><text x="250" y="15" textAnchor="middle" className="scene-small">Fixed upper arm</text>
+  return <Frame title={t("Antagonistic joint", "拮抗式关节")} subtitle={t("The same J-curve response, translated into rotation.", "将相同的 J 曲线响应转化为转动。")} status={t(`Joint angle ${angle > 0 ? '+' : ''}${Math.round(angle)}° · ${Math.abs(angle) < 2 ? 'centered' : 'passive torque acts toward center'}`, `关节角度 ${angle > 0 ? '+' : ''}${Math.round(angle)}° · ${Math.abs(angle) < 2 ? '处于中心位置' : '被动力矩使关节回中'}`)} motion={motion}
+    controls={<><Control label={t("Pre-stretch · Δs / dmax", "预拉伸 · Δs / dmax")} value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><div className="mechanics-insight"><strong>{t("Soft near center, firm near the limit", "中心附近柔顺，接近极限时刚硬")}</strong><span>{t("Turn up pre-stretch to see the available rotation narrow.", "增大预拉伸，观察可用转角范围的缩小。")}</span></div></>}
+    details={<p>{t("An ideal tendon route around a joint of radius r converts rotation to extension: dₘ = rθ. The holding torque is τ = r[F(Δs + rθ) − F(Δs − rθ)]; the passive joint torque acts in the opposite direction. This pulley schematic illustrates Fig. 5e in the public preprint (Fig. 6e in the revised manuscript) using the same normalized, tensile-only material law as the translation demo. The vertical axis is τ / (rFmax), and the horizontal axis is rθ / dmax. The coil ends move by the corresponding arc length.", "在理想的肌腱绕行路径中，半径为 r 的关节将转角转化为伸长量：dₘ = rθ。维持关节位置所需的力矩为 τ = r[F(Δs + rθ) − F(Δs − rθ)]；关节的被动力矩方向与之相反。此滑轮示意图对应公开预印本的图 5e（修订稿的图 6e），采用与平移演示相同的归一化、仅承受拉力的材料本构关系。纵轴为 τ / (rFmax)，横轴为 rθ / dmax。螺旋元件端部的移动距离等于相应的弧长。")}</p>}>
+    <svg className="mechanics-scene" viewBox="0 0 500 290" role="img" aria-label={t("A joint rotates against two oppositely routed tensile ligaments. One stretches as the other relaxes.", "关节转动时受到两条反向绕行的受拉韧带作用。一条被拉伸，另一条则松弛。")}>
+      <path d="M250 30V166" stroke="#d0dadd" strokeWidth="19" strokeLinecap="round"/><path d="M190 30H310" stroke="#879da7" strokeWidth="9" strokeLinecap="round"/><text x="250" y="15" textAnchor="middle" className="scene-small">{t("Fixed upper arm", "固定上臂")}</text>
       <path d={`M${cx - r} ${ly}V${cy}A${r} ${r} 0 0 0 ${cx + r} ${cy}V${ry}`} fill="none" stroke="#8ca0a8" strokeWidth="2"/>
       <Coil x1={cx - r} y1={36} x2={cx - r} y2={ly} color={BLUE} force={force.left} slack={prestretch + displacement < 0}/><Coil x1={cx + r} y1={36} x2={cx + r} y2={ry} color={GREEN} force={force.right} slack={prestretch - displacement < 0}/><circle cx={cx - r} cy={ly} r="3" fill={BLUE}/><circle cx={cx + r} cy={ry} r="3" fill={GREEN}/>
       <path d="M250 172V266" className="mechanics-guide"/><path d={`M${250 + 87 * Math.sin(-.7)} ${166 + 87 * Math.cos(-.7)}A87 87 0 0 0 ${250 + 87 * Math.sin(.7)} ${166 + 87 * Math.cos(.7)}`} fill="none" stroke="#e0e8eb" strokeWidth="3"/>
       <g transform={`rotate(${-angle} ${cx} ${cy})`}><path d={`M${cx} ${cy}V255`} stroke="#8dabb5" strokeWidth="19" strokeLinecap="round"/><path d={`M${cx - 4} ${cy + 19}V245`} stroke="#c7d8dd" strokeWidth="3" strokeLinecap="round"/><circle cx={cx} cy="255" r="8" fill="#f7fafb" stroke="#708f9c" strokeWidth="2"/></g>
       <circle cx={cx} cy={cy} r={r} fill="#eef3f4" stroke="#9cb1ba" strokeWidth="2"/><circle cx={cx} cy={cy} r={r - 7} fill="none" stroke="#d8e3e7" strokeWidth="2"/>
       <g transform={`rotate(${-angle} ${cx} ${cy})`}><path d={`M${cx - 30} ${cy}H${cx + 30}M${cx} ${cy - 30}V${cy + 30}`} stroke="#a6bac3" strokeWidth="5" strokeLinecap="round"/><circle cx={cx} cy={cy - 31} r="3.5" fill={BLUE}/></g><circle cx={cx} cy={cy} r="11" fill="#f8fbfc" stroke="#758f9b" strokeWidth="2"/><circle cx={cx} cy={cy} r="3" fill="#758f9b"/>
-      <text x="138" y="78" textAnchor="middle" className="scene-label" style={{fill: BLUE}}>Left</text><path d="M156 82L192 91" className="mechanics-leader"/><text x="362" y="78" textAnchor="middle" className="scene-label" style={{fill: GREEN}}>Right</text><path d="M344 82L308 91" className="mechanics-leader"/>
-      <text x="108" y="201" className="scene-small">Tendon routing</text><text x="108" y="219" className="scene-equation">dₘ = rθ</text><path d="M176 198L199 172" className="mechanics-leader"/><text x="369" y="200" textAnchor="middle" className="scene-small">Pivot</text><path d="M349 195L305 173" className="mechanics-leader"/>
+      <text x="138" y="78" textAnchor="middle" className="scene-label" style={{fill: BLUE}}>{t("Left", "左侧")}</text><path d="M156 82L192 91" className="mechanics-leader"/><text x="362" y="78" textAnchor="middle" className="scene-label" style={{fill: GREEN}}>{t("Right", "右侧")}</text><path d="M344 82L308 91" className="mechanics-leader"/>
+      <text x="108" y="201" className="scene-small">{t("Tendon routing", "肌腱绕行路径")}</text><text x="108" y="219" className="scene-equation">dₘ = rθ</text><path d="M176 198L199 172" className="mechanics-leader"/><text x="369" y="200" textAnchor="middle" className="scene-small">{t("Pivot", "转轴")}</text><path d="M349 195L305 173" className="mechanics-leader"/>
     </svg><ForcePlot prestretch={prestretch} displacement={displacement} rotary/>
   </Frame>;
 }
 
 function RunningPlot({cycle, prestretch, pace}: {cycle: number; prestretch: number; pace: number}) {
+  const {t} = useLanguage();
   const px = (x: number) => 38 + 238 * x, py = (y: number) => 125 - 90 * y;
   const traces = useMemo(() => (['target', 'passive', 'active'] as const).map(key => Array.from({length: 161}, (_, i) => `${i ? 'L' : 'M'}${round(px(i / 160))},${round(py(runningForces(i / 160, prestretch, pace)[key]))}`).join(' ')), [prestretch, pace]);
   const f = runningForces(cycle, prestretch, pace), p = cycle % 1;
-  const series = [{name: 'Target', key: 'target' as const, color: INK}, {name: 'Passive', key: 'passive' as const, color: GREEN}, {name: 'Active', key: 'active' as const, color: ORANGE}];
-  return <svg className="mechanics-chart" viewBox="0 0 310 290" role="img" aria-label="Force sharing across a prescribed stride. Target force equals passive spring force plus active actuator force, including negative actuator force when braking.">
-    <text x="22" y="19" className="chart-title">Force in the highlighted leg</text><rect x={px(STANCE_FRACTION)} y="34" width={238 * (1 - STANCE_FRACTION)} height="144" fill="#eff2f3" rx="2"/>
+  const series = [{name: t('Target', '目标'), key: 'target' as const, color: INK}, {name: t('Passive', '被动'), key: 'passive' as const, color: GREEN}, {name: t('Active', '主动'), key: 'active' as const, color: ORANGE}];
+  return <svg className="mechanics-chart" viewBox="0 0 310 290" role="img" aria-label={t("Force sharing across a prescribed stride. Target force equals passive spring force plus active actuator force, including negative actuator force when braking.", "预设步态周期中的力分担。目标力等于被动弹簧力与主动执行器力之和，制动时执行器可施加负向力。")}>
+    <text x="22" y="19" className="chart-title">{t("Force in the highlighted leg", "高亮腿部的受力")}</text><rect x={px(STANCE_FRACTION)} y="34" width={238 * (1 - STANCE_FRACTION)} height="144" fill="#eff2f3" rx="2"/>
     <path d="M38 35H276M38 80H276" className="mechanics-grid"/><path d="M38 34V178M38 125H276" className="mechanics-axis"/><text x="28" y="38" textAnchor="end">1</text><text x="28" y="128" textAnchor="end">0</text>
     {series.map((s, i) => <path key={s.key} d={traces[i]} fill="none" stroke={s.color} strokeWidth={i === 0 ? 1.8 : 2.5} strokeDasharray={i === 0 ? '4 4' : undefined}/>)}<path d={`M${px(p)} 35V178`} stroke="#9baeb7" strokeWidth="1" strokeDasharray="3 3"/>
     {series.map(s => <circle key={s.key} cx={px(p)} cy={py(f[s.key])} r="3.9" fill={s.color} stroke="white" strokeWidth="1.4"/>)}
-    <text x={px(STANCE_FRACTION / 2)} y="195" textAnchor="middle">Stance</text><text x={px((1 + STANCE_FRACTION) / 2)} y="195" textAnchor="middle">Highlighted-leg swing</text><text x="22" y="218" className="chart-small">Normalized force · active can brake (−)</text>
+    <text x={px(STANCE_FRACTION / 2)} y="195" textAnchor="middle">{t("Stance", "支撑相")}</text><text x={px((1 + STANCE_FRACTION) / 2)} y="195" textAnchor="middle">{t("Highlighted-leg swing", "高亮腿摆动相")}</text><text x="22" y="218" className="chart-small">{t("Normalized force · active can brake (−)", "归一化力 · 主动执行器可制动（−）")}</text>
     {series.map((s, i) => {const value = f[s.key], zero = 152, unit = 103; return <g key={s.key}><circle cx="25" cy={235 + i * 20} r="3" fill={s.color}/><text x="35" y={239 + i * 20}>{s.name}</text><path d={`M99 ${235 + i * 20}H259`} stroke="#e1e9ec" strokeWidth="5" strokeLinecap="round"/><path d={`M${zero} ${229 + i * 20}v12`} stroke="#acbbc2"/><path d={`M${zero} ${235 + i * 20}h${value * unit}`} stroke={s.color} strokeWidth="5" strokeLinecap="round"/><text x="291" y={239 + i * 20} textAnchor="end" className="chart-value">{value.toFixed(2)}</text></g>;})}
   </svg>;
 }
 
 export function RunningFigure({cycle, prestretch, pace}: {cycle: number; prestretch: number; pace: number}) {
+  const {t} = useLanguage();
   const pose = runningPose(cycle), f = runningForces(cycle, prestretch, pace);
   const {x: hx, y: hy} = pose.hip, {x: footx, y: footy} = pose.near.foot;
   const ground = 264, groundOffset = pose.groundOffset;
@@ -158,7 +165,7 @@ export function RunningFigure({cycle, prestretch, pace}: {cycle: number; prestre
   const legLength = Math.hypot(footx - hx, footy - hy), legAngle = -Math.atan2(footx - hx, footy - hy)*180/Math.PI;
   const armPath = (arm: typeof pose.nearArm) => `M${arm.shoulder.x} ${arm.shoulder.y}L${arm.elbow.x} ${arm.elbow.y}L${arm.hand.x} ${arm.hand.y}`;
   return (
-    <svg className="mechanics-scene running-scene" data-stride={cycle.toFixed(3)} viewBox="0 0 500 290" role="img" aria-label="A running figure with an effective passive spring and an active linear actuator in parallel between hip and stance foot. The mechanism compresses and extends through an animated stance and flight cycle.">
+    <svg className="mechanics-scene running-scene" data-stride={cycle.toFixed(3)} viewBox="0 0 500 290" role="img" aria-label={t("A running figure with an effective passive spring and an active linear actuator in parallel between hip and stance foot. The mechanism compresses and extends through an animated stance and flight cycle.", "跑步人形的髋部与支撑足之间并联了等效被动弹簧和主动直线执行器。动画展示支撑与腾空周期中机构的压缩和伸展。")}>
       <path d="M35 264H466" stroke="#8faaa8" strokeWidth="1.6"/><path d="M35 266H466" stroke="#e9eeee" strokeWidth="7"/>
       {Array.from({length: 20}, (_, i) => <path key={i} d={`M${24 * i - groundOffset} 269l-6 8`} stroke="#ccd8d8" strokeWidth="1.1"/>)}<ellipse cx={hx} cy="267" rx={f.stance ? 51 : 37} ry="4" fill="#465d6110"/>
       <g data-limb="far-leg"><path d={`M${hx} ${hy}L${pose.far.knee.x} ${pose.far.knee.y}L${pose.far.foot.x} ${pose.far.foot.y}`} stroke="#b4c3ca" strokeWidth="11" fill="none" strokeLinecap="round" strokeLinejoin="round"/><circle cx={pose.far.knee.x} cy={pose.far.knee.y} r="5" fill="#a6b9c2"/><path d="M-9 0L2 0L15 1" transform={`translate(${pose.far.foot.x} ${pose.far.foot.y}) rotate(${pose.far.footAngle})`} stroke="#8ca5b0" strokeWidth="7" fill="none" strokeLinecap="round"/></g>
@@ -174,18 +181,19 @@ export function RunningFigure({cycle, prestretch, pace}: {cycle: number; prestre
         {f.stance && <><Arrow x1={-29} y1={legLength - 36} x2={-29} y2={legLength - 36 - 48 * f.passive} color={GREEN}/><Arrow x1={31} y1={legLength - 36} x2={31} y2={legLength - 36 - 48 * f.active} color={ORANGE}/></>}
       </g>
       <path d="M-9 0L2 0L15 1" transform={`translate(${footx} ${footy}) rotate(${pose.near.footAngle})`} stroke="#506f79" strokeWidth="7" fill="none" strokeLinecap="round"/>{f.stance && <circle cx={footx} cy={ground} r="3" fill={GREEN}/>}
-      <text x="55" y="98" className="scene-label" style={{fill: GREEN}}>Passive spring</text><text x="55" y="115" className="scene-small">Effective J-curve response</text><path d={`M166 111L${hx - 21} ${hy + 56}`} className="mechanics-leader"/>
-      <text x="364" y="159" className="scene-label" style={{fill: ORANGE}}>Active actuator</text><text x="364" y="176" className="scene-small">Supplies the difference</text><path d={`M352 171L${hx + 25} ${hy + 78}`} className="mechanics-leader"/>
-      <text x="55" y="229" className="scene-equation">Fₜ = Fₚ + Fₐ</text><Arrow x1={371} y1={49} x2={420} y2={49} color="#829a9c"/><text x="395" y="36" textAnchor="middle" className="scene-small">Run direction</text>
+      <text x="55" y="98" className="scene-label" style={{fill: GREEN}}>{t("Passive spring", "被动弹簧")}</text><text x="55" y="115" className="scene-small">{t("Effective J-curve response", "等效 J 曲线响应")}</text><path d={`M166 111L${hx - 21} ${hy + 56}`} className="mechanics-leader"/>
+      <text x="364" y="159" className="scene-label" style={{fill: ORANGE}}>{t("Active actuator", "主动执行器")}</text><text x="364" y="176" className="scene-small">{t("Supplies the difference", "补足力的差额")}</text><path d={`M352 171L${hx + 25} ${hy + 78}`} className="mechanics-leader"/>
+      <text x="55" y="229" className="scene-equation">Fₜ = Fₚ + Fₐ</text><Arrow x1={371} y1={49} x2={420} y2={49} color="#829a9c"/><text x="395" y="36" textAnchor="middle" className="scene-small">{t("Run direction", "跑步方向")}</text>
     </svg>);
 }
 
 function RunningDemo() {
+  const {t} = useLanguage();
   const [prestretch, setPrestretch] = useState(.6), [pace, setPace] = useState(1.15), motion = useMotion(1.65 / pace);
   const f = runningForces(motion.cycle, prestretch, pace), pose = runningPose(motion.cycle);
-  return <Frame title="A spring-assisted running leg" subtitle="A tunable passive spring and an active actuator work in parallel." status={f.stance ? (f.u < .5 ? 'Stance · loading the leg' : 'Stance · returning spring energy') : (pose.far.stance ? 'Opposite-leg stance · highlighted leg swings' : 'Flight · both feet airborne')} motion={motion}
-    controls={<><Control label="Passive pre-stretch · Δs / dmax" value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><Control label="Running pace · prescribed cycle" value={pace} min={.8} max={1.8} step={.05} onChange={setPace} output={`${pace.toFixed(2)}×`}/></>}
-    details={<><p>The revised manuscript’s Fig. 6g and Eq. 5 motivate the parallel architecture: Ftarget = ktarget ΔL = Fspring + Factuator. The green element represents an effective passive leg spring; a tensile ligament would require a transmission to provide this support. The orange actuator supplies the remaining force and can apply a negative force when the passive support exceeds the target.</p><p>This illustration prescribes alternating leg contact, knee flexion, and opposing arm swing with constant anatomical limb lengths. Planted feet move with the ground. The spring–actuator overlay is shown during the highlighted leg’s stance and fades during swing. The graph shows force in that leg only: its swing phase includes opposite-leg stance and brief flight intervals. Pace changes cycle rate and illustrative target stiffness. Passive force uses F(Δs + c) − F(Δs − c), with normalized compression c ≤ 0.23 and the same illustrative J-curve law as above. It demonstrates force sharing, not a validated running simulation or a prediction of energy savings.</p></>}>
+  return <Frame title={t("A spring-assisted running leg", "弹簧辅助跑步腿")} subtitle={t("A tunable passive spring and an active actuator work in parallel.", "可调被动弹簧与主动执行器并联协作。")} status={f.stance ? (f.u < .5 ? t('Stance · loading the leg', '支撑相 · 腿部加载') : t('Stance · returning spring energy', '支撑相 · 释放弹簧能量')) : (pose.far.stance ? t('Opposite-leg stance · highlighted leg swings', '对侧腿支撑 · 高亮腿摆动') : t('Flight · both feet airborne', '腾空相 · 双脚离地'))} motion={motion}
+    controls={<><Control label={t("Passive pre-stretch · Δs / dmax", "被动元件预拉伸 · Δs / dmax")} value={prestretch} onChange={setPrestretch} output={prestretch.toFixed(2)}/><Control label={t("Running pace · prescribed cycle", "跑步节奏 · 预设周期")} value={pace} min={.8} max={1.8} step={.05} onChange={setPace} output={`${pace.toFixed(2)}×`}/></>}
+    details={<><p>{t("The revised manuscript’s Fig. 6g and Eq. 5 motivate the parallel architecture: Ftarget = ktarget ΔL = Fspring + Factuator. The green element represents an effective passive leg spring; a tensile ligament would require a transmission to provide this support. The orange actuator supplies the remaining force and can apply a negative force when the passive support exceeds the target.", "此并联结构源于修订稿的图 6g 和式 5：Ftarget = ktarget ΔL = Fspring + Factuator。绿色元件表示等效的腿部被动弹簧；若使用受拉韧带，则需通过传动机构提供这种支撑。橙色执行器补足剩余的力，并可在被动支撑力超过目标时施加负向力。")}</p><p>{t("This illustration prescribes alternating leg contact, knee flexion, and opposing arm swing with constant anatomical limb lengths. Planted feet move with the ground. The spring–actuator overlay is shown during the highlighted leg’s stance and fades during swing. The graph shows force in that leg only: its swing phase includes opposite-leg stance and brief flight intervals. Pace changes cycle rate and illustrative target stiffness. Passive force uses F(Δs + c) − F(Δs − c), with normalized compression c ≤ 0.23 and the same illustrative J-curve law as above. It demonstrates force sharing, not a validated running simulation or a prediction of energy savings.", "本示意预设双腿交替触地、屈膝以及手臂反向摆动，并保持各肢段长度不变。着地足随地面移动。弹簧与执行器的叠加示意在高亮腿的支撑相显示，在摆动相逐渐淡出。图中仅显示该腿的受力；其摆动相包含对侧腿支撑以及短暂的腾空时段。跑步节奏会改变周期频率和示意性目标刚度。被动力采用 F(Δs + c) − F(Δs − c)，其中归一化压缩量 c ≤ 0.23，并沿用上述示意性 J 曲线本构关系。本演示仅展示力的分担，并非经过验证的跑步仿真，也不用于预测节能效果。")}</p></>}>
     <RunningFigure cycle={motion.cycle} prestretch={prestretch} pace={pace}/><RunningPlot cycle={motion.cycle} prestretch={prestretch} pace={pace}/>
   </Frame>;
 }

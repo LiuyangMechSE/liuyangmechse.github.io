@@ -133,6 +133,19 @@ try {
   assert.ok(manifest.files.includes(path)); assert.ok(manifest.files.includes('files/Liuyang-Cheng-CV.pdf'));
   assert.ok(!writes.some(file => file.path.endsWith('files/Liuyang-Cheng-CV.pdf')));
  });
+ await check('Chinese CV replacement publishes and exports both language PDFs without changing the English link', async () => {
+  const state = mock(base), local = clone(base), path = 'files/cv-chinese-new.pdf', bytes = Buffer.from('%PDF-1.7\nChinese CV bytes\n%%EOF');
+  const index=local.links.findIndex(link=>/^CV(?:\s|$)/i.test(link.label));
+  const original=local.links[index].url; local.links[index].zhUrl=path; local.links[index].zhLabel='简历 (PDF)';
+  staged.set(path,new Blob([bytes],{type:'application/pdf'}));
+  const result=await publishWebsite({token:'test-token',content:local,base});
+  assert.equal(result.content.links[index].url,original); assert.equal(result.content.links[index].zhUrl,path);
+  const writes=state.calls.find(call=>call.path==='/git/trees'&&call.method==='POST').body.tree;
+  assert.equal(writes.find(file=>file.path===path).sha,gitSha(bytes));
+  assert.equal(writes.find(file=>file.path==='source/public/'+path).sha,gitSha(bytes));
+  const manifest=JSON.parse(state.blobs.get(writes.find(file=>file.path==='export-manifest.json').sha));
+  assert.ok(manifest.files.includes(path)); assert.ok(manifest.files.includes(original));
+ });
  await check('missing CV and conflicting remote CV filenames stop before remote writes', async () => {
   const local = clone(base); local.links.push({label: 'CV', url: 'files/cv-missing.pdf'});
   let state = mock();

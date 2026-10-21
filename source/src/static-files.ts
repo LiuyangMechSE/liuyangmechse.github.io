@@ -70,7 +70,7 @@ export async function stageCv(file:File):Promise<string>{
 export function mediaPaths(content:SiteContent){
  const items=content.sections.flatMap(section=>section.items);
  const images=[content.portrait,...items.flatMap(item=>[item.media,item.figure?.src??''])].filter(path=>path.startsWith('media/'));
- const documents=[...content.links,...items.flatMap(item=>item.links)].map(link=>link.url).filter(isLocalPdfPath);
+ const documents=[...content.links,...items.flatMap(item=>item.links)].flatMap(link=>[link.url,link.zhUrl??'']).filter(isLocalPdfPath);
  return Array.from(new Set([...images,...documents]));
 }
 const encoder=new TextEncoder();

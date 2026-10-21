@@ -14,7 +14,7 @@ const conflict = () => Error('The website changed on GitHub while you were editi
 export function mergeWebsiteContent(base: SiteContent, local: SiteContent, remote: SiteContent): SiteContent {
  const before = siteSchema.parse(base), draft = siteSchema.parse(local), latest = siteSchema.parse(remote);
  const merged: Record<string, unknown> = {};
- for (const key of Object.keys(before) as (keyof SiteContent)[]) {
+ for (const key of Array.from(new Set([...Object.keys(before),...Object.keys(draft),...Object.keys(latest)])) as (keyof SiteContent)[]) {
   if (same(draft[key], before[key])) merged[key] = latest[key];
   else if (same(latest[key], before[key]) || same(draft[key], latest[key])) merged[key] = draft[key];
   else throw conflict();

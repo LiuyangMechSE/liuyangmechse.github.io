@@ -6,6 +6,16 @@ This is a complete static website for **LiuyangMechSE/liuyangmechse.github.io**.
 
 The website is published at **https://liuyangmechse.github.io/** from the repository's `main` branch and root folder. Committing updated deployment files to that location triggers GitHub Pages. Keep `index.html`, `research.html`, `editor.html`, `content.json`, `assets/`, `media/`, and `.nojekyll` at the root.
 
+## English and Chinese
+
+Use **EN / 中文** in the navigation to change language. The choice is saved on this browser; `?lang=en` or `?lang=zh` in a shared link overrides it. Home, Research, paper captions and interactive demo controls follow the selected language. Publication titles, author names and journal names retain their original bibliographic spelling. If a new entry has no Chinese text yet, it safely falls back to English.
+
+The English CV is preserved at its existing URL. Chinese mode opens `files/Liuyang-Cheng-CV-zh.pdf`. Both versions are included in backups. The Chinese PDF uses embedded CJK fonts; its editable source and reproducible renderer are `source/scripts/cv-zh.html` and `source/scripts/build-cv-zh.py`.
+
+In the owner editor, select **EN** or **中文** before opening an edit dialog. Text edits and CV uploads affect only the selected language. Media, section/item order, page assignment and entry/link addition or deletion are shared. Close the dialog before changing language. English fields remain the canonical base; optional `zh` text and `zhLabel` / `zhUrl` link fields store the Chinese version in the same `content.json`, keeping the existing draft, publishing and backup workflow.
+
+Run `npm test`, `npm run typecheck` and `npm run build` in `source/` before publishing code changes. The tests cover language switching, persistence, navigation, bilingual drafts, unchanged English content, private editor access and mocked atomic GitHub publishing.
+
 ## Edit without coding
 
 The public pages do not show an editing link. Bookmark **https://liuyangmechse.github.io/editor.html** to open the editor. Enter a GitHub token from the **LiuyangMechSE** account to unlock the controls; authorization stays in memory for the current tab and is also used for publishing. Refreshing or closing the tab locks the controls again. Saved drafts remain on this device.

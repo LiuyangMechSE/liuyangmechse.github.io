@@ -43,11 +43,11 @@ export function validateSiteContent(site) {
   const array = (value, max, location) => { if (!Array.isArray(value) || value.length > max) fail(`Invalid website ${location}: expected at most ${max} entries.`); };
   const url = (value, location) => {
     string(value, 2000, location);
-    if (value && !/^https:\/\/[^\s]+$/i.test(value) && !/^media\/[a-zA-Z0-9.-]+$/.test(value) && !/^mailto:[^\s@]+@[^\s@]+$/.test(value)) fail(`Invalid website URL at ${location}.`);
+    if (value && !/^https:\/\/[^\s]+$/i.test(value) && !/^media\/[a-zA-Z0-9.-]+$/.test(value) && !/^mailto:[^\s@]+@[^\s@]+$/.test(value) && !/^files\/[a-zA-Z0-9][a-zA-Z0-9._-]*\.pdf$/i.test(value)) fail(`Invalid website URL at ${location}.`);
   };
   const links = (value, location) => {
     array(value, 10, location);
-    value.forEach((link, index) => { if (!link || typeof link !== 'object') fail(`Invalid link at ${location}.`); string(link.label, 80, `${location}[${index}].label`); url(link.url, `${location}[${index}].url`); });
+    value.forEach((link, index) => { if (!link || typeof link !== 'object') fail(`Invalid link at ${location}.`); string(link.label, 80, `${location}[${index}].label`); url(link.url, `${location}[${index}].url`); if(link.zhLabel!==undefined)string(link.zhLabel,80,`${location}[${index}].zhLabel`); if(link.zhUrl!==undefined)url(link.zhUrl,`${location}[${index}].zhUrl`); });
   };
   if (!site || typeof site !== 'object') fail('Invalid website content.');
   for (const [key, max, min] of [['name',120,1],['field',200],['affiliation',400],['bio',6000]]) string(site[key],max,key,min);
