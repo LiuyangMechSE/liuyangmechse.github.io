@@ -18,6 +18,20 @@ const waitLoaded=()=>waitFor(()=>expect(document.querySelector('main')?.getAttri
 beforeEach(async()=>{cleanup();localStorage.clear();window.history.replaceState({},'','/');await clearDraft();vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify(copy()),{status:200,headers:{'Content-Type':'application/json'}})));});
 afterEach(()=>{cleanup();vi.restoreAllMocks();});
 describe('bilingual site',()=>{
+ it.each([['/','en','zh'],['/zh/','zh-CN','en']])('shows verified collaborator links in the fixed-language %s biography',async(path,lang,opposite)=>{
+  localStorage.setItem('liuyang-website-language',opposite);window.history.replaceState({},'',path+'?lang='+opposite);
+  mount();await waitLoaded();expect(document.documentElement.lang).toBe(lang);
+  const bio=document.querySelector('.bio')!;
+  const people=[['James Pikul','https://pikulgroup.engr.wisc.edu/staff/pikul-james/'],['Mattia Gazzola','https://grainger.illinois.edu/about/directory/faculty/mgazzola'],['Mengmeng Zhang','https://profiles.utdallas.edu/mengmeng.zhang']];
+  for(const [name,href] of people){const link=within(bio as HTMLElement).getByRole('link',{name,exact:true});expect(link.getAttribute('href')).toBe(href);expect(link.getAttribute('target')).toBe('_blank');expect(link.getAttribute('rel')).toContain('noopener');expect(link.getAttribute('rel')).toContain('noreferrer');}
+  const paragraph=within(bio as HTMLElement).getByRole('link',{name:'James Pikul',exact:true}).closest('p')!;
+  expect(paragraph.querySelectorAll('a').length).toBe(6);
+  for(const href of ['https://www.wisc.edu/','https://illinois.edu/','https://www.utdallas.edu/'])expect(paragraph.querySelector(`a[href="${href}"]`)).not.toBeNull();
+  expect(bio.querySelector('a[href="https://tawfick.mechse.illinois.edu/people/sameh-tawfick/"]')).not.toBeNull();
+  expect(paragraph.textContent).toContain(lang==='en'?'I also collaborate with':'开展合作');
+  expect(paragraph.textContent).not.toMatch(/Pennsylvania|Penn University|supervis|advis|雇主|导师/);
+ });
+
  it('keeps the author-confirmed PNAS acceptance distinct from the preprint link in both languages and future publication merges',()=>{const base=copy();const item=section(base,'publications').items.find(i=>i.id==='p-jcurve')!;expect(item.meta).toBe('Proceedings of the National Academy of Sciences · Accepted 2026-10-05');expect(section(localizedContent(base,'zh'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toContain('已接收 2026-10-05');const record={id:'jcurve-2026',title:item.title,authors:item.authors.split(', '),year:2026,venue:'Proceedings of the National Academy of Sciences',status:'Accepted',acceptedDate:'2026-10-05',arxiv:'2602.00260',links:item.links};const merged=mergePublications(base,[record]);expect(section(merged,'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(item.links[0].url).toBe('https://arxiv.org/abs/2602.00260');expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined,doi:'10.48550/arXiv.2602.00260'}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,status:'accepted ',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(()=>validateInput({profileId:'MMkH8L0AAAAJ',completeScholarList:false,publications:[{...record,acceptedDate:'2026-02-30'}]})).toThrow('Invalid acceptance date');});
  it('keeps compact verified News before Publications without duplicating a conference section',async()=>{
   const base=copy(),talkTitle='Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles';
