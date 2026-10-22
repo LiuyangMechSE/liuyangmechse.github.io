@@ -1,0 +1,162 @@
+/* Research-only type system. Keep the site's serif section headings, while
+   prose, controls, and captions share one sans-serif family in each language.
+   Paper-image lettering is part of the original figure and is not restyled. */
+.research-page {
+  --research-font-body: Arial, Helvetica, sans-serif;
+  --research-font-math: Georgia, "Times New Roman", serif;
+  --research-body-size: 16px;
+  --research-label-size: 13px;
+  --research-small-size: 12px;
+  --research-ink: #48535d;
+  --research-muted: #5f6e78;
+  font-family: var(--research-font-body);
+}
+
+html[lang="zh-CN"] .research-page {
+  --research-font-body: Arial, "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+
+.research-page .research-intro > p:not(.research-field),
+.research-page .section-intro,
+.research-page .entry-description {
+  max-width: 78ch;
+  font-size: var(--research-body-size);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--research-ink);
+}
+
+/* Media choice must not change a project's heading or metadata style. */
+.research-page .entry h3 {
+  font-family: var(--research-font-body);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: normal;
+  margin-bottom: 9px;
+}
+
+.research-page .research-field,
+.research-page .topic,
+.research-page .venue {
+  font-size: var(--research-label-size);
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  color: var(--research-muted);
+}
+
+.research-page .entry .links,
+.research-page .research-intro nav {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.research-page .project-media figcaption,
+.research-page .project-paper-caption {
+  font-size: var(--research-label-size);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--research-muted);
+}
+
+.research-page .project-paper-heading {
+  font-size: var(--research-label-size);
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--research-ink);
+}
+
+.research-page .project-paper-source,
+.research-page .project-paper-expand {
+  font-size: var(--research-small-size);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--research-muted);
+}
+
+.research-page .entry .research-demo.demo {
+  font-family: var(--research-font-body);
+  line-height: 1.55;
+}
+
+.research-page .research-demo .mechanics-kicker {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.45;
+  letter-spacing: normal;
+  color: var(--research-ink);
+}
+
+.research-page .research-demo .mechanics-header p,
+.research-page .research-demo .mechanics-control label,
+.research-page .research-demo .mechanics-control output,
+.research-page .research-demo .mechanics-insight,
+.research-page .research-demo .mechanics-insight strong,
+.research-page .research-demo .mechanics-details,
+.research-page .research-demo .mechanics-details summary,
+.research-page .research-demo .mechanics-details p {
+  font-size: var(--research-label-size);
+  line-height: 1.6;
+  color: var(--research-muted);
+}
+
+.research-page .research-demo .mechanics-insight strong {
+  font-weight: 600;
+  color: var(--research-ink);
+}
+
+.research-page .research-demo .mechanics-status,
+.research-page .research-demo .mechanics-play {
+  font-family: var(--research-font-body);
+  font-size: var(--research-small-size);
+  line-height: 1.5;
+  color: var(--research-muted);
+}
+
+.research-page .research-demo .mechanics-status > span {
+  color: var(--research-muted);
+}
+
+.research-page .research-demo .mechanics-control output {
+  color: #24577c;
+}
+
+.research-page .research-demo .mechanics-play {
+  min-height: 30px;
+  color: #164f80;
+}
+
+/* SVG sizes are viewBox units. Keep a modest scale increase to avoid clipping
+   scientific labels, and preserve the meaningful blue/green/orange fills. */
+.research-page .research-demo svg text {
+  font-family: var(--research-font-body);
+  font-size: 12px;
+  fill: var(--research-muted);
+}
+
+.research-page .research-demo svg .scene-label,
+.research-page .research-demo svg .chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.research-page .research-demo svg .chart-title {
+  fill: var(--research-ink);
+}
+
+.research-page .research-demo svg .scene-small,
+.research-page .research-demo svg .chart-small,
+.research-page .research-demo svg .chart-value {
+  font-size: 11px;
+  fill: var(--research-muted);
+}
+
+/* Equations use the same math face in English and Chinese. */
+.research-page .research-demo.demo svg .scene-equation {
+  font-family: var(--research-font-math);
+  font-size: 15px;
+  fill: var(--research-ink);
+}
