@@ -38,10 +38,10 @@
         {
           "id": "news-ses-2026",
           "kind": "research",
-          "title": "SES 2026 oral presentation",
-          "text": "Presented “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles” at the 2026 Society of Engineering Science Annual Technical Meeting, Purdue University.",
+          "title": "SES 2026: talk and research exchanges",
+          "text": "Presented “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles” at SES 2026, Purdue University, on October 12. I also met Nanshu Lu (UT Austin) again, after previously introducing my J-curve work to her. I met Yong Lin Kong (Rice University) and Wenzhong Yan (UC Davis) and introduced my octopus-arm work to them.",
           "authors": "",
-          "meta": "2026-10-12",
+          "meta": "2026-10",
           "demo": "none",
           "mediaType": "image",
           "media": "",
@@ -51,13 +51,25 @@
               "label": "Program",
               "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf",
               "zhLabel": "会议日程"
+            },
+            {
+              "label": "Nanshu Lu",
+              "url": "https://ae.utexas.edu/person/nanshu-lu/"
+            },
+            {
+              "label": "Yong Lin Kong",
+              "url": "https://profiles.rice.edu/faculty/yong-lin-kong"
+            },
+            {
+              "label": "Wenzhong Yan",
+              "url": "https://mae.ucdavis.edu/people/wenzhong-yan"
             }
           ],
           "layout": "left",
           "zh": {
-            "title": "SES 2026 口头报告",
-            "text": "在 Purdue University 举办的 2026 Society of Engineering Science Annual Technical Meeting 作口头报告：“Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”。",
-            "meta": "2026-10-12"
+            "title": "SES 2026：报告与学术交流",
+            "text": "10 月 12 日在 Purdue University 的 SES 2026 作口头报告：“Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”。会议期间，我再次见到 Nanshu Lu（UT Austin）；此前我曾向她介绍 J-curve 工作。我也向新结识的 Yong Lin Kong（Rice University）和 Wenzhong Yan（UC Davis）介绍了章鱼腕足工作。",
+            "meta": "2026-10"
           }
         },
         {
@@ -83,6 +95,126 @@
             "title": "PNAS 接收",
             "text": "论文“Principles of use of tensile J-curve materials in antagonistic arrangements”已被 Proceedings of the National Academy of Sciences 接收。",
             "meta": "2026-10-05"
+          }
+        },
+        {
+          "id": "news-actuator-selection-2026",
+          "kind": "research",
+          "title": "Contractile actuator selection paper",
+          "text": "Our collaborative study on selecting contractile actuators for quasistatic soft robotics was published in Advanced Intelligent Systems.",
+          "authors": "",
+          "meta": "2026-07-28",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1002/aisy.70490"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "收缩驱动器选择论文",
+            "text": "我们合作开展的准静态软体机器人收缩驱动器选择研究发表于 Advanced Intelligent Systems。",
+            "meta": "2026-07-28"
+          }
+        },
+        {
+          "id": "news-hierarchical-muscle-2026",
+          "kind": "research",
+          "title": "Hierarchical artificial muscle paper",
+          "text": "Our collaborative work on nonlinear elasticity in hierarchical artificial muscles was published in Advanced Science.",
+          "authors": "",
+          "meta": "2026-03-19",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1002/advs.202521604"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "层级人工肌肉论文",
+            "text": "我们合作开展的层级人工肌肉非线性弹性研究发表于 Advanced Science。",
+            "meta": "2026-03-19"
+          }
+        },
+        {
+          "id": "news-smasis-2025",
+          "kind": "research",
+          "title": "SMASIS 2025 oral presentation",
+          "text": "Presented “Soft Robotic Octopus Tentacles Actuated by Scalable Coiled Artificial Muscles” at SMASIS 2025 in St. Louis, and met Aimy Wissa (Princeton University).",
+          "authors": "",
+          "meta": "2025-09",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Conference",
+              "url": "https://event.asme.org/SMASIS-2025",
+              "zhLabel": "会议"
+            },
+            {
+              "label": "Aimy Wissa",
+              "url": "https://mae.princeton.edu/people/aimy-wissa"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "SMASIS 2025 口头报告",
+            "text": "在圣路易斯举办的 SMASIS 2025 作口头报告：“Soft Robotic Octopus Tentacles Actuated by Scalable Coiled Artificial Muscles”，并结识了 Aimy Wissa（Princeton University）。",
+            "meta": "2025-09"
+          }
+        },
+        {
+          "id": "news-ses-2023",
+          "kind": "research",
+          "title": "SES 2023 oral presentation",
+          "text": "Presented “Hierarchical twisted and coiled fibers mimicking the stretchability and energy absorption of biological ligaments” at SES 2023 in Minneapolis.",
+          "authors": "",
+          "meta": "2023-10",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [],
+          "layout": "left",
+          "zh": {
+            "title": "SES 2023 口头报告",
+            "text": "在明尼阿波利斯举办的 SES 2023 作口头报告：“Hierarchical twisted and coiled fibers mimicking the stretchability and energy absorption of biological ligaments”。",
+            "meta": "2023-10"
+          }
+        },
+        {
+          "id": "news-jumping-robots-2023",
+          "kind": "research",
+          "title": "Insect-scale jumping robots",
+          "text": "Our collaborative paper on a dynamic buckling cascade for insect-scale jumping robots was published in PNAS.",
+          "authors": "",
+          "meta": "2023",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2210651120"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "昆虫尺度跳跃机器人",
+            "text": "我们合作开展的动态屈曲级联驱动昆虫尺度跳跃机器人研究发表于 PNAS。",
+            "meta": "2023"
           }
         }
       ]

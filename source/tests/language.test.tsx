@@ -18,6 +18,41 @@ const waitLoaded=()=>waitFor(()=>expect(document.querySelector('main')?.getAttri
 beforeEach(async()=>{cleanup();localStorage.clear();window.history.replaceState({},'','/');await clearDraft();vi.stubGlobal('fetch',vi.fn(async()=>new Response(JSON.stringify(copy()),{status:200,headers:{'Content-Type':'application/json'}})));});
 afterEach(()=>{cleanup();vi.restoreAllMocks();});
 describe('bilingual site',()=>{
+ it.each([['/','Earlier news'],['/zh/','更早动态']])('keeps %s news compact with a reversible native archive',async(path,label)=>{
+  window.history.replaceState({},'',path);mount();await waitLoaded();
+  const news=document.getElementById('news')!,archive=news.querySelector('details')!,summary=archive.querySelector('summary')!;
+  expect(Array.from(news.children).filter(element=>element.tagName==='ARTICLE').length).toBe(3);
+  expect(archive.querySelectorAll('article').length).toBe(4);expect(summary.textContent).toContain(label);expect(archive.hasAttribute('open')).toBe(false);
+  await userEvent.click(summary);expect(archive.hasAttribute('open')).toBe(true);
+  await userEvent.click(summary);expect(archive.hasAttribute('open')).toBe(false);
+  expect(news.querySelector('.entry-tools')).toBeNull();expect(news.querySelector('.news-editor-note')).toBeNull();
+  for(const [name,href] of [['Nanshu Lu','https://ae.utexas.edu/person/nanshu-lu/'],['Yong Lin Kong','https://profiles.rice.edu/faculty/yong-lin-kong'],['Wenzhong Yan','https://mae.ucdavis.edu/people/wenzhong-yan'],['Aimy Wissa','https://mae.princeton.edu/people/aimy-wissa']]){
+   const link=Array.from(news.querySelectorAll('a')).find(a=>a.textContent===name)!;expect(link.getAttribute('href')).toBe(href);expect(link.getAttribute('target')).toBe('_blank');expect(link.getAttribute('rel')).toContain('noreferrer');
+  }
+ });
+ it('keeps selected News facts, precise dates and person links separate from translated prose',()=>{
+  const base=copy(),news=section(base,'news');expect(news.items.map(i=>i.meta)).toEqual(['2026-10','2026-10-05','2026-07-28','2026-03-19','2025-09','2023-10','2023']);
+  const ses=news.items[0],smasis=news.items.find(i=>i.id==='news-smasis-2025')!;
+  expect(ses.text).toContain('after previously introducing my J-curve work to her');expect(ses.text).toContain('I met Yong Lin Kong (Rice University) and Wenzhong Yan (UC Davis) and introduced my octopus-arm work to them');
+  expect(ses.text).not.toMatch(/collaborat|endorse|invited/i);expect(smasis.text).toContain('met Aimy Wissa (Princeton University)');expect(smasis.text).not.toMatch(/collaborat|endorse|invited/i);
+  expect(ses.text).not.toContain('https://');expect(ses.zh!.text).not.toContain('https://');
+  ses.links.find(link=>link.label==='Nanshu Lu')!.url='https://example.org/updated-person-page';
+  expect(section(localizedContent(base,'zh'),'news').items[0].links.find(link=>link.label==='Nanshu Lu')!.url).toBe('https://example.org/updated-person-page');
+  expect(news.items.some(i=>i.id.includes('preprint'))).toBe(false);
+ });
+ it('keeps every archived news item editable and preserves its shared links through draft reload',async()=>{
+  window.history.replaceState({},'','/editor.html');mount(true);await waitLoaded();
+  const news=document.getElementById('news')!;expect(news.querySelector('.news-editor-note')?.textContent).toContain('The first three news entries');expect(news.querySelector('details')).toBeNull();expect(within(news).getAllByRole('button',{name:'Edit entry',exact:true}).length).toBe(7);
+  const older=news.querySelector('[data-item="news-smasis-2025"]')!;
+  await userEvent.click(within(older as HTMLElement).getByRole('button',{name:'Edit entry',exact:true}));
+  const dialog=screen.getByRole('dialog');fireEvent.change(within(dialog).getByLabelText('Description'),{target:{value:'SMASIS News draft update'}});await userEvent.click(within(dialog).getByRole('button',{name:'Save changes',exact:true}));
+  await waitFor(async()=>expect(section((await loadDraft())!.content,'news').items.find(i=>i.id==='news-smasis-2025')!.pendingTranslation?.text).toBe('en'));
+  const before=section(copy(),'news').items.find(i=>i.id==='news-smasis-2025')!.links;
+  cleanup();mount(true);await waitLoaded();expect(document.querySelector('#news details')).toBeNull();
+  const restored=section((await loadDraft())!.content,'news').items.find(i=>i.id==='news-smasis-2025')!;expect(restored.text).toBe('SMASIS News draft update');expect(restored.links).toEqual(before);
+  await userEvent.click(screen.getByRole('button',{name:'Preview',exact:true}));const archive=document.querySelector('#news details')!;expect(archive.hasAttribute('open')).toBe(false);await userEvent.click(archive.querySelector('summary')!);expect(screen.getByText('SMASIS News draft update')).toBeTruthy();
+ });
+
  it.each([['/','en','zh'],['/zh/','zh-CN','en']])('shows verified collaborator links in the fixed-language %s biography',async(path,lang,opposite)=>{
   localStorage.setItem('liuyang-website-language',opposite);window.history.replaceState({},'',path+'?lang='+opposite);
   mount();await waitLoaded();expect(document.documentElement.lang).toBe(lang);
@@ -41,7 +76,7 @@ describe('bilingual site',()=>{
    const view=localizedContent(base,language),news=section(view,'news');
    if(language==='en')expect(news.title).toBe('News');else expect(news.title).toMatch(/[\u4e00-\u9fff]/);
    const talk=news.items.find(i=>i.id==='news-ses-2026')!,accepted=news.items.find(i=>i.id==='news-pnas-accepted')!;
-   expect(talk.meta).toBe('2026-10-12');expect(talk.text).toContain(talkTitle);expect(talk.authors).toBe('');
+   expect(talk.meta).toBe('2026-10');expect(talk.text).toContain(language==='en'?'on October 12':'10 月 12 日');expect(talk.text).toContain(talkTitle);expect(talk.authors).toBe('');
    expect(talk.links.some(link=>link.url.includes('5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf'))).toBe(true);
    expect(accepted.meta).toBe('2026-10-05');expect(accepted.title+' '+accepted.text).toMatch(/PNAS|Proceedings of the National Academy of Sciences/);
    expect(section(view,'octopus-arm').items[0].text).toContain(talkTitle);

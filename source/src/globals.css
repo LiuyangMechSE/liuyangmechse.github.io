@@ -147,3 +147,8 @@ html[lang=zh-CN] body{font-family:Arial,"PingFang SC","Microsoft YaHei","Noto Sa
 .email-contact{display:inline-flex;align-items:baseline;gap:9px;flex-wrap:wrap}.email-contact button{color:#164f80;font:inherit;padding:0;border:0;background:none}.email-contact button:hover{text-decoration:underline;text-underline-offset:4px}.email-contact>span{color:#48535d;user-select:text;overflow-wrap:anywhere}.email-contact>span[hidden]{display:none}.public-notice{color:#a32f2f;font-size:16px;font-weight:600;line-height:1.6;margin:20px 0 0;max-width:700px}.bio a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
 #news .entry{margin-bottom:17px}#news .entry-copy{display:grid;grid-template-columns:100px 1fr;column-gap:16px}#news h3{grid-column:2;font-size:15px;font-weight:600;margin:0}#news .venue{grid-column:1;grid-row:1/4;font-size:13px;font-style:normal;margin:0;color:#69747c}#news .entry-description{grid-column:2;font-size:14px;line-height:1.65;margin:4px 0 0}#news .links{grid-column:2;font-size:12px;margin-top:3px}#news .section-heading{margin-bottom:17px}#news+.content-section{margin-top:24px}
 @media(max-width:620px){#news .entry-copy{grid-template-columns:82px 1fr;column-gap:12px}#news .venue{font-size:12px}.public-notice{font-size:15px}}
+
+/* Native disclosure keeps older news available to keyboard and touch users. */
+#news .news-archive>summary{width:fit-content;cursor:pointer;color:#164f80;font-size:13px;line-height:1.6;margin:5px 0 17px}
+#news .news-archive>summary:hover{text-decoration:underline;text-underline-offset:3px}
+#news .news-archive>summary:focus-visible{outline:2px solid #164f80;outline-offset:4px}
