@@ -16,15 +16,19 @@ const json = value => JSON.stringify(value, null, 2) + '\n';
 const main = 'a'.repeat(40), treeSha = 'b'.repeat(40), nextTree = 'c'.repeat(40), nextCommit = 'd'.repeat(40), racedHead = 'e'.repeat(40);
 const prefix = 'https://api.github.com/repos/LiuyangMechSE/liuyangmechse.github.io';
 let count = 0;
+const originalWindow = globalThis.window;
+globalThis.window = {location: {pathname: '/editor.html'}};
 try {
  let schemaSource = await readFile(join(project, 'src/lib/content.ts'), 'utf8');
  schemaSource = schemaSource.replace("'zod'", JSON.stringify(require.resolve('zod'))).replace("'../../public/content.json'", JSON.stringify(join(project, 'public/content.json')));
  await writeFile(join(temporary, 'content.cjs'), ts.transpileModule(schemaSource, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022, esModuleInterop: true, resolveJsonModule: true}}).outputText);
  await writeFile(join(temporary, 'draft.cjs'), 'exports.readDraftSnapshot = async () => globalThis.__publishTestDraft; exports.writeDraftSnapshot = async snapshot => {globalThis.__publishTestDraft = snapshot}; exports.deleteDraftSnapshot = async () => {delete globalThis.__publishTestDraft};');
- const staticSource = (await readFile(join(project, 'src/static-files.ts'), 'utf8')).replace("'./lib/content'", "'./content.cjs'").replace("'./draft-storage'", "'./draft.cjs'");
+ await writeFile(join(temporary, 'site-paths.cjs'), ts.transpileModule(await readFile(join(project, 'src/site-paths.ts'), 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}}).outputText);
+ await writeFile(join(temporary, 'translation-sync.cjs'), ts.transpileModule(await readFile(join(project, 'src/translation-sync.mjs'), 'utf8'), {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}}).outputText);
+ const staticSource = (await readFile(join(project, 'src/static-files.ts'), 'utf8')).replace("'./lib/content'", "'./content.cjs'").replace("'./draft-storage'", "'./draft.cjs'").replace("'./site-paths'", "'./site-paths.cjs'");
  await writeFile(join(temporary, 'static-files.cjs'), ts.transpileModule(staticSource, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}}).outputText);
  await writeFile(join(temporary, 'media.cjs'), 'exports.getStagedMedia = path => globalThis.__publishTestMedia.get(path); exports.mediaPaths = require("./static-files.cjs").mediaPaths;');
- const publisher = (await readFile(join(project, 'src/github-publish.ts'), 'utf8')).replace("'./lib/content'", "'./content.cjs'").replace("'./static-files'", "'./media.cjs'");
+ const publisher = (await readFile(join(project, 'src/github-publish.ts'), 'utf8')).replace("'./lib/content'", "'./content.cjs'").replace("'./static-files'", "'./media.cjs'").replace("'./translation-sync.mjs'", "'./translation-sync.cjs'");
  await writeFile(join(temporary, 'publisher.cjs'), ts.transpileModule(publisher, {compilerOptions: {module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022}}).outputText);
  const {publishWebsite} = require(join(temporary, 'publisher.cjs'));
  const {siteSchema, safeUrl} = require(join(temporary, 'content.cjs'));
@@ -39,7 +43,7 @@ try {
   const media = mediaPaths(remote);
   for (const path of media) {add(path, 'existing:' + path); add('source/public/' + path, 'existing:' + path);}
   add('unrelated-keep.txt', 'unchanged'); add('files/Liuyang-Cheng-CV.pdf', '%PDF-1.7\nprevious CV'); add('source/public/files/Liuyang-Cheng-CV.pdf', '%PDF-1.7\nprevious CV');
-  add('export-manifest.json', json({files: ['content.json', 'export-manifest.json', 'index.html', 'research.html', 'files/Liuyang-Cheng-CV.pdf', ...media].sort()}));
+  add('export-manifest.json', json({files: ['content.json', 'export-manifest.json', 'index.html', 'research.html', 'zh/index.html', 'zh/research.html', 'files/Liuyang-Cheng-CV.pdf', ...media].sort()}));
   let reads = 0;
   globalThis.fetch = async (url, options) => {
    assert.ok(url.startsWith(prefix), 'requests stay on the fixed GitHub repository');
@@ -78,7 +82,7 @@ try {
   assert.deepEqual(state.blobs.get(gitSha(bytes)), Buffer.from(bytes));
   assert.ok(!writes.some(file => file.path === 'unrelated-keep.txt'));
   const manifest = JSON.parse(state.blobs.get(writes.find(file => file.path === 'export-manifest.json').sha));
-  assert.ok(manifest.files.includes(path)); assert.ok(manifest.files.includes('research.html')); assert.ok(manifest.files.includes(base.portrait));
+  assert.ok(manifest.files.includes(path)); assert.ok(manifest.files.includes('research.html')); assert.ok(manifest.files.includes('zh/index.html')); assert.ok(manifest.files.includes('zh/research.html')); assert.ok(manifest.files.includes(base.portrait));
   assert.equal(state.calls.filter(call => call.method === 'PATCH').length, 1);
   assert.equal(result.sha, nextCommit); assert.equal(result.commitUrl, `https://github.com/LiuyangMechSE/liuyangmechse.github.io/commit/${nextCommit}`);
  });
@@ -187,16 +191,16 @@ try {
   globalThis.__publishTestDraft = {...saved, uploads: [{path: 'files/../cv-broken.pdf', blob: new Blob(['%PDF-1.7'], {type: 'application/pdf'})}]};
   await assert.rejects(loadDraft(), /invalid file/); globalThis.__publishTestDraft = saved;
  });
- await check('export uses staged PDF bytes, preserves existing files, and deduplicates filenames', async () => {
+ await check('export preserves both public sites, pending drafts, staged PDF bytes and unique filenames', async () => {
   const path = await stageCv(new File(['%PDF-1.7\nexported CV'], 'CV.pdf', {type: 'application/pdf'}));
-  const local = clone(base); local.links.push({label: 'CV', url: path});
+  const local = clone(base); local.links.push({label: 'CV', url: path}); local.bio='Unreviewed English update'; local.pendingTranslation={bio:'en'};
   const originalCreate = URL.createObjectURL, originalTimeout = globalThis.setTimeout, originalDocument = globalThis.document;
   let archive, downloaded = false; const fetched = [];
   URL.createObjectURL = blob => {archive = blob; return 'blob:test-export';}; globalThis.setTimeout = () => 0;
   globalThis.document = {createElement: tag => {assert.equal(tag, 'a'); return {click: () => {downloaded = true;}};}};
   globalThis.fetch = async url => {
    fetched.push(url); assert.notEqual(url, './' + path, 'staged upload must not be fetched from the old deployment');
-   if (url === './export-manifest.json') return new Response(json({files: ['index.html', 'content.json', 'export-manifest.json', 'files/Liuyang-Cheng-CV.pdf', path, path]}));
+   if (url === './export-manifest.json') return new Response(json({files: ['index.html', 'research.html', 'zh/index.html', 'zh/research.html', 'content.json', 'export-manifest.json', 'files/Liuyang-Cheng-CV.pdf', path, path]}));
    return new Response(url === './files/Liuyang-Cheng-CV.pdf' ? '%PDF-1.7\nprevious CV' : 'deployed asset');
   };
   try {await exportWebsite(local);} finally {URL.createObjectURL = originalCreate; globalThis.setTimeout = originalTimeout; globalThis.document = originalDocument;}
@@ -208,27 +212,55 @@ try {
   assert.equal(files.get(path).toString(), '%PDF-1.7\nexported CV'); assert.equal(files.get('files/Liuyang-Cheng-CV.pdf').toString(), '%PDF-1.7\nprevious CV');
   assert.deepEqual(JSON.parse(files.get('content.json')), local); const manifest = JSON.parse(files.get('export-manifest.json'));
   assert.deepEqual(manifest.files, [...files.keys()].sort()); assert.ok(fetched.includes('./files/Liuyang-Cheng-CV.pdf'));
+  for(const page of ['index.html','research.html','zh/index.html','zh/research.html'])assert.ok(files.has(page));
+  assert.ok(!files.has('zh/content.json'), 'both websites share the root content file');
  });
- await check('pending bilingual state and old translation publish atomically and survive draft/export paths', async () => {
+ await check('pending translations in either source language cannot publish and keep the recoverable draft', async () => {
   for (const language of ['en','zh']) {
    const local=clone(base);local.pendingTranslation={bio:language};if(language==='en')local.bio='Updated English source';else local.zh.bio='最新中文源文';
-   const state=mock(base);const result=await publishWebsite({token:'test-token',content:local,base});
-   const writes=state.calls.find(call=>call.path==='/git/trees'&&call.method==='POST').body.tree;
-   const root=JSON.parse(state.blobs.get(writes.find(file=>file.path==='content.json').sha));
-   const source=JSON.parse(state.blobs.get(writes.find(file=>file.path==='source/public/content.json').sha));
-   assert.deepEqual(root,local);assert.deepEqual(source,local);assert.deepEqual(result.content,local);
-   await saveDraft(result.content,base);assert.deepEqual((await loadDraft()).content,local);
+   await saveDraft(local,base);const state=mock(base);
+   await assert.rejects(publishWebsite({token:'test-token',content:local,base}),/translation.*review|review.*translation|confirm.*translation/i);
+   assert.ok(state.calls.every(call=>call.method==='GET'),'unreviewed text must never create GitHub objects');
+   assert.deepEqual((await loadDraft()).content,local);
   }
+ });
+ await check('nested pending translations on links, sections, entries and figure captions block publishing', async () => {
+  const variants=[
+   local=>{local.links[0].pendingTranslation={label:'en'};},
+   local=>{local.sections.find(section=>section.id==='news').pendingTranslation={title:'en'};},
+   local=>{local.sections.find(section=>section.id==='artificial-ligaments').items[0].pendingTranslation={text:'en'};},
+   local=>{local.sections.flatMap(section=>section.items).find(item=>item.figure).figure.pendingTranslation={caption:'en'};},
+  ];
+  for(const markPending of variants){
+   const local=clone(base);markPending(local);const state=mock(base);
+   await assert.rejects(publishWebsite({token:'test-token',content:local,base}),/translation.*review|review.*translation|confirm.*translation/i);
+   assert.ok(state.calls.every(call=>call.method==='GET'));
+  }
+ });
+ await check('a clean local edit cannot republish pending prose introduced on GitHub', async () => {
+  const remote=clone(base);remote.zh.bio='最新远端中文源文';remote.pendingTranslation={bio:'zh'};
+  const local=clone(base);local.portrait='https://example.com/new-portrait.png';const state=mock(remote);
+  await assert.rejects(publishWebsite({token:'test-token',content:local,base}),/translation.*review|review.*translation|confirm.*translation/i);
+  assert.ok(state.calls.every(call=>call.method==='GET'));
+ });
+ await check('reviewed bilingual text and shared contact fields publish atomically', async () => {
+  const local=clone(base);local.bio='Reviewed English biography';local.zh.bio='已核对的中文简介';local.email='reviewed@example.com';local.announcement='Reviewed shared announcement';
+  const state=mock(base),result=await publishWebsite({token:'test-token',content:local,base});
+  const writes=state.calls.find(call=>call.path==='/git/trees'&&call.method==='POST').body.tree;
+  const root=JSON.parse(state.blobs.get(writes.find(file=>file.path==='content.json').sha));
+  const source=JSON.parse(state.blobs.get(writes.find(file=>file.path==='source/public/content.json').sha));
+  assert.deepEqual(root,local);assert.deepEqual(source,local);assert.deepEqual(JSON.parse(json(result.content)),local);
  });
  await check('concurrent translation confirmation cannot merge with a newer source before writes', async () => {
   const baseline=clone(base);baseline.bio='A';baseline.pendingTranslation={bio:'en'};
-  const local=clone(baseline);local.bio='B';
+  const local=clone(baseline);local.bio='B';local.zh.bio='译文 B';delete local.pendingTranslation;
   const remote=clone(baseline);remote.zh.bio='译文 A';delete remote.pendingTranslation;
   const state=mock(remote);await assert.rejects(publishWebsite({token:'test-token',content:local,base:baseline}),/changed on GitHub/);
   assert.ok(state.calls.every(call=>call.method==='GET'));
  });
  process.stdout.write(`${count} offline publishing checks passed.\n`);
 } finally {
+ if(originalWindow===undefined)delete globalThis.window;else globalThis.window=originalWindow;
  delete globalThis.__publishTestMedia;
  delete globalThis.__publishTestDraft;
  await rm(temporary, {recursive: true, force: true});

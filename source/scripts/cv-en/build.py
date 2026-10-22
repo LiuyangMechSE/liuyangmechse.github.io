@@ -8,40 +8,45 @@ from docx.oxml.ns import qn
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 
 ROOT=Path(__file__).resolve().parent
-source=(ROOT/'original-text.txt').read_text()
-lines=source.replace('\f','').splitlines()
-heads={'Research Profile','Research Interests','Education','Publications','Conference Presentations','Academic Service','Research Projects','Technical Skills','Teaching Experience','Awards & Honors'}
-subs={'Peer-Reviewed Journal Articles','Accepted','In Preparation'}
-projects={'Scalable Supercoiled Artificial Muscle Manufacturing','Octopus-Inspired Soft Robotic Arm','Actuator Characterization and Selection for Soft Robotic Design','Smart Granular Robot with Vibration Sensing','Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements','Supercoiled & Hypercoiled Artificial Muscles','Insect-Scale Jumping Robot with Coiled Artificial Muscle','High Power Density, Large-Stroke Coiled Artificial Muscle System'}
-records=[]
-for ln in lines:
-    if not ln.strip():
-        if records: records[-1]['blank_after']=True
-        continue
-    text=ln.strip()
-    if text in ('Curriculum Vitae/Resume','Liuyang Cheng','liuyang5@illinois.edu'):
-        records.append({'type':'title' if text=='Curriculum Vitae/Resume' else 'name' if text=='Liuyang Cheng' else 'email','text':text})
-    elif text in heads: records.append({'type':'heading','text':text})
-    elif text in subs: records.append({'type':'subheading','text':text})
-    elif re.match(r'^\s+o\s+',ln): records.append({'type':'bullet','text':re.sub(r'^o\s+','',text)})
-    elif records and records[-1]['type']=='bullet' and ln.startswith('        '):
-        records[-1]['text']+=' '+text
-    elif records and not records[-1].get('blank_after') and records[-1]['type']=='body':
-        records[-1]['text']+=' '+text
-    elif records and records[-1]['type']=='heading' and records[-1]['text'] in ('Research Profile','Research Interests'):
-        records.append({'type':'body','text':text})
-    elif text in projects: records.append({'type':'project','text':text})
-    elif len(re.split(r'\s{2,}',text))==2:
-        left,right=re.split(r'\s{2,}',text)
-        records.append({'type':'pair','text':left+'\t'+right})
-    else: records.append({'type':'plain','text':text})
-
-for r in records:
-    r['text']=r['text'].replace('first-author manuscript under review at PNAS','first-author manuscript accepted by PNAS').replace('manuscript under review at PNAS','manuscript accepted by PNAS')
-# Verified official final program lists a speaker, not a full author list.
-ses='Liuyang Cheng (presenter). "Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles." 2026 Society of Engineering Science Annual Technical Meeting (SES 2026), Purdue University, West Lafayette, Indiana, USA, Oct. 12, 2026. (Oral)'
-idx=next(i for i,r in enumerate(records) if r['text']=='Conference Presentations')+1
-records.insert(idx,{'type':'bullet','text':ses,'ses':True})
+# Authoritative content is the public October 21 CV source, preserved in content.json.
+original_records=json.loads((ROOT/'content.json').read_text())
+sections={}; front=[]; section=None
+for r in original_records:
+    if r['type']=='heading': section=r['text']; sections[section]=[]
+    if section: sections[section].append(r.copy())
+    else: front.append(r.copy())
+ORDER=['Research Profile','Research Interests','Education','Publications','Conference Presentations','Awards & Honors','Academic Service','Research Projects','Teaching Experience','Technical Skills']
+records=front[:]
+def rec(typ,text,**kw): return dict(type=typ,text=text,**kw)
+for name in ORDER:
+    old=sections[name]; block=[old[0]]
+    if name=='Education':
+        institution=location=None
+        for r in old[1:]:
+            if r['type']=='pair': institution,location=r['text'].split('\t')
+            elif re.match(r'^(Ph.D.|B.S.|B.Eng.)',r['text']):
+                degree,date=re.split(r'\s{2,}',r['text'])
+                block.extend([rec('entry',degree),rec('metadata',institution+' | '+location+'\t'+date)])
+            else: block.append(r)
+    elif name=='Teaching Experience':
+        for i in range(1,len(old),2):
+            course,institution=old[i]['text'].split('\t')
+            role,date=old[i+1]['text'].split('\t')
+            block.extend([rec('entry',course),rec('metadata',institution+'\t'+date),rec('role',role)])
+    elif name=='Awards & Honors':
+        title,institution=old[1]['text'].split('\t'); role,date=old[2]['text'].split('\t')
+        block.extend([rec('entry',title),rec('metadata',institution+'\t'+date),rec('role',role)])
+        block.extend(old[3:])
+    elif name=='Academic Service':
+        for r in old[1:]:
+            left,date=r['text'].rsplit(' | ',1)
+            block.append(rec('service',left+'\t'+date))
+    else:
+        for r in old[1:]:
+            if r['type']=='project': r['type']='entry'
+            elif r['type']=='pair': r['type']='metadata'
+            block.append(r)
+    records.extend(block)
 (ROOT/'records.json').write_text(json.dumps(records,indent=2,ensure_ascii=False))
 
 D=Document(); sec=D.sections[0]
@@ -92,12 +97,8 @@ def bullet_setup(p):
 def pair(p,text,section):
     left,right=text.split('\t')
     p.paragraph_format.tab_stops.add_tab_stop(Inches(6.5),WD_TAB_ALIGNMENT.RIGHT)
-    if section in ['Education','Teaching Experience','Awards & Honors'] and not left.startswith(('Teaching Assistant','Leader of the Project','Ph.D.','B.S.','B.Eng.')):
-        text_runs(p,left,all_bold=True)
-        p.add_run('\t'); text_runs(p,right,all_bold=section!='Education',all_italic=section=='Education')
-    else:
-        text_runs(p,left,all_italic=left.startswith('Teaching Assistant') or left.startswith('Leader of the Project'))
-        p.add_run('\t'); text_runs(p,right,all_italic=True)
+    text_runs(p,left,size=10)
+    p.add_run('\t'); text_runs(p,right,all_italic=True,size=10)
 
 section=''; prev=None
 for ix,rec in enumerate(records):
@@ -117,31 +118,32 @@ for ix,rec in enumerate(records):
         p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY; text_runs(p,t)
     elif typ=='bullet':
         bullet_setup(p); p.alignment=WD_ALIGN_PARAGRAPH.JUSTIFY; pf.space_after=Pt(0); pf.keep_together=True
-        if section=='Education':
-            if '\t' in t: pair(p,t,section)
-            else:
-                # degree and date share a line in the original PDF.
-                parts=re.split(r'\s{2,}',t)
-                if len(parts)==2: pair(p,'\t'.join(parts),section)
-                else: text_runs(p,t)
-        elif section=='Technical Skills' and ':' in t:
+        if section=='Technical Skills' and ':' in t:
             lead,rest=t.split(':',1); text_runs(p,lead+':',all_bold=True); text_runs(p,rest)
         else: text_runs(p,t,size=10 if section in ('Publications','Research Projects') else None)
         if section=='Conference Presentations': pf.space_after=Pt(3)
-    elif typ=='project':
-        pf.space_before=Pt(14 if prev and prev['type']!='heading' else 0); pf.keep_with_next=True; text_runs(p,t,all_bold=True)
-    elif typ=='pair':
-        if section=='Education' and t.startswith('Zhejiang University'): pf.space_before=Pt(14)
-        if section=='Teaching Experience' and not t.startswith('Teaching Assistant'):
-            pf.space_before=Pt(13 if prev and prev['type']!='heading' else 0)
+    elif typ=='entry':
+        pf.space_before=Pt(11 if prev and prev['type']!='heading' else 0); pf.keep_with_next=True; text_runs(p,t,all_bold=True)
+    elif typ=='metadata':
         pair(p,t,section); pf.keep_with_next=True
+    elif typ=='service':
+        pair(p,t,section); pf.keep_together=True
+    elif typ=='role':
+        text_runs(p,t,all_italic=True); pf.keep_with_next=section!='Teaching Experience'
     else:
         text_runs(p,t); pf.keep_with_next=True
     prev=rec
 
-# Insert hard page breaks at stable section boundaries only if requested by QA iterations.
+# Keep each research entry intact, rather than letting a project straddle a page.
+active=False
+for i,r in enumerate(records):
+    if r['type']=='heading': active=r['text']=='Research Projects'
+    if active and i+1<len(records) and records[i+1]['type'] not in ('entry','heading'):
+        D.paragraphs[i].paragraph_format.keep_with_next=True
+
+# Stable section-boundary pagination in a four-page CV.
 for p in D.paragraphs:
-    if p.text in ['Accepted','Smart Granular Robot with Vibration Sensing','Teaching Experience']:
+    if p.text in ['Accepted','Teaching Experience']:
         p.paragraph_format.page_break_before=True
 
 # Remove template title rules and theme fonts so the source's Times style survives rendering.
@@ -152,7 +154,7 @@ for sty in D.styles:
 for node in [D.styles['Title']._element, D.paragraphs[0]._p]:
     for border_node in list(node.iter(qn('w:pBdr'))):
         border_node.getparent().remove(border_node)
-out=ROOT/'Liuyang-Cheng-CV-English-Updated.docx'
+out=ROOT/'Liuyang-Cheng-CV-en-20261022.docx'
 D.save(out)
 print(out)
 for i,r in enumerate(records): print(i,r['type'],repr(r['text']))

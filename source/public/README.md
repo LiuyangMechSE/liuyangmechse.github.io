@@ -4,28 +4,30 @@ This is a complete static website for **LiuyangMechSE/liuyangmechse.github.io**.
 
 ## Publishing updates
 
-The website is published at **https://liuyangmechse.github.io/** from the repository's `main` branch and root folder. Committing updated deployment files to that location triggers GitHub Pages. Keep `index.html`, `research.html`, `editor.html`, `content.json`, `assets/`, `media/`, and `.nojekyll` at the root.
+The website is published at **https://liuyangmechse.github.io/** from the repository's `main` branch and root folder. Committing updated deployment files to that location triggers GitHub Pages. Keep `index.html`, `research.html`, `editor.html`, `zh/`, `content.json`, `assets/`, `media/`, and `.nojekyll` at the root.
 
-## English and Chinese
+## Separate English and Chinese entries
 
-Use **EN / 中文** in the navigation to change language. The choice is saved on this browser; `?lang=en` or `?lang=zh` in a shared link overrides it. Home, Research, paper captions and interactive demo controls follow the selected language. Publication titles, author names and journal names retain their original bibliographic spelling. If a new entry has no Chinese text yet, it safely falls back to English.
+The root website, including `index.html` and `research.html`, always uses English. The independent Chinese site lives at **https://liuyangmechse.github.io/zh/**, with its own `research.html`. There is no public language toggle. Legacy root `?lang=zh` links and old browser preferences no longer change the public site's language; `/zh/` likewise stays Chinese even with `?lang=en`.
 
-The current English and Chinese CVs are `files/Liuyang-Cheng-CV-en-20261021.pdf` and `files/Liuyang-Cheng-CV-zh-20261021.pdf`. Earlier PDFs remain available at their original URLs. Both current versions are included in backups. The Chinese PDF uses embedded CJK fonts and preserves the owner’s revised document; its HTML source and alternative renderer are `source/scripts/cv-zh.html` and `source/scripts/build-cv-zh.py`. The published October 21 revision was exported from the owner-reviewed Word document, not regenerated from the HTML renderer.
+Both sites use one root `content.json` and the same root `media/` and `files/` assets. No duplicate Chinese content store is published. Chinese page assets, CVs, data fetches and backup exports resolve against the shared root. Keep the `zh/` directory in every deployment and backup.
 
-In the owner editor, both text versions appear side by side. A content edit in either language becomes the **latest source** and appears on both pages after publishing. Its previous translation remains stored in the editor, not shown as outdated content. This is **translation review, not automatic translation**: no translation service, API key or extra account is used.
+The owner editor remains available at `/editor.html` or `/zh/editor.html`; only the editor supports language switching and `?lang=en` / `?lang=zh`. Both entry points share the same saved browser draft and paired translation review. Publishing updates both public sites together. Public visitors never load local drafts or see editing controls.
 
-### Review an update
+### Review an update before publishing
 
-1. Open the relevant **Edit introduction**, **Edit section**, or **Edit entry** dialog. A **to review / 待核对** badge identifies pending fields. Each pair shows its **latest source / 最新源文**.
-2. Edit the other-language box to match the latest source. This translation remains a draft until confirmed. If you intend it to become the new source content instead, explicitly choose **Use this version as the latest source**.
-3. Click **Confirm this translation pair / 确认这组译文**, then **Save changes / 保存更改**. The two pages now display their respective reviewed text. For identical names or wording, use **Use latest text in both languages** instead. Opening, saving unchanged, or switching language never confirms a translation.
-4. **Save to GitHub / 保存至 GitHub** publishes both versions and review state together. Until then, only your local draft changes. Cancel, Undo, draft restoration and backups preserve review state. Visitors see a brief notice when pending updates appear in their source language.
+1. In **Edit introduction**, **Edit section**, or **Edit entry**, compare the paired English and Chinese fields. A **to review / 待核对** badge identifies changes awaiting review.
+2. Edit the counterpart to match the latest source. The editor temporarily previews the latest source in both languages, retaining the old translation for comparison. This is a review workflow, not automatic translation.
+3. Click **Confirm this translation pair / 确认这组译文**, then **Save changes**. For intentionally identical names or wording, use **Use latest text in both languages**. Opening a dialog, saving unchanged, or switching language never confirms a translation.
+4. **Save to GitHub** requires all pending translation pairs to be confirmed. Otherwise publication stops with an actionable message and keeps the draft. This prevents Chinese source prose appearing on the English public site (or vice versa), and avoids publishing stale translations. The final merged content is checked again before any remote writes, so concurrent unreviewed edits cannot bypass the check.
 
-Ordinary link URLs, authors, media, layout, entry/section order, page assignment, and additions/deletions are shared. Publication titles keep their bibliographic spelling; venue/status/year metadata is shared too. Dates embedded in other prose follow the source-and-review workflow, rather than being guessed or separately rewritten. Link labels and figure descriptions/captions use paired review. English and Chinese **CV files remain distinct**, so replacing one never replaces the other.
+URLs, authors, media, layout, section/entry order, page assignment and additions/deletions remain shared. Publication titles retain their bibliographic spelling, and venue/status/year metadata is shared. Dates embedded in prose require paired review. Links and figure captions retain paired review. The English and Chinese CVs remain independent files; replacing one never replaces the other. Shared field/media-only edits can publish normally when no prose review is pending.
 
-Both languages live in one `content.json`: original fields and `zh`/`zhLabel` values are retained, while `pendingTranslation` names the authoritative language for pending fields. CV links carry `kind: "cv"`; items carry stable `kind: "publication"` or `"research"` so moving an entry does not change its text semantics. Legacy drafts are supported. Concurrent profile source edits and translation confirmations are merged atomically or rejected as conflicts, never silently mixed.
+The profile's **Email** button reveals a selectable address, without a mailto link or launching a mail app. Its address is a shared editable field. The public postdoctoral notice is deliberately English on both sites, as requested, and is editable in **Public notice (English, shared)**. Biography fields accept safe `[label](https://website)` links; arbitrary HTML is not rendered. News is a compact ordinary editor section placed before Publications, not the previously removed standalone conference section.
 
-Run `npm test`, `npm run typecheck` and `npm run build` in `source/` before publishing code changes. The tests cover language switching, persistence, navigation, bilingual drafts, unchanged English content, private editor access and mocked atomic GitHub publishing.
+Current CV files are linked by language in `content.json`; earlier PDFs remain at their original URLs. The source formats are documented under `source/scripts/cv-en/` and `source/scripts/cv-zh/`. Every public PDF is included in backups.
+
+Run `npm test`, `npm run typecheck` and `npm run build` in `source/` before publishing code changes. Tests cover independent routes, shared nested-path assets, contact controls, bilingual drafts/review, private editor access and mocked atomic GitHub publishing.
 
 ## Edit without coding
 

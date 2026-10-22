@@ -71,6 +71,8 @@ export function validateSiteContent(site) {
   if (!site || typeof site !== 'object') fail('Invalid website content.');
   for (const [key, max, min] of [['name',120,1],['field',200],['affiliation',400],['bio',6000]]) string(site[key],max,key,min);
   translations(site,{name:120,field:200,affiliation:400,bio:6000},'site');
+  if(site.email!==undefined){string(site.email,254,'email');if(site.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(site.email))fail('Invalid website email.');}
+  if(site.announcement!==undefined)string(site.announcement,1000,'announcement');
   url(site.portrait,'portrait'); links(site.links,'links'); array(site.sections,20,'sections');
   const ids = new Set();
   const id = (value, location) => { string(value,100,location,1); if (ids.has(value)) fail(`Duplicate global website ID: ${value}.`); ids.add(value); };

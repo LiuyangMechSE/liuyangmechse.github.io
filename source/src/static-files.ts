@@ -1,3 +1,4 @@
+import {siteFile} from './site-paths';
 import {isLocalPdfPath,siteSchema,type SiteContent} from './lib/content';
 import {readDraftSnapshot,writeDraftSnapshot,deleteDraftSnapshot} from './draft-storage';
 
@@ -6,7 +7,7 @@ const uploads=new Map<string,Blob>();
 const previews=new Map<string,string>();
 const maxUploadSize=25*1024*1024;
 async function hasPdfHeader(blob:Blob){return new TextDecoder().decode(await blob.slice(0,5).arrayBuffer())==='%PDF-';}
-export const mediaSource=(path:string)=>previews.get(path)??path;
+export const mediaSource=(path:string)=>previews.get(path)??(/^(media|files)\//.test(path)?siteFile(path):path);
 export const getStagedMedia=(path:string)=>uploads.get(path);
 export async function saveDraft(content:SiteContent,base:SiteContent):Promise<void>{
  const snapshot={content:siteSchema.parse(content),base:siteSchema.parse(base),updatedAt:new Date().toISOString(),uploads:Array.from(uploads,([path,blob])=>({path,blob}))};
@@ -44,7 +45,7 @@ export async function clearDraft():Promise<void>{
  // decides which content to display after discarding or publishing a draft.
 }
 export async function loadPage(){
- const response=await fetch('./content.json',{cache:'no-store'});
+ const response=await fetch(siteFile('content.json'),{cache:'no-store'});
  if(!response.ok)throw Error('Your content could not be loaded. Refresh before editing.');
  return siteSchema.parse(await response.json());
 }
@@ -91,12 +92,12 @@ export function zipFiles(files:{name:string;data:Uint8Array}[]){
 function download(blob:Blob,name:string){const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),30000);}
 export async function exportWebsite(content:SiteContent){
  const checked=siteSchema.parse(content);
- const response=await fetch('./export-manifest.json',{cache:'no-store'});if(!response.ok)throw Error('The export files could not be loaded. Try again.');
+ const response=await fetch(siteFile('export-manifest.json'),{cache:'no-store'});if(!response.ok)throw Error('The export files could not be loaded. Try again.');
  const manifest=await response.json() as {files:string[]};
  if(!Array.isArray(manifest.files)||manifest.files.some(p=>typeof p!=='string'||p.startsWith('/')||p.includes('..')||p.includes(':')))throw Error('The export file list is invalid.');
  const entries:{name:string;data:Uint8Array}[]=[];
  const paths=new Set([...manifest.files,...mediaPaths(checked)]);paths.delete('content.json');paths.delete('export-manifest.json');
- for(const path of paths){const staged=uploads.get(path);let blob:Blob;if(staged)blob=staged;else{const r=await fetch('./'+path);if(!r.ok)throw Error('Could not export '+path);blob=await r.blob();}entries.push({name:path,data:new Uint8Array(await blob.arrayBuffer())});}
+ for(const path of paths){const staged=uploads.get(path);let blob:Blob;if(staged)blob=staged;else{const r=await fetch(siteFile(path));if(!r.ok)throw Error('Could not export '+path);blob=await r.blob();}entries.push({name:path,data:new Uint8Array(await blob.arrayBuffer())});}
  entries.push({name:'content.json',data:encoder.encode(JSON.stringify(checked,null,2)+'\n')});
  entries.push({name:'export-manifest.json',data:encoder.encode(JSON.stringify({files:[...entries.map(e=>e.name),'export-manifest.json'].sort()},null,2)+'\n')});
  download(zipFiles(entries),'liuyangmechse.github.io-update.zip');

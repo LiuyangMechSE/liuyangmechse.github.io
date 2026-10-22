@@ -1,7 +1,12 @@
-# English CV revision source
+# English CV source
 
-The original English CV was provided only as a PDF. `original-text.txt` is its layout-preserving text extraction; `build.py` reconstructs a Times-style editable document, changing only the two PNAS “under review” references to “accepted” and adding the verified SES 2026 oral presentation. `records.json` records the resulting content.
+Formatting update dated October 22, 2026.
 
-Run `python build.py` with python-docx installed to regenerate a local DOCX, then export to PDF with a compatible Office renderer. The published PDF is `files/Liuyang-Cheng-CV-en-20261021.pdf`; it was rendered and visually checked across all four pages using an embedded Times-compatible Liberation Serif font. Do not publish the generated DOCX automatically.
+- content.json is the complete preserved October 21 English CV source.
+- build.py reads content.json, applies section ordering and the consistent title / institution-and-date layout, and generates the editable DOCX plus records.json.
+- records.json is the generated reading-order content, useful for downstream verification.
+- validate.py checks per-section wording preservation, approved metadata repetition, section order, counts, DOCX/PDF text equality, 17 right-aligned date fields, and page bounds.
 
-Any further content changes must be reviewed before updating the public PDF. Earlier PDFs remain unchanged in `files/`.
+Run with Python containing python-docx. Render the DOCX using LibreOffice. The verified export is Liuyang-Cheng-CV-en-20261022.pdf. The source specifies Times New Roman; the verified PDF embeds metrically compatible Liberation Serif.
+
+The source changes only layout and section order. PNAS acceptance status and October 5, 2026 date, all SES presentation wording, and all other substantive content remain unchanged. Each degree repeats its associated school and location for a self-contained, consistently formatted entry.

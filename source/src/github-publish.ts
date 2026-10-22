@@ -1,4 +1,5 @@
 import {siteSchema, type SiteContent} from './lib/content';
+import {pendingTranslations} from './translation-sync.mjs';
 import {getStagedMedia, mediaPaths} from './static-files';
 
 const REPOSITORY = 'LiuyangMechSE/liuyangmechse.github.io';
@@ -65,6 +66,7 @@ export async function publishWebsite({token, content, base, onProgress}: {
  const credential = token.trim();
  if (!credential || /\s/.test(credential)) throw Error('Enter your GitHub access token to publish.');
  const local = siteSchema.parse(content), baseline = siteSchema.parse(base);
+ if(pendingTranslations(local))throw Error('Review and confirm every pending translation pair before publishing the separate English and Chinese sites. Your draft has been kept.');
  const progress = (text: string) => onProgress?.(text);
  async function request<T>(path: string, method = 'GET', body?: unknown): Promise<T> {
   let response: Response;
@@ -105,6 +107,7 @@ export async function publishWebsite({token, content, base, onProgress}: {
  progress('Comparing your draft with the published website…');
  const remote = siteSchema.parse(await readJson('content.json'));
  const merged = mergeWebsiteContent(baseline, local, remote);
+ if(pendingTranslations(merged))throw Error('The latest merged content has pending translation review. Review and confirm every translation pair before publishing. Your draft has been kept.');
  const paths = mediaPaths(merged);
  const media: {path: string; sha: string; bytes?: Uint8Array}[] = [];
  // Check every file before creating any remote objects. Missing uploads never become broken links.

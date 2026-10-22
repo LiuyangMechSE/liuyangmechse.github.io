@@ -2,7 +2,7 @@
   "name": "Liuyang Cheng",
   "field": "Mechanics · Soft robotics · Material actuators",
   "affiliation": "University of Illinois Urbana-Champaign",
-  "bio": "I am a PhD candidate in Mechanical Science & Engineering at the University of Illinois Urbana-Champaign.\n\nMy research focuses on soft robotics, twisted and coiled polymer actuators, nonlinear elasticity, and automated manufacturing of artificial muscles.\n\nI study how soft materials' mechanics can create motion and how to apply them in soft robotics. I combine mechanical modeling with experiments to understand these materials and explore their use in soft robotic systems.",
+  "bio": "I am a PhD candidate in Mechanical Science & Engineering at the [University of Illinois Urbana-Champaign](https://illinois.edu/), advised by [Professor Sameh H. Tawfick](https://tawfick.mechse.illinois.edu/people/sameh-tawfick/).\n\nMy research focuses on soft robotics, twisted and coiled polymer actuators, nonlinear elasticity, and automated manufacturing of artificial muscles.\n\nI study how soft materials' mechanics can create motion and how to apply them in soft robotics. I combine mechanical modeling with experiments to understand these materials and explore their use in soft robotic systems.",
   "portrait": "media/liuyang-cheng-portrait-tight-20261010.jpg",
   "links": [
     {
@@ -15,10 +15,10 @@
     },
     {
       "label": "CV (PDF)",
-      "url": "files/Liuyang-Cheng-CV-en-20261021.pdf",
+      "url": "files/Liuyang-Cheng-CV-en-20261022.pdf",
       "kind": "cv",
       "zhLabel": "简历 (PDF)",
-      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261021.pdf"
+      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261022.pdf"
     },
     {
       "label": "LinkedIn",
@@ -26,6 +26,67 @@
     }
   ],
   "sections": [
+    {
+      "id": "news",
+      "title": "News",
+      "intro": "",
+      "page": "home",
+      "zh": {
+        "title": "近况"
+      },
+      "items": [
+        {
+          "id": "news-ses-2026",
+          "kind": "research",
+          "title": "SES 2026 oral presentation",
+          "text": "Presented “Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles” at the 2026 Society of Engineering Science Annual Technical Meeting, Purdue University.",
+          "authors": "",
+          "meta": "2026-10-12",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Program",
+              "url": "https://custom.cvent.com/737F604CADA14E7282FD1FA2BBCC383C/files/5683bc8cbbae4d2c9a051bfaaae1e0f1.pdf",
+              "zhLabel": "会议日程"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "SES 2026 口头报告",
+            "text": "在 Purdue University 举办的 2026 Society of Engineering Science Annual Technical Meeting 作口头报告：“Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles”。",
+            "meta": "2026-10-12"
+          }
+        },
+        {
+          "id": "news-pnas-accepted",
+          "kind": "research",
+          "title": "PNAS acceptance",
+          "text": "Our manuscript “Principles of use of tensile J-curve materials in antagonistic arrangements” was accepted by Proceedings of the National Academy of Sciences.",
+          "authors": "",
+          "meta": "2026-10-05",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Preprint",
+              "url": "https://arxiv.org/abs/2602.00260",
+              "zhLabel": "预印本"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "PNAS 接收",
+            "text": "论文“Principles of use of tensile J-curve materials in antagonistic arrangements”已被 Proceedings of the National Academy of Sciences 接收。",
+            "meta": "2026-10-05"
+          }
+        }
+      ]
+    },
     {
       "id": "publications",
       "title": "Publications",
@@ -405,6 +466,8 @@
     "name": "成刘阳",
     "field": "力学 · 软体机器人 · 材料驱动器",
     "affiliation": "伊利诺伊大学厄巴纳香槟校区",
-    "bio": "我是伊利诺伊大学厄巴纳香槟校区机械科学与工程专业的博士候选人。\n\n我的研究聚焦于软体机器人、加捻卷曲聚合物驱动器、非线性弹性，以及人工肌肉的自动化制造。\n\n我研究软材料的力学特性如何产生运动，以及如何将其应用于软体机器人。我结合力学建模与实验，理解这些材料的行为，并探索它们在软体机器人系统中的应用。"
-  }
+    "bio": "我是[伊利诺伊大学厄巴纳香槟校区](https://illinois.edu/)机械科学与工程专业的博士候选人，导师为 [Sameh H. Tawfick 教授](https://tawfick.mechse.illinois.edu/people/sameh-tawfick/)。\n\n我的研究聚焦于软体机器人、加捻卷曲聚合物驱动器、非线性弹性，以及人工肌肉的自动化制造。\n\n我研究软材料的力学特性如何产生运动，以及如何将其应用于软体机器人。我结合力学建模与实验，理解这些材料的行为，并探索它们在软体机器人系统中的应用。"
+  },
+  "email": "liuyang5@illinois.edu",
+  "announcement": "I am actively seeking a postdoctoral position. Please feel free to get in touch."
 }

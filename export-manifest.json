@@ -2,15 +2,17 @@
   "files": [
     ".nojekyll",
     "README.md",
-    "assets/main-dLfbpw-j.css",
-    "assets/main-qi2Fg-UP.js",
+    "assets/main-CPAM-vyd.js",
+    "assets/main-FyKaz4Dv.css",
     "conference-sources.json",
     "content.json",
     "editor.html",
     "export-manifest.json",
     "favicon.svg",
     "files/Liuyang-Cheng-CV-en-20261021.pdf",
+    "files/Liuyang-Cheng-CV-en-20261022.pdf",
     "files/Liuyang-Cheng-CV-zh-20261021.pdf",
+    "files/Liuyang-Cheng-CV-zh-20261022.pdf",
     "files/Liuyang-Cheng-CV-zh.pdf",
     "files/Liuyang-Cheng-CV.pdf",
     "files/cv-eddb5176-660d-4eac-81bd-928cf9d47059.pdf",
@@ -26,6 +28,9 @@
     "media/paper-jcurve-running.webp",
     "media/paper-tcpa-thermomechanics.webp",
     "publication-sources.json",
-    "research.html"
+    "research.html",
+    "zh/editor.html",
+    "zh/index.html",
+    "zh/research.html"
   ]
 }

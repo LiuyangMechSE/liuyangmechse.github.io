@@ -35,12 +35,12 @@
     "text": "Education"
   },
   {
-    "type": "pair",
-    "text": "University of Illinois Urbana-Champaign\tIllinois, USA"
+    "type": "entry",
+    "text": "Ph.D. of Mechanical Science and Engineering"
   },
   {
-    "type": "bullet",
-    "text": "Ph.D. of Mechanical Science and Engineering                         Aug. 2021 - Dec. 2026 (expected)"
+    "type": "metadata",
+    "text": "University of Illinois Urbana-Champaign | Illinois, USA\tAug. 2021 - Dec. 2026 (expected)"
   },
   {
     "type": "bullet",
@@ -51,8 +51,12 @@
     "text": "GPA (Overall): 3.8/4.0"
   },
   {
-    "type": "bullet",
-    "text": "B.S. in Mechanical Science and Engineering                                    Aug. 2017 - June 2021"
+    "type": "entry",
+    "text": "B.S. in Mechanical Science and Engineering"
+  },
+  {
+    "type": "metadata",
+    "text": "University of Illinois Urbana-Champaign | Illinois, USA\tAug. 2017 - June 2021"
   },
   {
     "type": "bullet",
@@ -64,12 +68,12 @@
     "blank_after": true
   },
   {
-    "type": "pair",
-    "text": "Zhejiang University\tZhejiang, China"
+    "type": "entry",
+    "text": "B.Eng. in Mechanical Engineering"
   },
   {
-    "type": "bullet",
-    "text": "B.Eng. in Mechanical Engineering                                                   Sep. 2017 - June 2021"
+    "type": "metadata",
+    "text": "Zhejiang University | Zhejiang, China\tSep. 2017 - June 2021"
   },
   {
     "type": "bullet",
@@ -139,24 +143,43 @@
   },
   {
     "type": "heading",
+    "text": "Awards & Honors"
+  },
+  {
+    "type": "entry",
+    "text": "Undergraduate Technology Innovation Award"
+  },
+  {
+    "type": "metadata",
+    "text": "Government of Zhejiang Province, China\tAug. 2020"
+  },
+  {
+    "type": "role",
+    "text": "Leader of the Project Multi-functional Portable Egg Boiler & Peeler"
+  },
+  {
+    "type": "bullet",
+    "text": "Top 7% student independent research projects of all universities in Zhejiang Province"
+  },
+  {
+    "type": "heading",
     "text": "Academic Service",
     "blank_after": true
   },
   {
-    "type": "bullet",
-    "text": "Manuscript Reviewer, Advanced Robotics Research | 2026",
-    "blank_after": true
+    "type": "service",
+    "text": "Manuscript Reviewer, Advanced Robotics Research\t2026"
   },
   {
     "type": "heading",
     "text": "Research Projects"
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Scalable Supercoiled Artificial Muscle Manufacturing"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tJune 2023 - On-going"
   },
   {
@@ -169,11 +192,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Octopus-Inspired Soft Robotic Arm"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "Mini-MURI Project, UIUC (ONR-funded)\tJan. 2023 - On-going"
   },
   {
@@ -194,11 +217,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Actuator Characterization and Selection for Soft Robotic Design"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tJuly 2024 - Oct. 2025"
   },
   {
@@ -207,11 +230,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Smart Granular Robot with Vibration Sensing"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tJune 2023 – Mar. 2025"
   },
   {
@@ -227,11 +250,11 @@
     "text": "Built a Python interface for group control; evaluated environmental interaction as a smart soil"
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tMay 2022 - April 2025"
   },
   {
@@ -248,11 +271,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Supercoiled & Hypercoiled Artificial Muscles"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tFeb. 2022 - May 2024"
   },
   {
@@ -265,11 +288,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "Insect-Scale Jumping Robot with Coiled Artificial Muscle"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "University of Illinois Urbana-Champaign\tJune 2020 - May 2022"
   },
   {
@@ -278,11 +301,11 @@
     "blank_after": true
   },
   {
-    "type": "project",
+    "type": "entry",
     "text": "High Power Density, Large-Stroke Coiled Artificial Muscle System"
   },
   {
-    "type": "pair",
+    "type": "metadata",
     "text": "Undergraduate Research Assistant, UIUC\tJan. 2020 - Aug. 2020"
   },
   {
@@ -293,6 +316,58 @@
     "type": "bullet",
     "text": "Standardized fabrication and produced custom muscles for a collaborating group at Harvard",
     "blank_after": true
+  },
+  {
+    "type": "heading",
+    "text": "Teaching Experience"
+  },
+  {
+    "type": "entry",
+    "text": "TAM 210/211: Engineering Mechanics – Statics"
+  },
+  {
+    "type": "metadata",
+    "text": "University of Illinois Urbana-Champaign\tAug. 2025 - Dec. 2025"
+  },
+  {
+    "type": "role",
+    "text": "Teaching Assistant"
+  },
+  {
+    "type": "entry",
+    "text": "ME 170: Computer-Aided Design"
+  },
+  {
+    "type": "metadata",
+    "text": "University of Illinois Urbana-Champaign\tJan. 2025 - June 2025"
+  },
+  {
+    "type": "role",
+    "text": "Teaching Assistant"
+  },
+  {
+    "type": "entry",
+    "text": "ME 370: Mechanical Design I"
+  },
+  {
+    "type": "metadata",
+    "text": "University of Illinois Urbana-Champaign\tJan. 2024 - June 2024"
+  },
+  {
+    "type": "role",
+    "text": "Teaching Assistant"
+  },
+  {
+    "type": "entry",
+    "text": "TAM 211: Engineering Mechanics – Statics"
+  },
+  {
+    "type": "metadata",
+    "text": "Zhejiang University\tSep. 2019 - Jan. 2020"
+  },
+  {
+    "type": "role",
+    "text": "Teaching Assistant"
   },
   {
     "type": "heading",
@@ -311,60 +386,5 @@
     "type": "bullet",
     "text": "Design and computation: CAD modeling, Arduino-based machine design and stepper-motor control, soft arm and mesh assembly, MATLAB, Python, machine learning",
     "blank_after": true
-  },
-  {
-    "type": "heading",
-    "text": "Teaching Experience"
-  },
-  {
-    "type": "pair",
-    "text": "TAM 210/211: Engineering Mechanics – Statics\tUniversity of Illinois Urbana-Champaign"
-  },
-  {
-    "type": "pair",
-    "text": "Teaching Assistant\tAug. 2025 - Dec. 2025",
-    "blank_after": true
-  },
-  {
-    "type": "pair",
-    "text": "ME 170: Computer-Aided Design\tUniversity of Illinois Urbana-Champaign"
-  },
-  {
-    "type": "pair",
-    "text": "Teaching Assistant\tJan. 2025 - June 2025"
-  },
-  {
-    "type": "pair",
-    "text": "ME 370: Mechanical Design I\tUniversity of Illinois Urbana-Champaign"
-  },
-  {
-    "type": "pair",
-    "text": "Teaching Assistant\tJan. 2024 - June 2024",
-    "blank_after": true
-  },
-  {
-    "type": "pair",
-    "text": "TAM 211: Engineering Mechanics – Statics\tZhejiang University"
-  },
-  {
-    "type": "pair",
-    "text": "Teaching Assistant\tSep. 2019 - Jan. 2020",
-    "blank_after": true
-  },
-  {
-    "type": "heading",
-    "text": "Awards & Honors"
-  },
-  {
-    "type": "pair",
-    "text": "Undergraduate Technology Innovation Award\tGovernment of Zhejiang Province, China"
-  },
-  {
-    "type": "pair",
-    "text": "Leader of the Project Multi-functional Portable Egg Boiler & Peeler\tAug. 2020"
-  },
-  {
-    "type": "bullet",
-    "text": "Top 7% student independent research projects of all universities in Zhejiang Province"
   }
 ]
