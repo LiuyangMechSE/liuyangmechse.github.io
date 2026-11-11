@@ -22,7 +22,7 @@ describe('bilingual site',()=>{
   window.history.replaceState({},'',path);mount();await waitLoaded();
   const news=document.getElementById('news')!,archive=news.querySelector('details')!,summary=archive.querySelector('summary')!;
   expect(Array.from(news.children).filter(element=>element.tagName==='ARTICLE').length).toBe(3);
-  expect(archive.querySelectorAll('article').length).toBe(4);expect(summary.textContent).toContain(label);expect(archive.hasAttribute('open')).toBe(false);
+  expect(archive.querySelectorAll('article').length).toBe(section(copy(),'news').items.length-3);expect(summary.textContent).toContain(label);expect(archive.hasAttribute('open')).toBe(false);
   await userEvent.click(summary);expect(archive.hasAttribute('open')).toBe(true);
   await userEvent.click(summary);expect(archive.hasAttribute('open')).toBe(false);
   expect(news.querySelector('.entry-tools')).toBeNull();expect(news.querySelector('.news-editor-note')).toBeNull();
@@ -31,18 +31,18 @@ describe('bilingual site',()=>{
   }
  });
  it('keeps selected News facts, precise dates and person links separate from translated prose',()=>{
-  const base=copy(),news=section(base,'news');expect(news.items.map(i=>i.meta)).toEqual(['2026-10','2026-10-05','2026-07-28','2026-03-19','2025-09','2023-10','2023']);
-  const ses=news.items[0],smasis=news.items.find(i=>i.id==='news-smasis-2025')!;
+  const base=copy(),news=section(base,'news');expect(news.items.map(i=>i.meta)).toEqual(['2026-11-11','2026-10','2026-10-05','2026-07-28','2026-03-19','2025-09','2023-10','2023']);
+  const ses=news.items.find(i=>i.id==='news-ses-2026')!,smasis=news.items.find(i=>i.id==='news-smasis-2025')!;
   expect(ses.text).toContain('after previously introducing my J-curve work to her');expect(ses.text).toContain('I met Yong Lin Kong (Rice University) and Wenzhong Yan (UC Davis) and introduced my octopus-arm work to them');
   expect(ses.text).not.toMatch(/collaborat|endorse|invited/i);expect(smasis.text).toContain('met Aimy Wissa (Princeton University)');expect(smasis.text).not.toMatch(/collaborat|endorse|invited/i);
   expect(ses.text).not.toContain('https://');expect(ses.zh!.text).not.toContain('https://');
   ses.links.find(link=>link.label==='Nanshu Lu')!.url='https://example.org/updated-person-page';
-  expect(section(localizedContent(base,'zh'),'news').items[0].links.find(link=>link.label==='Nanshu Lu')!.url).toBe('https://example.org/updated-person-page');
+  expect(section(localizedContent(base,'zh'),'news').items.find(i=>i.id==='news-ses-2026')!.links.find(link=>link.label==='Nanshu Lu')!.url).toBe('https://example.org/updated-person-page');
   expect(news.items.some(i=>i.id.includes('preprint'))).toBe(false);
  });
  it('keeps every archived news item editable and preserves its shared links through draft reload',async()=>{
   window.history.replaceState({},'','/editor.html');mount(true);await waitLoaded();
-  const news=document.getElementById('news')!;expect(news.querySelector('.news-editor-note')?.textContent).toContain('The first three news entries');expect(news.querySelector('details')).toBeNull();expect(within(news).getAllByRole('button',{name:'Edit entry',exact:true}).length).toBe(7);
+  const news=document.getElementById('news')!;expect(news.querySelector('.news-editor-note')?.textContent).toContain('The first three news entries');expect(news.querySelector('details')).toBeNull();expect(within(news).getAllByRole('button',{name:'Edit entry',exact:true}).length).toBe(section(copy(),'news').items.length);
   const older=news.querySelector('[data-item="news-smasis-2025"]')!;
   await userEvent.click(within(older as HTMLElement).getByRole('button',{name:'Edit entry',exact:true}));
   const dialog=screen.getByRole('dialog');fireEvent.change(within(dialog).getByLabelText('Description'),{target:{value:'SMASIS News draft update'}});await userEvent.click(within(dialog).getByRole('button',{name:'Save changes',exact:true}));
@@ -67,7 +67,23 @@ describe('bilingual site',()=>{
   expect(paragraph.textContent).not.toMatch(/Pennsylvania|Penn University|supervis|advis|雇主|导师/);
  });
 
- it('keeps the author-confirmed PNAS acceptance distinct from the preprint link in both languages and future publication merges',()=>{const base=copy();const item=section(base,'publications').items.find(i=>i.id==='p-jcurve')!;expect(item.meta).toBe('Proceedings of the National Academy of Sciences · Accepted 2026-10-05');expect(section(localizedContent(base,'zh'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toContain('已接收 2026-10-05');const record={id:'jcurve-2026',title:item.title,authors:item.authors.split(', '),year:2026,venue:'Proceedings of the National Academy of Sciences',status:'Accepted',acceptedDate:'2026-10-05',arxiv:'2602.00260',links:item.links};const merged=mergePublications(base,[record]);expect(section(merged,'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(item.links[0].url).toBe('https://arxiv.org/abs/2602.00260');expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined,doi:'10.48550/arXiv.2602.00260'}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,status:'accepted ',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(()=>validateInput({profileId:'MMkH8L0AAAAJ',completeScholarList:false,publications:[{...record,acceptedDate:'2026-02-30'}]})).toThrow('Invalid acceptance date');});
+ it.each([['/','en'],['/zh/','zh']])('shows the published PNAS citation and latest News on %s',async(path,language)=>{
+  const base=copy(),view=localizedContent(base,language as 'en'|'zh'),item=section(view,'publications').items.find(i=>i.id==='p-jcurve')!;
+  expect(item.title).toBe('Principles of use of tensile J-curve materials in antagonistic arrangements');
+  expect(item.meta).toBe('Proceedings of the National Academy of Sciences 123(46), e2604227123 · 2026');
+  expect(item.meta).not.toMatch(/Accepted|接收|preprint/i);
+  expect(item.links[0].url).toBe('https://doi.org/10.1073/pnas.2604227123');
+  expect(item.links[1].url).toBe('https://arxiv.org/abs/2602.00260');
+  const news=section(view,'news');expect(news.items[0].id).toBe('news-pnas-published');expect(news.items[0].meta).toBe('2026-11-11');
+  expect(news.items[0].title).toContain(language==='en'?'published in PNAS':'发表于 PNAS');
+  expect(news.items.find(i=>i.id==='news-pnas-accepted')!.meta).toBe('2026-10-05');
+  window.history.replaceState({},'',path);mount();await waitLoaded();
+  const publication=document.querySelector('[data-item="p-jcurve"]')!;
+  expect(publication.textContent).toContain(item.meta);
+  const titleLink=within(publication as HTMLElement).getByRole('link',{name:item.title});expect(titleLink.getAttribute('href')).toBe(item.links[0].url);
+  const firstNews=document.querySelector('#news > article')!;expect(firstNews.getAttribute('data-item')).toBe('news-pnas-published');
+ });
+ it('keeps the author-confirmed PNAS acceptance distinct from the preprint link in both languages and future publication merges',()=>{const base=copy();const item=section(base,'publications').items.find(i=>i.id==='p-jcurve')!;item.meta='Proceedings of the National Academy of Sciences · Accepted 2026-10-05';item.links=item.links.filter(link=>link.url.includes('arxiv.org'));expect(item.meta).toBe('Proceedings of the National Academy of Sciences · Accepted 2026-10-05');expect(section(localizedContent(base,'zh'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toContain('已接收 2026-10-05');const record={id:'jcurve-2026',title:item.title,authors:item.authors.split(', '),year:2026,venue:'Proceedings of the National Academy of Sciences',status:'Accepted',acceptedDate:'2026-10-05',arxiv:'2602.00260',links:item.links};const merged=mergePublications(base,[record]);expect(section(merged,'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(item.links[0].url).toBe('https://arxiv.org/abs/2602.00260');expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined,doi:'10.48550/arXiv.2602.00260'}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,status:'accepted ',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(()=>validateInput({profileId:'MMkH8L0AAAAJ',completeScholarList:false,publications:[{...record,acceptedDate:'2026-02-30'}]})).toThrow('Invalid acceptance date');});
  it('keeps compact verified News before Publications without duplicating a conference section',async()=>{
   const base=copy(),talkTitle='Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles';
   expect(base.sections.find(s=>s.id==='conference-presentations')).toBeUndefined();

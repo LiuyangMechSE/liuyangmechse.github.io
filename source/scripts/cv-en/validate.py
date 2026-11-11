@@ -23,7 +23,7 @@ counts={'projects':sum(r['type']=='entry' for r in N['Research Projects']),'pape
 assert counts==dict(projects=8,papers=6,talks=3,teaching=4)
 norm=lambda s: re.sub(r'\s+',' ',s).strip()
 expected=norm(' '.join(r['text'] for r in new))
-with ZipFile(R/'Liuyang-Cheng-CV-en-20261022.docx') as z:
+with ZipFile(R/'Liuyang-Cheng-CV-en-20261111.docx') as z:
  tree=etree.fromstring(z.read('word/document.xml')); ns={'w':'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}; pars=[]
  for p in tree.findall('.//w:body/w:p',ns):
   st=''
@@ -37,12 +37,16 @@ with ZipFile(R/'Liuyang-Cheng-CV-en-20261022.docx') as z:
    p=tree.findall('.//w:body/w:p',ns)[i]
    tabs=p.findall('w:pPr/w:tabs/w:tab',ns)
    assert any(t.get('{'+ns['w']+'}val')=='right' and t.get('{'+ns['w']+'}pos')=='9360' for t in tabs)
-pdf=fitz.open(R/'Liuyang-Cheng-CV-en-20261022.pdf'); actual=norm(' '.join(p.get_text() for p in pdf).replace('○',''))
+pdf=fitz.open(R/'Liuyang-Cheng-CV-en-20261111.pdf'); actual=norm(' '.join(p.get_text() for p in pdf).replace('○',''))
 assert expected==actual
 assert len(pdf)==4
 assert 'under review' not in actual
-assert actual.count('accepted by PNAS')==2
-assert 'Oct. 5, 2026' in actual and 'Oct. 12, 2026' in actual
+assert 'accepted' not in actual.lower()
+assert actual.count('10.1073/pnas.2604227123')==1
+assert '123(46), e2604227123' in actual
+assert 'Five peer-reviewed journal articles' in actual
+assert 'Kim, H., Pineda Guzman, R., Kim, J.' in actual
+assert 'Oct. 5, 2026' not in actual and 'Oct. 12, 2026' in actual
 checks=[]
 for r in new:
  if r['type'] not in ('metadata','service'): continue
@@ -58,8 +62,8 @@ for i,p in enumerate(pdf):
    for s in l['spans']:
     if not s['text'].strip(): continue
     x0,y0,x1,y1=s['bbox']; assert x0>=60 and x1<=550 and y0>=20 and y1<=750,(i,s)
-report={'pages':len(pdf),'counts':counts,'section_order':order,'wording_preserved':'Every section word-for-word retained; UIUC institution and Illinois location duplicated once to make each degree self-contained. Existing service pipe replaced by date tab; three school/location layout pipes added. No factual content changes.','docx_pdf_match':True,'all_17_dates_right_aligned':len(checks)==17,'date_right_edges':checks,'visual_QA':'All four final page PNGs inspected at full-page resolution; no overlaps, clipping, missing glyphs, split entries, or orphan headings.','font_note':'Times New Roman specified in DOCX; PDF embeds compatible Liberation Serif.'}
+report={'pages':len(pdf),'counts':counts,'section_order':order,'wording_preserved':'PNAS entry moved from Accepted into published articles with verified citation, DOI, author order, overview count, and project status. All unrelated content retained from the October 22 CV.','docx_pdf_match':True,'all_17_dates_right_aligned':len(checks)==17,'date_right_edges':checks,'visual_QA':'All four final page PNGs inspected at full-page resolution; no overlaps, clipping, missing glyphs, split entries, or orphan headings.','font_note':'Times New Roman specified in DOCX; PDF embeds compatible Liberation Serif.'}
 for ext in ('pdf','docx'):
- p=R/f'Liuyang-Cheng-CV-en-20261022.{ext}';report[ext+'_sha256']=hashlib.sha256(p.read_bytes()).hexdigest()
+ p=R/f'Liuyang-Cheng-CV-en-20261111.{ext}';report[ext+'_sha256']=hashlib.sha256(p.read_bytes()).hexdigest()
 (R/'validation-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
 print(json.dumps(report,ensure_ascii=False,indent=2))

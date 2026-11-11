@@ -75,7 +75,7 @@ The SES 2026 entry records Liuyang Cheng’s oral presentation, “Soft Spiral O
 
 ## Publication updates
 
-The home page contains six verified papers/preprints initially checked on September 13, 2026. The October 21 author-revised CV confirms the J-curve manuscript’s PNAS acceptance on October 5, 2026; it is marked accepted while the existing arXiv link remains a preprint link. `publication-sources.json` records their primary-source evidence. Direct access to Google Scholar profile `MMkH8L0AAAAJ` and its portrait was blocked (403/429), so the initial import is **not verified as a complete Scholar list** and the existing lab portrait remains.
+The home page contains six verified papers/preprints initially checked on September 13, 2026. The J-curve paper was published in PNAS 123(46), e2604227123, on November 11, 2026 (DOI: 10.1073/pnas.2604227123). Its publisher link is primary, with the existing arXiv link retained separately as the preprint; the October 5 acceptance remains a historical News entry. `publication-sources.json` records their primary-source evidence. Direct access to Google Scholar profile `MMkH8L0AAAAJ` and its portrait was blocked (403/429), so the initial import is **not verified as a complete Scholar list** and the existing lab portrait remains.
 
 A weekly ChatGPT automation checks this Scholar profile and updates the site through the connected GitHub account. If Scholar is blocked, it leaves the existing records intact and reports the block. It must not remove entries based on an incomplete result or attribute another author's work by name alone. This is a scheduled ChatGPT task; it is not a browser timer or GitHub Actions scraper.
 

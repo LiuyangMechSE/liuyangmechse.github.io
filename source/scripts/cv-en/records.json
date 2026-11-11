@@ -18,7 +18,7 @@
   },
   {
     "type": "body",
-    "text": "Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected Dec. 2026). Four peer-reviewed journal articles (including PNAS) and a first-author manuscript accepted by PNAS, spanning theory, manufacturing, and characterization of soft actuators.",
+    "text": "Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected Dec. 2026). Five peer-reviewed journal articles, including a first-author paper in PNAS, spanning theory, manufacturing, and characterization of soft actuators.",
     "blank_after": true
   },
   {
@@ -90,6 +90,11 @@
   },
   {
     "type": "bullet",
+    "text": "Cheng, L., Eom, W., Wang, Q., Kim, H., Pineda Guzman, R., Kim, J., Solis, M., Malladi, S., Tsai, S., Kersh, M. E., & Tawfick, S. (2026). Principles of use of tensile J-curve materials in antagonistic arrangements. Proceedings of the National Academy of Sciences, 123(46), e2604227123. https://doi.org/10.1073/pnas.2604227123",
+    "blank_after": true
+  },
+  {
+    "type": "bullet",
     "text": "Wang, Q., Cheng, L., Kim, J., Tsai, S., Roach, D., & Tawfick, S. (2026). Characterization and selection of contractile actuators for soft robotics operating in the quasistatic regime. Advanced Intelligent Systems, Article e70490. https://doi.org/10.1002/aisy.70490"
   },
   {
@@ -103,15 +108,6 @@
   {
     "type": "bullet",
     "text": "Wang, Y., Wang, Q., Liu, M., Qin, Y., Cheng, L., Bolmin, O., ... & Tawfick, S. (2023). Insect-scale jumping robots enabled by a dynamic buckling cascade. Proceedings of the National Academy of Sciences, 120(5), e2210651120."
-  },
-  {
-    "type": "subheading",
-    "text": "Accepted"
-  },
-  {
-    "type": "bullet",
-    "text": "Cheng, L., Eom, W., Wang, Q., Kim, H., Kim, J., Pineda Guzman, R., Solis, M., Malladi, S., Tsai, S., Kersh, M. E., & Tawfick, S. (2026). Principles of use of tensile J-curve materials in antagonistic arrangements [Accepted by Proceedings of the National Academy of Sciences Oct. 5, 2026].",
-    "blank_after": true
   },
   {
     "type": "subheading",
@@ -263,7 +259,7 @@
   },
   {
     "type": "bullet",
-    "text": "Originated principles of use of J-curve materials in linear and rotary antagonistic mechanisms (first-author manuscript accepted by PNAS)"
+    "text": "Originated principles of use of J-curve materials in linear and rotary antagonistic mechanisms (first-author paper published in PNAS, 2026)"
   },
   {
     "type": "bullet",

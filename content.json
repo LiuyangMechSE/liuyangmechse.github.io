@@ -15,10 +15,10 @@
     },
     {
       "label": "CV (PDF)",
-      "url": "files/Liuyang-Cheng-CV-en-20261022.pdf",
+      "url": "files/Liuyang-Cheng-CV-en-20261111.pdf",
       "kind": "cv",
       "zhLabel": "简历 (PDF)",
-      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261022.pdf"
+      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261111.pdf"
     },
     {
       "label": "LinkedIn",
@@ -35,6 +35,31 @@
         "title": "近况"
       },
       "items": [
+        {
+          "id": "news-pnas-published",
+          "kind": "research",
+          "title": "J-curve paper published in PNAS",
+          "text": "Our paper “Principles of use of tensile J-curve materials in antagonistic arrangements” was published in Proceedings of the National Academy of Sciences, 123(46), e2604227123.",
+          "authors": "",
+          "meta": "2026-11-11",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2604227123",
+              "zhLabel": "论文"
+            }
+          ],
+          "layout": "left",
+          "zh": {
+            "title": "J-curve 论文发表于 PNAS",
+            "text": "论文“Principles of use of tensile J-curve materials in antagonistic arrangements”正式发表于 Proceedings of the National Academy of Sciences，123(46)，e2604227123。",
+            "meta": "2026-11-11"
+          }
+        },
         {
           "id": "news-ses-2026",
           "kind": "research",
@@ -247,15 +272,19 @@
         {
           "id": "p-jcurve",
           "kind": "publication",
-          "title": "Principles of Use of Tensile J-Curve Materials in Antagonistic Arrangements",
+          "title": "Principles of use of tensile J-curve materials in antagonistic arrangements",
           "text": "",
           "authors": "Liuyang Cheng, Wonsik Eom, Qiong Wang, Hyeongkeun Kim, Roberto Pineda Guzman, Jeongmin Kim, Montse Solis, Shreyas Malladi, Samuel Tsai, Mariana E. Kersh, Sameh H. Tawfick",
-          "meta": "Proceedings of the National Academy of Sciences · Accepted 2026-10-05",
+          "meta": "Proceedings of the National Academy of Sciences 123(46), e2604227123 · 2026",
           "demo": "none",
           "mediaType": "image",
           "media": "",
           "caption": "",
           "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2604227123"
+            },
             {
               "label": "Preprint",
               "url": "https://arxiv.org/abs/2602.00260"
@@ -375,6 +404,10 @@
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
           "links": [
             {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2604227123"
+            },
+            {
               "label": "Paper preprint",
               "url": "https://arxiv.org/abs/2602.00260"
             }
@@ -412,6 +445,10 @@
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
           "links": [
             {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2604227123"
+            },
+            {
               "label": "Paper preprint",
               "url": "https://arxiv.org/abs/2602.00260"
             }
@@ -448,6 +485,10 @@
           "media": "",
           "caption": "Illustrative animation. Open “Model & paper” for the assumptions.",
           "links": [
+            {
+              "label": "Paper",
+              "url": "https://doi.org/10.1073/pnas.2604227123"
+            },
             {
               "label": "Paper preprint",
               "url": "https://arxiv.org/abs/2602.00260"

@@ -8,7 +8,7 @@ from docx.oxml.ns import qn
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 
 ROOT=Path(__file__).resolve().parent
-# Authoritative content is the public October 21 CV source, preserved in content.json.
+# Authoritative CV content, updated for the November 11, 2026 PNAS publication.
 original_records=json.loads((ROOT/'content.json').read_text())
 sections={}; front=[]; section=None
 for r in original_records:
@@ -77,7 +77,7 @@ def hyperlink(p,text,url):
     r.append(rp); t=OxmlElement('w:t'); t.text=text; r.append(t); h.append(r); p._p.append(h)
 
 def text_runs(p,text,all_bold=False,all_italic=False,size=None):
-    regex='('+ '|'.join(re.escape(s) for s in ['https://doi.org/10.1002/aisy.70490','Cheng, L.','Liuyang Cheng']+italics) +')'
+    regex='('+ '|'.join(re.escape(s) for s in ['https://doi.org/10.1002/aisy.70490','https://doi.org/10.1073/pnas.2604227123','Cheng, L.','Liuyang Cheng']+italics) +')'
     for s in re.split(regex,text):
         if not s: continue
         if s.startswith('https://'): hyperlink(p,s,s); continue
@@ -143,7 +143,7 @@ for i,r in enumerate(records):
 
 # Stable section-boundary pagination in a four-page CV.
 for p in D.paragraphs:
-    if p.text in ['Accepted','Teaching Experience']:
+    if p.text in ['Teaching Experience']:
         p.paragraph_format.page_break_before=True
 
 # Remove template title rules and theme fonts so the source's Times style survives rendering.
@@ -154,7 +154,7 @@ for sty in D.styles:
 for node in [D.styles['Title']._element, D.paragraphs[0]._p]:
     for border_node in list(node.iter(qn('w:pBdr'))):
         border_node.getparent().remove(border_node)
-out=ROOT/'Liuyang-Cheng-CV-en-20261022.docx'
+out=ROOT/'Liuyang-Cheng-CV-en-20261111.docx'
 D.save(out)
 print(out)
 for i,r in enumerate(records): print(i,r['type'],repr(r['text']))
