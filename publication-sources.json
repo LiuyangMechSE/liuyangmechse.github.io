@@ -262,5 +262,25 @@
       "scholarListingObserved": true,
       "identityEvidence": "The exact title appears in the search-index snippet for Scholar profile MMkH8L0AAAAJ; PubMed and the author manuscript in PMC establish the UIUC affiliation and author list."
     }
+  ],
+  "manuscripts": [
+    {
+      "id": "cm3-2026",
+      "title": "Continuous manufacturing and array control of long supercoiled artificial muscle",
+      "authors": [
+        "Liuyang Cheng",
+        "Qiong Wang",
+        "Shenbo Xue",
+        "James Yu",
+        "Sameh Tawfick"
+      ],
+      "year": 2026,
+      "status": "Manuscript in preparation",
+      "statusCheckedAt": "2026-11-11",
+      "statusSource": {
+        "type": "Author manuscript",
+        "note": "Title and author order verified against the current author manuscript. No journal, DOI, submission, acceptance or publication is claimed."
+      }
+    }
   ]
 }

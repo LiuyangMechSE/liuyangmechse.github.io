@@ -18,7 +18,7 @@
   },
   {
     "type": "body",
-    "text": "Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected Dec. 2026). Five peer-reviewed journal articles, including a first-author paper in PNAS, spanning theory, manufacturing, and characterization of soft actuators.",
+    "text": "Ph.D. candidate in Mechanical Science and Engineering, University of Illinois Urbana-Champaign (expected Feb. 2027). Five peer-reviewed journal articles, including a first-author paper in PNAS, spanning theory, manufacturing, and characterization of soft actuators.",
     "blank_after": true
   },
   {
@@ -40,7 +40,7 @@
   },
   {
     "type": "metadata",
-    "text": "University of Illinois Urbana-Champaign | Illinois, USA\tAug. 2021 - Dec. 2026 (expected)"
+    "text": "University of Illinois Urbana-Champaign | Illinois, USA\tAug. 2021 - Feb. 2027 (expected)"
   },
   {
     "type": "bullet",
@@ -112,6 +112,10 @@
   {
     "type": "subheading",
     "text": "In Preparation"
+  },
+  {
+    "type": "bullet",
+    "text": "Cheng, L., Wang, Q., Xue, S., Yu, J., & Tawfick, S. (2026). Continuous manufacturing and array control of long supercoiled artificial muscle. [Manuscript in preparation]."
   },
   {
     "type": "bullet",

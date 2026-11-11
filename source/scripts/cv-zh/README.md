@@ -10,4 +10,6 @@ The formatting update moves Awards & Honors immediately before Academic Service 
 
 Only the verified PDF is a website publication artifact. Keep Word and private review files off the public website.
 
-The J-curve paper is first under published journal articles with verified PNAS 123(46), e2604227123 (2026), DOI 10.1073/pnas.2604227123, and publisher author order. The overview counts five published papers; the project status says published. The empty Accepted section is removed. The verified PDF is Liuyang-Cheng-CV-zh-20261111.pdf (three pages). All unrelated text remains unchanged.
+The J-curve paper is first under published journal articles with verified PNAS 123(46), e2604227123 (2026), DOI 10.1073/pnas.2604227123, and publisher author order. The overview counts five published papers; the project status says published. The empty Accepted section is removed. The verified PDF is Liuyang-Cheng-CV-zh-20261111-r2.pdf (three pages). All unrelated text remains unchanged.
+
+Further revision on November 11, 2026: expected graduation changed to February 2027 at the author’s request; CM3 manuscript bibliographic details are added from the current manuscript source, without implying journal submission or publication.

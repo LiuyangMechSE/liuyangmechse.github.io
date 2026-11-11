@@ -15,10 +15,10 @@
     },
     {
       "label": "CV (PDF)",
-      "url": "files/Liuyang-Cheng-CV-en-20261111.pdf",
+      "url": "files/Liuyang-Cheng-CV-en-20261111-r2.pdf",
       "kind": "cv",
       "zhLabel": "简历 (PDF)",
-      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261111.pdf"
+      "zhUrl": "files/Liuyang-Cheng-CV-zh-20261111-r2.pdf"
     },
     {
       "label": "LinkedIn",
@@ -383,6 +383,31 @@
       ],
       "zh": {
         "title": "论文发表"
+      }
+    },
+    {
+      "id": "manuscripts",
+      "title": "Manuscripts in preparation",
+      "intro": "",
+      "page": "home",
+      "items": [
+        {
+          "id": "m-cm3-2026",
+          "kind": "publication",
+          "title": "Continuous manufacturing and array control of long supercoiled artificial muscle",
+          "text": "",
+          "authors": "Liuyang Cheng, Qiong Wang, Shenbo Xue, James Yu, Sameh Tawfick",
+          "meta": "Manuscript in preparation · 2026",
+          "demo": "none",
+          "mediaType": "image",
+          "media": "",
+          "caption": "",
+          "links": [],
+          "layout": "left"
+        }
+      ],
+      "zh": {
+        "title": "准备中的稿件"
       }
     },
     {

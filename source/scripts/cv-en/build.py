@@ -154,7 +154,7 @@ for sty in D.styles:
 for node in [D.styles['Title']._element, D.paragraphs[0]._p]:
     for border_node in list(node.iter(qn('w:pBdr'))):
         border_node.getparent().remove(border_node)
-out=ROOT/'Liuyang-Cheng-CV-en-20261111.docx'
+out=ROOT/'Liuyang-Cheng-CV-en-20261111-r2.docx'
 D.save(out)
 print(out)
 for i,r in enumerate(records): print(i,r['type'],repr(r['text']))

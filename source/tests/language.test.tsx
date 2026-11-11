@@ -84,6 +84,23 @@ describe('bilingual site',()=>{
   const firstNews=document.querySelector('#news > article')!;expect(firstNews.getAttribute('data-item')).toBe('news-pnas-published');
  });
  it('keeps the author-confirmed PNAS acceptance distinct from the preprint link in both languages and future publication merges',()=>{const base=copy();const item=section(base,'publications').items.find(i=>i.id==='p-jcurve')!;item.meta='Proceedings of the National Academy of Sciences · Accepted 2026-10-05';item.links=item.links.filter(link=>link.url.includes('arxiv.org'));expect(item.meta).toBe('Proceedings of the National Academy of Sciences · Accepted 2026-10-05');expect(section(localizedContent(base,'zh'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toContain('已接收 2026-10-05');const record={id:'jcurve-2026',title:item.title,authors:item.authors.split(', '),year:2026,venue:'Proceedings of the National Academy of Sciences',status:'Accepted',acceptedDate:'2026-10-05',arxiv:'2602.00260',links:item.links};const merged=mergePublications(base,[record]);expect(section(merged,'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(item.links[0].url).toBe('https://arxiv.org/abs/2602.00260');expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,venue:'arXiv',status:'Preprint',acceptedDate:undefined,doi:'10.48550/arXiv.2602.00260'}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(section(mergePublications(base,[{...record,status:'accepted ',acceptedDate:undefined}]),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe(item.meta);expect(()=>validateInput({profileId:'MMkH8L0AAAAJ',completeScholarList:false,publications:[{...record,acceptedDate:'2026-02-30'}]})).toThrow('Invalid acceptance date');});
+ it.each([['/','en'],['/zh/','zh']])('keeps the CM3 manuscript separate from publications on %s',async(path,language)=>{
+  const base=copy(),view=localizedContent(base,language as 'en'|'zh'),manuscripts=section(view,'manuscripts'),item=manuscripts.items[0];
+  expect(item.title).toBe('Continuous manufacturing and array control of long supercoiled artificial muscle');
+  expect(item.authors).toBe('Liuyang Cheng, Qiong Wang, Shenbo Xue, James Yu, Sameh Tawfick');
+  expect(item.links).toEqual([]);expect(item.meta).toBe(language==='en'?'Manuscript in preparation · 2026':'稿件准备中 · 2026');
+  expect(section(base,'publications').items).toHaveLength(6);expect(section(base,'publications').items.some(i=>i.id===item.id)).toBe(false);
+  expect(base.sections.findIndex(s=>s.id==='manuscripts')).toBe(base.sections.findIndex(s=>s.id==='publications')+1);
+  expect(JSON.stringify(base)).not.toContain('overleaf.com');
+  window.history.replaceState({},'',path);mount();await waitLoaded();
+  const area=document.getElementById('manuscripts')!;expect(area.textContent).toContain(manuscripts.title);expect(area.textContent).toContain(item.meta);expect(area.querySelector('a')).toBeNull();
+ });
+ it('labels manuscripts in preparation without implying publication in either language',()=>{
+  const base=copy(),item=section(base,'publications').items.find(i=>i.id==='p-jcurve')!;
+  item.meta='Manuscript in preparation · 2026';
+  expect(section(localizedContent(base,'en'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe('Manuscript in preparation · 2026');
+  expect(section(localizedContent(base,'zh'),'publications').items.find(i=>i.id==='p-jcurve')!.meta).toBe('稿件准备中 · 2026');
+ });
  it('keeps compact verified News before Publications without duplicating a conference section',async()=>{
   const base=copy(),talkTitle='Soft Spiral Octopus Tentacles Driven by Concentric Coiled Artificial Muscles';
   expect(base.sections.find(s=>s.id==='conference-presentations')).toBeUndefined();

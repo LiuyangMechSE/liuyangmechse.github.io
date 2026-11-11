@@ -141,7 +141,7 @@ for e in list(sec._sectPr):
     if e.tag==qn('w:docGrid'):sec._sectPr.remove(e)
 for p in doc.paragraphs:
     e=OxmlElement('w:snapToGrid');e.set(qn('w:val'),'0');p._p.get_or_add_pPr().append(e)
-out=args.output_dir/'Liuyang-Cheng-CV-zh-20261111.docx';doc.save(out)
+out=args.output_dir/'Liuyang-Cheng-CV-zh-20261111-r2.docx';doc.save(out)
 print(out)
 print('headings', [s[0].text_content() for s in sections])
 print('paragraphs',len(doc.paragraphs))
